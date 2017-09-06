@@ -1,7 +1,10 @@
-from sqlalchemy import Column, Integer, ForeignKey, String
+from sqlalchemy import Column,Date,Integer, ForeignKey, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
+from psycopg2 import connect
+import sys
+from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
 #instancia de declarative_base
 
@@ -80,6 +83,7 @@ class MedicalData(Base):
     student = Column(Integer, ForeignKey('students.id'))
 
 class Schedule(Base):
+    __tablename__= "schedule"
     id = Column(Integer, primary_key=True)
     day = Column(String(200))
     daytime = Column(String(20))
@@ -89,8 +93,18 @@ class Schedule(Base):
 
 
 
+#create database
+con = connect(user='postgres', host = 'localhost', password='0321help')
+con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
+cur= con.cursor()
+cur.execute('CREATE DATABASE' + " cincinnatus")
+cur.close()
+con.close()
+
+
 #instance or create engine class
-engine = create_engine('postgresql://scott:tiger@localhost/cincinnatus')
+db_string="postgres://postgres:0321help@localhost:5432/cincinnatus"
+engine = create_engine(db_string)
 
 #this will add the classes that we will create as tables in our database
 Base.metadata.create_all(engine)
