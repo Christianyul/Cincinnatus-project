@@ -9,7 +9,9 @@
       <li> <router-link to='/admin'> Admin </router-link> </li>
     
     </ul>
+    <h1> +++==============- Component -==============+++</h1>
     <router-view> </router-view>
+    <h1> +++==================- -===================+++</h1>
   </div>
 </template>
 
@@ -19,7 +21,7 @@ export default {
   name: 'app',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Cincinnatus Institute'
     }
   }
 }
