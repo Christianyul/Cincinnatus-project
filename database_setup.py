@@ -149,12 +149,12 @@ class Schedule(Base):
 
 
 #create database
-con = connect(user='postgres', host = 'localhost', password='0321help')
-con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
-cur= con.cursor()
-cur.execute('CREATE DATABASE' + " cincinnatus")
-cur.close()
-con.close()
+# con = connect(user='postgres', host = 'localhost', password='0321help')
+# con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
+# cur= con.cursor()
+# cur.execute('CREATE DATABASE' + " cincinnatus")
+# cur.close()
+# con.close()
 
 
 #instance or create engine class
