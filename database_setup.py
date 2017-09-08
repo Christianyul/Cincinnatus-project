@@ -50,13 +50,30 @@ class Student(Base):
     address = Column(String(200), nullable=False)
     email = Column(String(50), nullable=False)
 
-    # @property
-    # #returns an object data in easily serializeable format
-    # def serialize(self):
-    #     return {
-    #     'id': self.id
-    #     'name': self.name
-    #     }
+
+    @property
+    #returns an object data in easily serializeable format
+    def serialize(self):
+        return {
+        'id': self.id,
+        'name': self.name,
+        'last_name':self.last_name,
+        'gender': self.gender,
+        'inscription_date': self.inscription_date,
+        'birthdate': self.birthdate,
+        'phone_mobile': self.phone_mobile,
+        'phone_home': self.phone_home,
+        'id_document': self.id_document,
+        'status': self.status,
+        'ending_date': self.ending_date,
+        'retirement_date': self.retirement_date,
+        'actual_course': self.actual_course,
+        'actual_lesson': self.actual_lesson,
+        'marital_status': self.marital_status,
+        'nationality': self.nationality,
+        'address': self.address,
+        'email': self.email,
+        }
 
 
 
@@ -68,6 +85,18 @@ class EmergencyContact(Base):
     phone_home = Column(String(12))
     relationship = Column(String(20), nullable=False)
     student = Column(Integer, ForeignKey('students.id'))
+
+    @property
+    #returns an object data in easily serializeable format
+    def serialize(self):
+        return {
+        'id': self.id,
+        'name': self.name,
+        'phone_mobile': self.phone_mobile,
+        'phone_home': self.phone_home,
+        'relationship': self.relationship,
+        'student': self.student,
+        }
 
 
 class MedicalData(Base):
@@ -82,6 +111,23 @@ class MedicalData(Base):
     policy_number = Column(Integer)
     student = Column(Integer, ForeignKey('students.id'))
 
+    @property
+    #returns an object data in easily serializeable format
+    def serialize(self):
+        return {
+        'id': self.id,
+        'alergies': self.alergies,
+        'intensity': self.intensity,
+        'special_condition': self.special_condition,
+        'blood_type':self.blood_type,
+        'ars': self.ars,
+        'afiliation_type': self.afiliation_type,
+        'policy_number': policy_number,
+        'student': self.student,
+        }
+
+
+
 class Schedule(Base):
     __tablename__= "schedule"
     id = Column(Integer, primary_key=True)
@@ -89,6 +135,15 @@ class Schedule(Base):
     daytime = Column(String(20))
     student = Column(Integer, ForeignKey('students.id'))
 
+    @property
+    #returns an object data in easily serializeable format
+    def serialize(self):
+        return {
+        'id': self.id,
+        'day': self.day,
+        'daytime':self.daytime,
+        'student':self.student,
+        }
 
 
 
