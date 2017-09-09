@@ -1,7 +1,12 @@
 <template>
-  <div id="home">
-    
-    <h1>{{ msg }}</h1>
+  <div id="login">
+
+    <h1>Login</h1>
+    <form method="post">
+    	<input type="text" name="u" placeholder="Username" required="required" />
+        <input type="password" name="p" placeholder="Password" required="required" />
+        <button type="button" class="btn btn-primary btn-block btn-large">Let me in.</button>
+    </form>
 
   </div>
 </template>
@@ -18,5 +23,9 @@ export default {
 </script>
 
 <style lang="scss">
-
+#login{
+	color: white;
+	background-color: #123456;
+	padding: 2%;
+}
 </style>
