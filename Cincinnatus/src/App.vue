@@ -1,17 +1,26 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <h2>Menu Alpha</h2>
-    <ul>
-      <li> <router-link to='/home'> Home </router-link> </li>
-      <li> <router-link to='/login'> Login </router-link> </li>
-      <li> <router-link to='/admin'> Admin </router-link> </li>
+
+  
+    <div id="content">
+
+      <div id="slidebar"> 
+        <img  id="logo" src="./img/logo.png" alt="">
+        
+        <ul>
+          <li> <router-link to='/home'> Home </router-link> </li>
+          <li> <router-link to='/login'> Login </router-link> </li>
+          <li> <router-link to='/admin'> Admin </router-link> </li>
+        </ul>
+      </div>
+
+      <div id="views">
+        <router-view> </router-view>
+      </div>
+
+    </div>
     
-    </ul>
-    <h1> +++==============- Component -==============+++</h1>
-    <router-view> </router-view>
-    <h1> +++==================- -===================+++</h1>
+    
   </div>
 </template>
 
@@ -32,23 +41,48 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+#slidebar {
+  display: flex;
+  flex-direction: column;
+  width: 15%;
+  height: 98%;
+  position: absolute;
+  color: white;
+  background-color: #222222;
+
+}
+
+#content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+#views {
+  margin-left: 16%;
+  width: 84%;
+}
+#logo {
+  display: flex;
+  margin-left: 0%;
+  width: 100%;
+  height: 10%;
 }
 
 h1, h2 {
   font-weight: normal;
 }
 
-ul {
+#slidebar ul {
   list-style-type: none;
   padding: 0;
 }
 
 li {
-  display: inline-block;
-  margin: 0 10px;
+  margin-top: 15px;
 }
 
 a {
@@ -57,4 +91,5 @@ a {
 .router-link-active{
   color: gray;
 }
+
 </style>
