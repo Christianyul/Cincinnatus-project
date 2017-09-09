@@ -9,6 +9,7 @@ class Student(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(50), nullable=False)
     last_name = Column(String(50), nullable=False)
+    image_path= Column(String(50))
     gender=Column(String(20), nullable=False)
     inscription_date = Column(Date,nullable=False)
     birthdate = Column(Date)
