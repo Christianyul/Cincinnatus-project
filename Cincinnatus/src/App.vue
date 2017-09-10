@@ -1,30 +1,39 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://gitter.im/vuejs/vue" target="_blank">Gitter Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+
+  
+    <div id="content">
+
+      <div id="slidebar"> 
+        <img  id="logo" src="./img/logo.png" alt="">
+
+        <ul>
+          <li> <router-link to='/home'> Home </router-link> </li>
+          <li> <router-link to='/myinfo'> My data </router-link> </li>
+          <li> <router-link to='/schedule'> My schedule </router-link> </li>
+          <li> <router-link to='/course'> Course control </router-link> </li>
+          <li> <router-link to='/login'> Login </router-link> </li>
+          <li> <router-link to='/admin'> Admin </router-link> </li>
+        </ul>
+      </div>
+
+      <div id="views">
+        <router-view> </router-view>
+      </div>
+
+    </div>
+    
+    
   </div>
 </template>
 
 <script>
+
 export default {
   name: 'app',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Cincinnatus Institute'
     }
   }
 }
@@ -35,26 +44,55 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+#slidebar {
+  display: flex;
+  flex-direction: column;
+  width: 15%;
+  height: 98%;
+  position: absolute;
+  color: white;
+  background-color: #222222;
+
+}
+
+#content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+#views {
+  margin-left: 16%;
+  width: 84%;
+}
+#logo {
+  display: flex;
+  margin-left: 0%;
+  width: 100%;
+  height: 10%;
 }
 
 h1, h2 {
   font-weight: normal;
 }
 
-ul {
+#slidebar ul {
   list-style-type: none;
   padding: 0;
 }
 
 li {
-  display: inline-block;
-  margin: 0 10px;
+  margin-top: 15px;
 }
 
 a {
   color: #42b983;
 }
+.router-link-active{
+  color: gray;
+}
+
 </style>
