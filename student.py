@@ -2,7 +2,7 @@ from dependencies import *
 #instance or declarative class
 #this will let sqlalchemy know that our classes are special classses
 #that correspond to tables in our database
-Base = declarative_base()
+
 
 class Student(Base):
     __tablename__="students"
@@ -25,6 +25,7 @@ class Student(Base):
     nationality = Column(String(20), nullable=False)
     address = Column(String(200), nullable=False)
     email = Column(String(50), nullable=False)
+
 
 
     @property

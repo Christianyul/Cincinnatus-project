@@ -1,7 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from dependencies import *
 from database_setup import *
+from flask_wtf import Form
+from wtforms import StringField, PasswordField
+from wtforms.validators import DataRequire
+from course import Course
 
 app=Flask(__name__)
 db_string="postgres://postgres:011741@localhost:5432/cincinnatus"
@@ -10,10 +12,17 @@ Base.metadata.bind = engine
 DBSession=sessionmaker(bind=engine)
 session=DBSession()
 
+
 @app.route("/")
 def Welcome():
-    items=session.query(Student).all()
-    return jsonify(Student=[i.serialize for i in items])
+    # items=session.query(Student).all()
+    # return jsonify(Student=[i.serialize for i in items])
+    return "Hola"
+
+
+#@app.route("/courses/newCourse", methods=['GET','POST'])
+
+
 
 if __name__ == '__main__':
     app.secret_key='super_secret_key'

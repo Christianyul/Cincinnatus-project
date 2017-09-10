@@ -2,7 +2,6 @@ from dependencies import *
 #instance or declarative class
 #this will let sqlalchemy know that our classes are special classses
 #that correspond to tables in our database
-Base = declarative_base()
 
 class EmergencyContact(Base):
     __tablename__="emergency_contacts"
