@@ -4,11 +4,15 @@ from course import *
 from student import *
 from medicalData import *
 from schedule import *
+from emergencyContact import *
 
-#instance or declarative class
-#this will let sqlalchemy know that our classes are special classses
-#that correspond to tables in our database
-Base = declarative_base()
+#instances of the clases/tables
+us= User()
+co= Course()
+st= Student()
+me= MedicalData()
+sc= Schedule()
+em= EmergencyContact()
 
 
 #create database
@@ -21,15 +25,30 @@ try:
     cur.execute('CREATE DATABASE' + " cincinnatus")
     cur.close()
     con.close()
+
+    #///----cambiar password------///
+    db_string="postgres://postgres:011741@localhost:5432/cincinnatus"
+    engine = create_engine(db_string)
+
+    #this will add the classes that we will create as tables in our database
+    Base.metadata.create_all(engine)
+
+    DBSession=sessionmaker(bind=engine)
+    session=DBSession()
+
+
+    session.add(co)
+    session.add(st)
+    session.add(me)
+    session.add(us)
+    session.add(sc)
+    session.add(em)
+    session.commit()
+
+
+
 except Exception as e:
     pass
 
-#instance or create engine class
-#///----cambiar password------///
-db_string="postgres://postgres:011741@localhost:5432/cincinnatus"
-engine = create_engine(db_string)
-
-#this will add the classes that we will create as tables in our database
-Base.metadata.create_all(engine)
 
 print "database setup done"
