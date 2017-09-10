@@ -1,10 +1,8 @@
 <template>
-  <div id="home">
+  <div id="student-contact">
+    
     <h1>{{ msg }}</h1>
-
-    <h3>Rank of all student...</h3>
-
-    <h3>Calendar of all student..</h3>
+	<h3>Here the student will be able to see the course he is doing and update the lesson he is in.</h3>
   </div>
 </template>
 
@@ -13,7 +11,7 @@ export default {
   name: 'home',
   data () {
     return {
-      msg: 'Home of the page'
+      msg: 'My courses'
     }
   }
 }

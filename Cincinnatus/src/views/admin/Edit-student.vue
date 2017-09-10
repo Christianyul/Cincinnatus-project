@@ -1,10 +1,8 @@
 <template>
   <div id="home">
-    <h1>{{ msg }}</h1>
+    
+    <h1>{{ msg }} id:  {{ $route.params.id}}</h1>
 
-    <h3>Rank of all student...</h3>
-
-    <h3>Calendar of all student..</h3>
   </div>
 </template>
 
@@ -13,7 +11,7 @@ export default {
   name: 'home',
   data () {
     return {
-      msg: 'Home of the page'
+      msg: 'Edit student'
     }
   }
 }

@@ -6,9 +6,12 @@
 
       <div id="slidebar"> 
         <img  id="logo" src="./img/logo.png" alt="">
-        
+
         <ul>
           <li> <router-link to='/home'> Home </router-link> </li>
+          <li> <router-link to='/myinfo'> My data </router-link> </li>
+          <li> <router-link to='/schedule'> My schedule </router-link> </li>
+          <li> <router-link to='/course'> Course control </router-link> </li>
           <li> <router-link to='/login'> Login </router-link> </li>
           <li> <router-link to='/admin'> Admin </router-link> </li>
         </ul>

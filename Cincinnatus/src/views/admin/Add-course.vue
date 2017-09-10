@@ -11,7 +11,7 @@ export default {
   name: 'home',
   data () {
     return {
-      msg: 'Student info'
+      msg: 'Add course'
     }
   }
 }

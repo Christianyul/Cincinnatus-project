@@ -2,7 +2,12 @@
   <div id="admin">
     
     <h1>{{ msg }}</h1>
+    <button> <router-link to="/admin/students-management">Students management</router-link> </button>
+    
+    <button> <router-link to="/admin/courses-management">Courses management </router-link> </button>
+	<button v-if="rango === 'adm'"> <router-link to="/admin/admin-management">Admins management</router-link> </button>
 
+	<router-view></router-view>
   </div>
 </template>
 
@@ -11,7 +16,8 @@ export default {
   name: 'Admin',
   data () {
     return {
-      msg: 'ADMIN'
+      msg: 'ADMIN',
+      rango: 'adm'
     }
   }
 }
