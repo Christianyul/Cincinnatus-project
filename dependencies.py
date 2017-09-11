@@ -3,7 +3,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, relationship, backref
 from sqlalchemy import Column,Date,Integer, ForeignKey, String, Table
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, load_only
 from sqlalchemy import create_engine
 from psycopg2 import connect
 import sys

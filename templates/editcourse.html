@@ -1,0 +1,58 @@
+{% from "_formhelpers.html" import render_field %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Cursos</title>
+  </head>
+  <body>
+    <div class="row">
+
+        <!-- {% with messages = get_flashed_messages() %}
+          {% if messages %}
+          <ul>
+            {% for message in messages %}
+            <li><strong> {{ message }} </strong></li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        {% endwith %} -->
+
+      <div class="form">
+        <h1>Nombre del Curso</h1>
+        <form class="coursesform" action="/course/newCourse" method="post">
+          {{ form.csrf_token }}
+          {{ render_field(form.name) }}
+          {{ render_field(form.lesson) }}
+          {{ render_field(form.link) }}
+          <div><input type="submit" value="Enviar"></div>
+        </form>
+
+        <select class="" name="">
+
+
+        <option> Cursos Aqui </option>
+
+
+        </select>
+      </div>
+    </div>
+    <div>
+      <button>Eliminar</button>
+    </div>
+
+    <div>
+      <!-- esto va en un modal -->
+      <h2>Seguro que desea eliminar este curso? </h2>
+      <form action="POST">
+        <button type="submit" name="eliminar"> Confirmar </button>
+        <button type="button" name="button"> Cancelar </button>
+      </form>
+
+
+    </div>
+
+
+
+  </body>
+</html>
