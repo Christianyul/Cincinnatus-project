@@ -39,22 +39,39 @@ def newCourse():
         session.add(newCourse)
         session.commit()
         # flash("New Item Added")
+        return redirect(url_for('welcome'))
     return render_template("newcourse.html", form=form)
 
 
 
-@app.route("/course/<int:course_id>/editCourse")
+@app.route("/course/<int:course_id>/edit", methods=['GET','POST'])
 def editCourse(course_id):
     form = CourseForm()
     if form.validate_on_submit():
-        editCourse=Course(id=course_id, name=request.form['name'],lesson=request.form['lesson'], link=request.form['link'])
-        session.add(editCourse)
+        editedItem = session.query(Course).filter_by(id=course_id).one()
+        editedItem.name = request.form['name']
+        editedItem.lesson = request.form['lesson']
+        editedItem.link = request.form['link']
+        session.add(editedItem)
         session.commit()
         #flash("New Item Added")
+        return redirect(url_for('welcome'))
+    return render_template("editcourse.html",form=form, course_id=course_id)
 
-        # if request.get:
-        #     pass
-    return render_template("editcourse.html", form=form)
+
+
+@app.route("/course/<int:course_id>/delete", methods=['GET','POST'])
+def deleteCourse(course_id):
+    if request.method == 'POST':
+        deletedItem = session.query(Course).filter_by(id=course_id).one()
+        session.delete(deletedItem)
+        session.commit()
+        return redirect(url_for('welcome'))
+
+    return render_template("deletecourse.html", course_id=course_id)
+
+
+
 
 
 if __name__ == '__main__':

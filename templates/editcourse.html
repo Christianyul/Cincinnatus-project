@@ -20,12 +20,13 @@
 
       <div class="form">
         <h1>Nombre del Curso</h1>
-        <form class="coursesform" action="/course/newCourse" method="post">
+        <form class="coursesform" action="{{url_for('editCourse', course_id=course_id)}}" method="post">
           {{ form.csrf_token }}
           {{ render_field(form.name) }}
           {{ render_field(form.lesson) }}
           {{ render_field(form.link) }}
           <div><input type="submit" value="Enviar"></div>
+          <div> <a href="{{url_for('deleteCourse', course_id=course_id)}}">Eliminar</a> </div>
         </form>
 
         <select class="" name="">
@@ -37,21 +38,6 @@
         </select>
       </div>
     </div>
-    <div>
-      <button>Eliminar</button>
-    </div>
-
-    <div>
-      <!-- esto va en un modal -->
-      <h2>Seguro que desea eliminar este curso? </h2>
-      <form action="POST">
-        <button type="submit" name="eliminar"> Confirmar </button>
-        <button type="button" name="button"> Cancelar </button>
-      </form>
-
-
-    </div>
-
 
 
   </body>
