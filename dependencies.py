@@ -3,11 +3,15 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, relationship, backref
 from sqlalchemy import Column,Date,Integer, ForeignKey, String, Table
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, load_only
 from sqlalchemy import create_engine
 from psycopg2 import connect
 import sys
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
+from wtforms import StringField, PasswordField, IntegerField, validators
+from wtforms.validators import *
+from flask_wtf import Form
+
 
 #instance or declarative class
 #this will let sqlalchemy know that our classes are special classses

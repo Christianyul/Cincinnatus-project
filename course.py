@@ -8,7 +8,7 @@ class Course(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(50), nullable=False)
     lesson = Column(Integer)
-    link =Column(String(50))
+    link =Column(String(150))
 
     @property
     #returns an object data in easily serializeable format
