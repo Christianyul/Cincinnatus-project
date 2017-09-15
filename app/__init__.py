@@ -9,4 +9,8 @@ def create_app(config_name):
 	from .courses import CourseRouting as CourseRouting
 	app.register_blueprint(CourseRouting)
 
+	from .users import UserRouting as UserRouting
+	app.register_blueprint(UserRouting)
+
+
 	return app

@@ -8,9 +8,7 @@ from sqlalchemy import create_engine
 from psycopg2 import connect
 import sys
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
-from wtforms import StringField, PasswordField, IntegerField, validators
-from wtforms.validators import *
-from flask_wtf import Form
+
 
 
 #instance or declarative class
