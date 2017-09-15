@@ -1,7 +1,7 @@
 from flask import Flask, render_template, url_for
 from . import CourseRouting 
 from database_setup import *
-from coursesForm import CourseForm
+from . import coursesForm
 from flask import Blueprint
 
 methods = ['GET', 'POST']
@@ -34,7 +34,7 @@ def showCourse():
 
 @CourseRouting.route("/course/newCourse/", methods=['GET','POST'])
 def newCourse():
-    form = CourseForm()
+    form = coursesForm.CourseForm()
     if form.validate_on_submit():
         newCourse=Course(name=request.form['name'],lesson=request.form['lesson'], link=request.form['link'])
         session.add(newCourse)
@@ -46,7 +46,7 @@ def newCourse():
 
 @CourseRouting.route("/course/<int:course_id>/edit/", methods=['GET','POST'])
 def editCourse(course_id):
-    form = CourseForm()
+    form = coursesForm.CourseForm()
     editedItem = session.query(Course).filter_by(id=course_id).one()
     if form.validate_on_submit():
         editedItem.name = request.form['name']
