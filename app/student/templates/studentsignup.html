@@ -1,0 +1,29 @@
+{% from "_formhelpers.html" import render_field %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Cursos</title>
+  </head>
+  <body>
+    <div class="row">
+
+    
+      <div class="form">
+        <h1>Registro de usuario</h1>
+        <form class="form" action="{{url_for('UserRouting.signUp')}}" method="post">
+          {{ form.csrf_token }}
+          {{ render_field(form.name) }}
+          {{ render_field(form.user_name) }}
+          {{ render_field(form.email) }}
+          {{ render_field(form.password) }}
+          {{ render_field(form.user_type) }}
+
+
+          <div><input type="submit" value="Enviar"></div>
+        </form>
+
+      </div>
+    </div>
+  </body>
+</html>
