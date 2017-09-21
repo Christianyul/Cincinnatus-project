@@ -1,5 +1,5 @@
 from flask import Flask, render_template, url_for
-from . import CourseRouting 
+from . import CourseRouting
 from database_setup import *
 from . import coursesForm
 from flask import Blueprint
@@ -9,21 +9,21 @@ GET, POST = methods
 
 nl = "\n"
 
-db_string="postgres://postgres:0321help@localhost:5432/cincinnatus"
+db_string="postgres://postgres:011741@localhost:5432/cincinnatus"
 engine = create_engine(db_string)
 DBSession=sessionmaker(bind=engine)
 session=DBSession()
 app=Flask(__name__)
 
-def CollectingData():
-    Data = {}
-    coursedata = session.query(Course).all()
-    for courses in coursedata:
-        Data["id"] = courses.id
-        Data["name"] = courses.name
-        Data["lesson"] = courses.lesson
-        Data["link"] = courses.link
-    return Data
+# def CollectingData():
+#     Data = {}
+#     coursedata = session.query(Course).all()
+#     for courses in coursedata:
+#         Data["id"] = courses.id
+#         Data["name"] = courses.name
+#         Data["lesson"] = courses.lesson
+#         Data["link"] = courses.link
+#     return Data
 
 @CourseRouting.route("/course/")
 def showCourse():

@@ -16,7 +16,6 @@
     <p> {{item[item.index(r)].email}} </p>
     <p> {{item[item.index(r)].user_type}} </p>
 
-    <a href="{{item[item.index(r)].link}}">Go to Page</a>
     <br>
     <a href='{{url_for('UserRouting.editUser',user_id = item[item.index(r)].id)}}'>Edit/Delete </a>
     <br>

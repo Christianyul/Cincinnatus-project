@@ -1,18 +1,15 @@
 from dependencies import *
-#instance or declarative class
-#this will let sqlalchemy know that our classes are special classses
-#that correspond to tables in our database
-
 
 class Student(Base):
     __tablename__="students"
     id = Column(Integer, primary_key=True)
     name = Column(String(50), nullable=False)
     last_name = Column(String(50), nullable=False)
-    image_path= Column(String(50))
+    email = Column(String(50), nullable=False)
+    image_path= Column(String(150))
     gender=Column(String(20), nullable=False)
     inscription_date = Column(Date,nullable=False)
-    birthdate = Column(Date)
+    birthdate = Column(Date, nullable=False )
     phone_mobile = Column(String(12), nullable=False)
     phone_home = Column(String(12))
     id_document = Column(String(12))
@@ -21,10 +18,10 @@ class Student(Base):
     retirement_date = Column(Date)
     actual_course = Column(Integer, ForeignKey('courses.id'))
     actual_lesson = Column(Integer)
-    marital_status = Column(String(20), nullable=False)
+    marital_status = Column(String(20))
     nationality = Column(String(20), nullable=False)
     address = Column(String(200), nullable=False)
-    email = Column(String(50), nullable=False)
+
 
 
 

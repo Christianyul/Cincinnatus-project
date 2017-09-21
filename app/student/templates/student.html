@@ -1,0 +1,41 @@
+<html>
+
+<body>
+
+
+  <h1>Estudiantes</h1>
+  <h2>Registrar Nuevo Estudiante</h2>
+  <a href='{{url_for('StudentRouting.newStudent')}}'> Add new student </a>
+  {% for r in item %}
+
+  <div>
+
+    <p> {{item[item.index(r)].name}} </p>
+    <p> {{item[item.index(r)].last_name}} </p>
+    <p> {{item[item.index(r)].gender}} </p>
+    <p> {{item[item.index(r)].email}} </p>
+    <p> {{item[item.index(r)].inscription_date}} </p>
+    <p> {{item[item.index(r)].ending_date}} </p>
+    <p> {{item[item.index(r)].retirement_date}} </p>
+    <p> {{item[item.index(r)].birthdate}} </p>
+    <p> {{item[item.index(r)].phone_mobile}} </p>
+    <p> {{item[item.index(r)].phone_home}} </p>
+    <p> {{item[item.index(r)].id_document}} </p>
+    <p> {{item[item.index(r)].actual_course}} </p>
+    <p> {{item[item.index(r)].actual_lesson}} </p>
+    <p> {{item[item.index(r)].status}} </p>
+    <p> {{item[item.index(r)].marital_status}} </p>
+    <p> {{item[item.index(r)].nationality}} </p>
+    <p> {{item[item.index(r)].address}} </p>
+
+
+    <br>
+    <a href='{{url_for('StudentRouting.editStudent',student_id = item[item.index(r)].id)}}'>Edit/Delete </a>
+    <br>
+    <br>
+  </div>
+
+  {% endfor %}
+</body>
+
+</html>
