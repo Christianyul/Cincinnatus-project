@@ -18,28 +18,36 @@ app=Flask(__name__)
 
 
 @StudentRouting.route("/student/")
-def shoStudentr():
+def showStudent():
     item=session.query(Student).all()
     print item
     return render_template("student.html", item=item)
 
 
-@StudentRouting.route("/student/signup/", methods=['GET','POST'])
-def signUp():
+@StudentRouting.route("/student/register/", methods=['GET','POST'])
+def newStudent():
     form = StudentForm()
     if form.validate_on_submit():
-        filename = secure_filename(request.form['image_path'])
-        print os.path.realpath(filename)
-        file.save(os.path.join('/static/Pictures', filename))
-
-        newItem=Student(name=request.form['name'],last_name=request.form['last_name'],
-        email=request.form['email'], gender=request.form['gender'],
+        # filename = secure_filename(request.form['image_path'])
+        # print os.path.realpath(filename)
+        # file.save(os.path.join('/static/Pictures', filename))
+        print form.errors
+        print "its happening 2"
+        newItem=Student(name=request.form['name'],
+        last_name=request.form['last_name'],
+        email=request.form['email'],
+        gender=request.form['gender'],
         inscription_date=request.form['inscription_date'],
-        ending_date=request.form['ending_date'], retirement_date=request.form['retirement_date'],
-        birthdate=request.form['birthdate'], phone_mobile=request.form['phone_mobile'],
-        phone_home=request.form['phone_home'], id_document=request.form['id_document'],
-        status=request.form['status'], marital_status=request.form['marital_status'],
-        nationality=request.form['nationality'], address=request.form['address'])
+        ending_date=request.form['ending_date'],
+        retirement_date=request.form['retirement_date'],
+        birthdate=request.form['birthdate'],
+        phone_mobile=request.form['phone_mobile'],
+        phone_home=request.form['phone_home'],
+        id_document=request.form['id_document'],
+        status=request.form['status'],
+        marital_status=request.form['marital_status'],
+        nationality=request.form['nationality'],
+        address=request.form['address'])
         # os.path.realpath(filename)
 
 
@@ -47,7 +55,44 @@ def signUp():
         session.commit()
         #flash("New Item Added")
         return redirect(url_for('StudentRouting.showStudent'))
-    return render_template("signup.html", form=form)
+
+        # try:
+        #     con = connect(user='postgres', host = 'localhost', password='011741')
+        #     con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
+        #     cur= con.cursor()
+        #     SQL = """INSERT INTO students (name,last_name, email, gender,inscription_date, ending_date, retirement_date,
+        #     birthdate, phone_mobile, phone_home, id_document, status, marital_status, nationality, address)
+        #     VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);"""
+        #
+        #     data = (request.form['name'],
+        #     request.form['last_name'],
+        #     request.form['email'],
+        #     request.form['gender'],
+        #     request.form['inscription_date'],
+        #     request.form['ending_date'],
+        #     request.form['retirement_date'],
+        #     request.form['birthdate'],
+        #     request.form['phone_mobile'],
+        #     request.form['phone_home'],
+        #     request.form['id_document'],
+        #     request.form['status'],
+        #     request.form['marital_status'],
+        #     request.form['nationality'],
+        #     request.form['address']
+        #     )
+        #
+        #     cur.execute(SQL, data)
+        #
+        #     cur.close()
+        #     con.close()
+        #
+        #     return redirect(url_for('StudentRouting.showStudent'))
+
+        # except Exception as e:
+        #  raise
+    print "its happening 1"
+
+    return render_template("studentsignup.html", form=form)
 
 
 
