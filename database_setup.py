@@ -1,10 +1,6 @@
 from dependencies import *
-from user import *
-from course import *
-from student import *
-from medicalData import *
-from schedule import *
-from emergencyContact import *
+from database import *
+
 
 #instances of the clases/tables
 us= User()
