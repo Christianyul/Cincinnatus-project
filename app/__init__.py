@@ -15,4 +15,7 @@ def create_app(config_name):
 	from .student import StudentRouting as StudentRouting
 	app.register_blueprint(StudentRouting)
 
+	from .emergencyContact import EmergencyRouting as EmergencyRouting
+	app.register_blueprint(EmergencyRouting)
+
 	return app

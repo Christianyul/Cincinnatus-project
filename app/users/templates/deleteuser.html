@@ -8,11 +8,10 @@
 </head>
 <body>
   <div>
-    <!-- esto va en un modal -->
     <h2> Seguro que desea eliminar este usuario? </h2>
     <form action="{{url_for('UserRouting.deleteUser', user_id=user_id)}}" method="post">
       <input type="submit" name="" value="Confirmar">
-      <input type="button" name="" value="Cancelar">
+      <a href="{{url_for('UserRouting.editUser',user_id = user_id)}}">Cancelar</a>
     </form>
   </div>
 </body>

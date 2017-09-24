@@ -7,6 +7,7 @@ class EmergencyContact(Base):
     __tablename__="emergency_contacts"
     id = Column(Integer, primary_key=True)
     name = Column(String(50), nullable=False)
+    last_name = Column(String(50), nullable=False)
     phone_mobile = Column(String(12), nullable=False)
     phone_home = Column(String(12))
     relationship = Column(String(20), nullable=False)

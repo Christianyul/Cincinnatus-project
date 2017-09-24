@@ -1,0 +1,29 @@
+<html>
+
+<body>
+
+
+  <h1></h1>
+  <h2>Registrar Nuevo Contacto</h2>
+  <a href='{{url_for('EmergencyRouting.newEmergency', student_id= student.id)}}'> Add new Emergency Contact </a>
+  {% for r in item %}
+
+  <div>
+
+    <p> {{item[item.index(r)].name}} </p>
+    <p> {{item[item.index(r)].last_name}} </p>
+    <p> {{item[item.index(r)].phone_mobile}} </p>
+    <p> {{item[item.index(r)].phone_home}} </p>
+    <p> {{item[item.index(r)].relationship}} </p>
+
+
+    <br>
+    <a href='{{url_for('EmergencyRouting.editEmergency', emergency_id = item[item.index(r)].id, student_id= student.id )}}'>Edit/Delete </a>
+    <br>
+    <br>
+  </div>
+
+  {% endfor %}
+</body>
+
+</html>

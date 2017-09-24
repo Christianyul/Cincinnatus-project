@@ -9,10 +9,10 @@
 <body>
   <div>
     <!-- esto va en un modal -->
-    <h2> Seguro que desea eliminar este curso? </h2>
-    <form action="{{url_for('CourseRouting.deleteCourse', course_id=course_id)}}" method="post">
+    <h2> Seguro que desea eliminar este estudiante? </h2>
+    <form action="{{url_for('EmergencyRouting.deleteEmergency',emergency_id=emergency_id, student_id=student.id)}}" method="post">
       <input type="submit" name="" value="Confirmar">
-      <a href="{{url_for('CourseRouting.editCourse',course_id = course_id)}}">Cancelar</a>
+      <a href="{{url_for('EmergencyRouting.editEmergency', emergency_id = emergency_id, student_id= student.id )}}">Cancelar</a>
     </form>
   </div>
 </body>
