@@ -18,4 +18,7 @@ def create_app(config_name):
 	from .emergencyContact import EmergencyRouting as EmergencyRouting
 	app.register_blueprint(EmergencyRouting)
 
+	from .medicalData import MedicalRouting as MedicalRouting
+	app.register_blueprint(MedicalRouting)
+
 	return app

@@ -1,0 +1,31 @@
+<html>
+
+<body>
+
+
+  <h1></h1>
+  <h2>Registrar Datos Medicos</h2>
+  <a href='{{url_for('MedicalRouting.newMedical', student_id= student.id)}}'> Add Medical Data </a>
+  {% for r in item %}
+
+  <div>
+
+    <p> {{item[item.index(r)].alergies}} </p>
+    <p> {{item[item.index(r)].intensity}} </p>
+    <p> {{item[item.index(r)].special_condition}} </p>
+    <p> {{item[item.index(r)].blood_type}} </p>
+    <p> {{item[item.index(r)].ars}} </p>
+    <p> {{item[item.index(r)].afiliation_type}} </p>
+    <p> {{item[item.index(r)].policy_number}} </p>
+
+
+    <br>
+    <a href='{{url_for('MedicalRouting.editMedical', medical_id = item[item.index(r)].id, student_id= student.id )}}'>Edit/Delete </a>
+    <br>
+    <br>
+  </div>
+
+  {% endfor %}
+</body>
+
+</html>
