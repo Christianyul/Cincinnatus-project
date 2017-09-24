@@ -32,6 +32,8 @@
     <br>
     <a href='{{url_for('StudentRouting.editStudent',student_id = item[item.index(r)].id)}}'>Edit/Delete </a>
     <br>
+    <a href="{{url_for('EmergencyRouting.showEmergency',student_id=item[item.index(r)].id)}}">Add/Edit Emergency Contact</a>
+
     <br>
   </div>
 

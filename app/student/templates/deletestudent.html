@@ -12,7 +12,7 @@
     <h2> Seguro que desea eliminar este estudiante? </h2>
     <form action="{{url_for('StudentRouting.deleteStudent', student_id=student_id)}}" method="post">
       <input type="submit" name="" value="Confirmar">
-      <input type="button" name="" value="Cancelar">
+      <a href="{{url_for('StudentRouting.editStudent',student_id = student_id)}}">Cancelar</a>
     </form>
   </div>
 </body>

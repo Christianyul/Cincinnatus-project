@@ -1,0 +1,79 @@
+from flask import Flask, render_template, url_for
+from . import EmergencyRouting
+from database_setup import *
+from emergencyForm import EmergencyForm
+from flask import Blueprint
+import os
+
+methods = ['GET', 'POST']
+GET, POST = methods
+
+nl = "\n"
+
+db_string="postgres://postgres:011741@localhost:5432/cincinnatus"
+engine = create_engine(db_string)
+DBSession=sessionmaker(bind=engine)
+session=DBSession()
+app=Flask(__name__)
+
+
+@EmergencyRouting.route("/<int:student_id>/emergency/")
+def showEmergency(student_id):
+    student=session.query(Student).filter_by(id=student_id).one()
+    item=session.query(EmergencyContact).filter_by(student=student_id).all()
+    print item
+    return render_template("emergency.html", item=item, student = student )
+
+
+@EmergencyRouting.route("/<int:student_id>/emergency/register/", methods=['GET','POST'])
+def newEmergency(student_id):
+    form = EmergencyForm()
+    student=session.query(Student).filter_by(id=student_id).one()
+    if form.validate_on_submit():
+        newItem=EmergencyContact(name=request.form['name'],
+        last_name=request.form['last_name'],
+        phone_mobile=request.form['phone_mobile'],
+        phone_home=request.form['phone_home'],
+        relationship=request.form['relationship'],
+        student=student.id)
+
+        session.add(newItem)
+        session.commit()
+        #flash("New Item Added")
+        # return redirect(url_for('EmergencyRouting.showEmergency',student_id=student.id))
+        return redirect(url_for('StudentRouting.showStudent'))
+    return render_template("emergencysignup.html", form=form, student=student)
+
+
+
+
+@EmergencyRouting.route("/<int:student_id>/emergency/<int:emergency_id>/edit/", methods=['GET','POST'])
+def editEmergency(emergency_id,student_id):
+    form = EmergencyForm()
+    student=session.query(Student).filter_by(id=student_id).one()
+    editedItem = session.query(EmergencyContact).filter_by(id=emergency_id).one()
+    if form.validate_on_submit():
+        editedItem.name = request.form['name']
+        editedItem.last_name=request.form['last_name']
+        editedItem.phone_mobile=request.form['phone_mobile']
+        editedItem.phone_home=request.form['phone_home']
+        session.add(editedItem)
+        session.commit()
+        #flash("New Item Added")
+        # return redirect(url_for('EmergencyRouting.showEmergency',student_id=student.id))
+        return redirect(url_for('StudentRouting.showStudent'))
+    return render_template("editemergency.html",form=form, emergency_id=emergency_id, item=editedItem, student=student)
+
+
+
+@EmergencyRouting.route("/<int:student_id>/emergency/<int:emergency_id>/delete/", methods=['GET','POST'])
+def deleteEmergency(emergency_id, student_id):
+    student=session.query(Student).filter_by(id=student_id).one()
+    if request.method == 'POST':
+        deletedItem = session.query(EmergencyContact).filter_by(id=emergency_id).one()
+        session.delete(deletedItem)
+        session.commit()
+        # return redirect(url_for('EmergencyRouting.showEmergency',student_id=student.id))
+        return redirect(url_for('StudentRouting.showStudent'))
+
+    return render_template("deleteemergency.html",emergency_id=emergency_id, student=student)
