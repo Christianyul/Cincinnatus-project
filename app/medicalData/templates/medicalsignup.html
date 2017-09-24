@@ -1,0 +1,30 @@
+{% from "_formhelpers.html" import render_field %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Datos Medicos</title>
+  </head>
+  <body>
+    <div class="row">
+
+      <div class="form">
+        <h1>Registro de Datos Medicos</h1>
+        <form class="form" action="{{url_for('MedicalRouting.newMedical', student_id= student.id)}}" method="post">
+          {{ form.csrf_token }}
+          {{ render_field(form.alergies) }}
+          {{ render_field(form.intensity ) }}
+          {{ render_field(form.special_condition) }}
+          {{ render_field(form.blood_type) }}
+          {{ render_field(form.ars) }}
+          {{ render_field(form.afiliation_type) }}
+          {{ render_field(form.policy_number) }}
+
+          <div><input type="submit" value="Enviar"></div>
+        </form>
+
+
+      </div>
+    </div>
+  </body>
+</html>
