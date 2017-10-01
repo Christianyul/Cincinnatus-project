@@ -1,0 +1,73 @@
+{% from "_formhelpers.html" import render_field %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Registro de Estudiantes</title>
+  </head>
+  <body>
+    <div class="row">
+
+      <div class="form">
+        <h1>Registro de estudiates</h1>
+        <form class="form" action="{{url_for('RegisterRouting.registerStudent')}}" method="post">
+          {{ form.csrf_token }}
+          <h2>Datos Generales</h2>
+          <div>
+          {{ render_field(form.name) }}
+          {{ render_field(form.last_name) }}
+          <!-- <input type="file" name="myImage" accept="image/*" /> -->
+          <br>
+          {{ render_field(form.email) }}
+          {{ render_field(form.gender) }}
+          {{ render_field(form.inscription_date) }}
+          {{ render_field(form.ending_date) }}
+          {{ render_field(form.retirement_date) }}
+          {{ render_field(form.birthdate) }}
+          <select class="" name="">
+            <option value="">Cursos Aqui</option>
+          </select>
+          <br>
+          <select class="" name="">
+            <option value="">Lecciones Aqui</option>
+          </select>
+          <br>
+          {{ render_field(form.phone_mobile) }}
+          {{ render_field(form.phone_home) }}
+          {{ render_field(form.id_document) }}
+          {{ render_field(form.status) }}
+          {{ render_field(form.marital_status) }}
+          {{ render_field(form.nationality) }}
+          {{ render_field(form.address) }}
+          </div>
+
+          <h2>Datos Medicos</h2>
+          <div>
+            {{ render_field(form.alergies) }}
+            {{ render_field(form.intensity ) }}
+            {{ render_field(form.special_condition) }}
+            {{ render_field(form.blood_type) }}
+            {{ render_field(form.ars) }}
+            {{ render_field(form.afiliation_type) }}
+            {{ render_field(form.policy_number) }}
+          </div>
+
+
+          <h2>Contactos de emergencia</h2>
+          <div>
+            {{ render_field(form.emname) }}
+            {{ render_field(form.emlast_name) }}
+            {{ render_field(form.emphone_mobile) }}
+            {{ render_field(form.emphone_home) }}
+            {{ render_field(form.relationship) }}
+          </div>
+
+
+          <div><input type="submit" value="Enviar"></div>
+        </form>
+
+
+      </div>
+    </div>
+  </body>
+</html>
