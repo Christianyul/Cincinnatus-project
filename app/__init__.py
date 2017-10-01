@@ -21,4 +21,7 @@ def create_app(config_name):
 	from .medicalData import MedicalRouting as MedicalRouting
 	app.register_blueprint(MedicalRouting)
 
+	from .register import RegisterRouting as RegisterRouting
+	app.register_blueprint(RegisterRouting)
+
 	return app
