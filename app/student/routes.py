@@ -31,6 +31,9 @@ def newStudent():
         # filename = secure_filename(request.form['image_path'])
         # print os.path.realpath(filename)
         # file.save(os.path.join('/static/Pictures', filename))
+        re_date=request.form['retirement_date']
+        end_date=request.form['ending_date']
+        
         print form.errors
         print "its happening 2"
         newItem=Student(name=request.form['name'],
@@ -38,8 +41,8 @@ def newStudent():
         email=request.form['email'],
         gender=request.form['gender'],
         inscription_date=request.form['inscription_date'],
-        ending_date=request.form['ending_date'],
-        retirement_date=request.form['retirement_date'],
+        ending_date=end_date,
+        retirement_date=re_date,
         birthdate=request.form['birthdate'],
         phone_mobile=request.form['phone_mobile'],
         phone_home=request.form['phone_home'],
@@ -56,40 +59,7 @@ def newStudent():
         #flash("New Item Added")
         return redirect(url_for('StudentRouting.showStudent'))
 
-        # try:
-        #     con = connect(user='postgres', host = 'localhost', password='011741')
-        #     con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
-        #     cur= con.cursor()
-        #     SQL = """INSERT INTO students (name,last_name, email, gender,inscription_date, ending_date, retirement_date,
-        #     birthdate, phone_mobile, phone_home, id_document, status, marital_status, nationality, address)
-        #     VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);"""
-        #
-        #     data = (request.form['name'],
-        #     request.form['last_name'],
-        #     request.form['email'],
-        #     request.form['gender'],
-        #     request.form['inscription_date'],
-        #     request.form['ending_date'],
-        #     request.form['retirement_date'],
-        #     request.form['birthdate'],
-        #     request.form['phone_mobile'],
-        #     request.form['phone_home'],
-        #     request.form['id_document'],
-        #     request.form['status'],
-        #     request.form['marital_status'],
-        #     request.form['nationality'],
-        #     request.form['address']
-        #     )
-        #
-        #     cur.execute(SQL, data)
-        #
-        #     cur.close()
-        #     con.close()
-        #
-        #     return redirect(url_for('StudentRouting.showStudent'))
 
-        # except Exception as e:
-        #  raise
     print "its happening 1"
 
     return render_template("studentsignup.html", form=form)

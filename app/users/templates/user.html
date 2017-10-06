@@ -1,20 +1,25 @@
 <html>
 
 <body>
+  <header>
+    <!-- header aqui -->
+  </header>
 
-
+<section>
+  <div>
   <h1>Users</h1>
   <h2>Add nuevo Usuario</h2>
   <a href='{{url_for('UserRouting.signUp')}}'> Add new user </a>
+  </div>
   {% for r in item %}
 
   <div>
 
-    <p> {{item[item.index(r)].name}} </p>
+    <h3>Nombre:</h3><p> {{item[item.index(r)].name}} </p>
 
-    <p> {{item[item.index(r)].user_name}} </p>
-    <p> {{item[item.index(r)].email}} </p>
-    <p> {{item[item.index(r)].user_type}} </p>
+    <h3>Nombre de Usuario:</h3><p> {{item[item.index(r)].user_name}} </p>
+    <h3>Email:</h3><p> {{item[item.index(r)].email}} </p>
+    <h3>Tipo de Usuario:</h3><p> {{item[item.index(r)].user_type}} </p>
 
     <br>
     <a href='{{url_for('UserRouting.editUser',user_id = item[item.index(r)].id)}}'>Edit/Delete </a>
@@ -23,6 +28,12 @@
   </div>
 
   {% endfor %}
+
+  </section>
+
+  <footer>
+    <!-- footer aqui -->
+  </footer>
 </body>
 
 </html>
