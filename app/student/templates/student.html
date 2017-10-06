@@ -2,31 +2,39 @@
 
 <body>
 
-
-  <h1>Estudiantes</h1>
-  <h2>Registrar Nuevo Estudiante</h2>
-  <a href='{{url_for('StudentRouting.newStudent')}}'> Add new student </a>
+  <header>
+    <!-- header aqui -->
+  </header>
+  
+  <div>
+    <h1>Estudiantes</h1>
+    <h2>Registrar Nuevo Estudiante</h2>
+    <a href='{{url_for('StudentRouting.newStudent')}}'> Add new student </a>
+  </div>
   {% for r in item %}
+
+  <section>
+
 
   <div>
 
-    <p> {{item[item.index(r)].name}} </p>
-    <p> {{item[item.index(r)].last_name}} </p>
-    <p> {{item[item.index(r)].gender}} </p>
-    <p> {{item[item.index(r)].email}} </p>
-    <p> {{item[item.index(r)].inscription_date}} </p>
-    <p> {{item[item.index(r)].ending_date}} </p>
-    <p> {{item[item.index(r)].retirement_date}} </p>
-    <p> {{item[item.index(r)].birthdate}} </p>
-    <p> {{item[item.index(r)].phone_mobile}} </p>
-    <p> {{item[item.index(r)].phone_home}} </p>
-    <p> {{item[item.index(r)].id_document}} </p>
-    <p> {{item[item.index(r)].actual_course}} </p>
-    <p> {{item[item.index(r)].actual_lesson}} </p>
-    <p> {{item[item.index(r)].status}} </p>
-    <p> {{item[item.index(r)].marital_status}} </p>
-    <p> {{item[item.index(r)].nationality}} </p>
-    <p> {{item[item.index(r)].address}} </p>
+    <h3>Nombres:</h3><p> {{item[item.index(r)].name}} </p>
+    <h3>Apellidos:</h3><p> {{item[item.index(r)].last_name}} </p>
+    <h3>Genero:</h3><p> {{item[item.index(r)].gender}} </p>
+    <h3>Email:</h3><p> {{item[item.index(r)].email}} </p>
+    <h3>Fecha de Ingreso:</h3><p> {{item[item.index(r)].inscription_date}} </p>
+    <h3>Fecha de Egreso:</h3><p> {{item[item.index(r)].ending_date}} </p>
+    <h3>Fecha de Retiro:</h3><p> {{item[item.index(r)].retirement_date}} </p>
+    <h3>Fecha de nacimiento:</h3><p> {{item[item.index(r)].birthdate}} </p>
+    <h3>Teléfono Celular:</h3><p> {{item[item.index(r)].phone_mobile}} </p>
+    <h3>Teléfono Hogar:</h3> <p> {{item[item.index(r)].phone_home}} </p>
+    <h3>Documento de Identidad:</h3><p> {{item[item.index(r)].id_document}} </p>
+    <h3>Curso Actual:</h3> <p> {{item[item.index(r)].actual_course}} </p>
+    <h3>Leccion Actual:</h3><p> {{item[item.index(r)].actual_lesson}} </p>
+    <h3>Estado:</h3><p> {{item[item.index(r)].status}} </p>
+    <h3>Estado Civil:</h3><p> {{item[item.index(r)].marital_status}} </p>
+    <h3>Nacionalidad:</h3><p> {{item[item.index(r)].nationality}} </p>
+    <h3>Direccion:</h3>  <p> {{item[item.index(r)].address}} </p>
 
 
     <br>
@@ -39,6 +47,10 @@
   </div>
 
   {% endfor %}
+  </section>
+  <footer>
+    <!-- footer aqui -->
+  </footer>
 </body>
 
 </html>

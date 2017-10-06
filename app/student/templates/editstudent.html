@@ -6,7 +6,10 @@
     <title>Usuarios</title>
   </head>
   <body>
-    <div class="row">
+    <header>
+      <!-- header aqui -->
+    </header>
+    <section class="row">
 
         <!-- {% with messages = get_flashed_messages() %}
           {% if messages %}
@@ -28,10 +31,11 @@
           <br>
           {{ render_field(form.email) }}
           {{ render_field(form.gender) }}
+          {{ render_field(form.birthdate) }}
           {{ render_field(form.inscription_date) }}
           {{ render_field(form.ending_date) }}
           {{ render_field(form.retirement_date) }}
-          {{ render_field(form.birthdate) }}
+
           <select class="" name="">
             <option value="">Cursos Aqui</option>
           </select>
@@ -53,8 +57,10 @@
           <div> <a href="{{url_for('StudentRouting.deleteStudent', student_id=student_id)}}">Eliminar</a> </div>
         </form>
       </div>
-    </div>
+    </section>
 
-
+    <footer>
+      <!-- footer aqui -->
+    </footer>
   </body>
 </html>

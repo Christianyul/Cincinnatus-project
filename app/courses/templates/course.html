@@ -1,18 +1,26 @@
 <html>
 
 <body>
+<header>
+  <!-- header aqui -->
+</header>
+  <div>
+    <h1>Cursos</h1>
+    <h2>Add nuevo Curso</h2>
+    <a href='{{url_for('CourseRouting.newCourse')}}'> Add new course </a>
 
+  </div>
 
-  <h1>Cursos</h1>
-  <h2>Add nuevo Curso</h2>
-  <a href='{{url_for('CourseRouting.newCourse')}}'> Add new course </a>
   {% for r in course %}
+  <section>
+
 
   <div>
+    <h3>Nombre: </h3>
+    <p>{{course[course.index(r)].name}}</p>
 
-    <p> {{course[course.index(r)].name}} </p>
-
-    <p> {{course[course.index(r)].lesson}} </p>
+    <h3>Cantidad de lecciones:</h3>
+    <p>{{course[course.index(r)].lesson}}</p>
 
     <a href=" {{course[course.index(r)].link}}">"Go to Page</a>
     <br>
@@ -20,8 +28,13 @@
     <br>
     <br>
   </div>
+  </section>
 
   {% endfor %}
+
+  <footer>
+    <!-- footer aqui -->
+  </footer>
 </body>
 
 </html>

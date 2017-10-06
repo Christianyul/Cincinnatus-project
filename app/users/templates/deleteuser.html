@@ -7,6 +7,9 @@
   <title>Document</title>
 </head>
 <body>
+  <header>
+    <!-- header aqui -->
+  </header>
   <div>
     <h2> Seguro que desea eliminar este usuario? </h2>
     <form action="{{url_for('UserRouting.deleteUser', user_id=user_id)}}" method="post">
@@ -14,5 +17,8 @@
       <a href="{{url_for('UserRouting.editUser',user_id = user_id)}}">Cancelar</a>
     </form>
   </div>
+  <footer>
+    <!-- footer aqui -->
+  </footer>
 </body>
 </html>

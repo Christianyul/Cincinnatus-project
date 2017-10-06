@@ -1,8 +1,10 @@
 <html>
 
 <body>
-
-
+  <header>
+    <!-- header aqui -->
+  </header>
+<section>
   <h1></h1>
   <h2>Registrar Datos Medicos</h2>
   <a href='{{url_for('MedicalRouting.newMedical', student_id= student.id)}}'> Add Medical Data </a>
@@ -10,13 +12,13 @@
 
   <div>
 
-    <p> {{item[item.index(r)].alergies}} </p>
-    <p> {{item[item.index(r)].intensity}} </p>
-    <p> {{item[item.index(r)].special_condition}} </p>
-    <p> {{item[item.index(r)].blood_type}} </p>
-    <p> {{item[item.index(r)].ars}} </p>
-    <p> {{item[item.index(r)].afiliation_type}} </p>
-    <p> {{item[item.index(r)].policy_number}} </p>
+    <h3>Alergias:</h3><p> {{item[item.index(r)].alergies}} </p>
+    <h3>Intensidad:</h3><p> {{item[item.index(r)].intensity}} </p>
+    <h3>Condincion Especial:</h3><p> {{item[item.index(r)].special_condition}} </p>
+    <h3>Tipo de Sangre:</h3><p> {{item[item.index(r)].blood_type}} </p>
+    <h3>ARS:</h3><p> {{item[item.index(r)].ars}} </p>
+    <h3>Tipo de Afiliación:</h3><p> {{item[item.index(r)].afiliation_type}} </p>
+    <h3>Numero de Poliza:</h3><p> {{item[item.index(r)].policy_number}} </p>
 
 
     <br>
@@ -26,6 +28,11 @@
   </div>
 
   {% endfor %}
+
+  </section>
+  <footer>
+    <!-- footer aqui -->
+  </footer>
 </body>
 
 </html>
