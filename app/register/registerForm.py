@@ -1,7 +1,6 @@
-from wtforms import StringField, PasswordField, IntegerField, RadioField, validators, DateField, SelectField, FileField
+from wtforms import StringField, PasswordField, IntegerField, RadioField, validators, DateField, SelectField
 from wtforms.validators import *
 from wtforms.fields.html5 import DateField, EmailField
-from flask_wtf.file import FileField
 from flask_wtf import Form
 
 
@@ -11,8 +10,7 @@ class RegisterForm(Form):
     email = EmailField('Email:', validators=[InputRequired()])
     gender = RadioField('Gender:', choices=[('Masculino','Masculino'),('Femenino','Femenino')], validators=[InputRequired()])
     inscription_date = DateField('Fecha de Ingreso:', format='%Y-%m-%d', validators=[InputRequired()])
-    ending_date = DateField('Fecha de Egreso:', format='%Y-%m-%d', validators=[Optional()])
-    retirement_date = DateField('Fecha de Retiro:', format='%Y-%m-%d', validators=[Optional()])
+
     birthdate = DateField('Fecha de nacimiento:', format='%Y-%m-%d', validators=[InputRequired()] )
     phone_mobile = StringField('Telefono Celular:', validators=[InputRequired()])
     phone_home = StringField('Telefono Hogar:', validators=[InputRequired()])
@@ -26,14 +24,13 @@ class RegisterForm(Form):
     address= StringField('Direccion:', validators=[InputRequired(), Length(min=3,max=200)])
 
 #-------------MEDICAL DATA---------------#
-    alergies = StringField('Alergies:')
-    intensity = RadioField('Intensidad:', choices=[('Ninguna','Ninguna'),('Leve','Leve'),('Media','Media'),('Fuerte','Fuerte')],default='Ninguna',validators=[Optional()])
+    alergies = StringField('Alergias:', validators=[Optional()])
+    intensity = RadioField('Intensidad:', choices=[('Ninguna','Ninguna'),('Leve','Leve'),('Media','Media'),('Fuerte','Fuerte')],default="Ninguna", validators=[Optional()])
     special_condition = StringField('Condicion Especial:', validators=[Optional()])
     blood_type = RadioField('Tipo de sangre:',
     choices=[('A+','A+'),('A-','A-'),('B+','B+'),('B-','B-'),('O+','O+'),('O-','O-'),
-    ('AB+','AB+'),('AB-','AB-')], default='A+', validators=[InputRequired()])
-
-    ars = StringField('ARS:',)
+    ('AB+','AB+'),('AB-','AB-')], validators=[InputRequired()])
+    ars = StringField('ARS:', validators=[Optional()])
     afiliation_type = StringField('Tipo de Afiliacion:',validators=[Optional()])
     policy_number = IntegerField('Numero de Poliza:',validators=[Optional()] )
 

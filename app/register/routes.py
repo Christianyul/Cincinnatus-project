@@ -65,8 +65,6 @@ def registerStudent():
         image_path=filename,
         gender=request.form['gender'],
         inscription_date=request.form['inscription_date'],
-        ending_date=request.form['ending_date'],
-        retirement_date=request.form['retirement_date'],
         birthdate=request.form['birthdate'],
         phone_mobile=request.form['phone_mobile'],
         phone_home=request.form['phone_home'],
@@ -80,15 +78,31 @@ def registerStudent():
         session.add(newStudent)
         session.flush()
 
+
         if len(request.form['policy_number'])> 0:
-            policy_num=request.form['policy_number']
+            policy_num = request.form['policy_number']
         else:
             policy_num = 0
 
+
+        # si no hay nada en alergies se agrega "Ninguna" por default
+        if len(request.form['alergies']) > 0:
+            aler = request.form['alergies']
+        else:
+            aler = "Ninguna"  
+
+
+
+        if len(request.form['special_condition']) > 0:
+            special = request.form['special_condition']
+        else:
+            special = "Ninguna"       
+
+
         newMedical=MedicalData(
-        alergies=request.form['alergies'],
+        alergies=aler,
         intensity=request.form['intensity'],
-        special_condition=request.form['special_condition'],
+        special_condition=special,
         blood_type=request.form['blood_type'],
         ars=request.form['ars'],
         afiliation_type=request.form['afiliation_type'],

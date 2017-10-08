@@ -39,8 +39,8 @@ def newStudent():
         end_date=request.form['ending_date']
 
         if 'file' not in request.files:
-            flash('No file part')
-            print 'No file part'
+            flash('No image selected')
+            print "No image selected"
             return redirect(request.url)
 
         file = request.files['file']
@@ -49,8 +49,8 @@ def newStudent():
             os.mkdir(UPLOAD_FOLDER)
 
         if file.filename == '':
-            flash('No selected file')
-            print "No selected file"
+            flash('No image selected')
+            print "No image selected"
             return redirect(request.url)
 
         if file and allowed_file(file.filename):
