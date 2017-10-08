@@ -1,23 +1,29 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request
 from . import RegisterRouting
 from database_setup import *
 from registerForm import RegisterForm
 from flask import Blueprint
 import os
+from werkzeug.utils import secure_filename
 
-methods = ['GET', 'POST']
-GET, POST = methods
 
-nl = "\n"
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
+APP_ROOT= os.path.abspath(os.path.dirname(__name__))
+UPLOAD_FOLDER = os.path.join(APP_ROOT,"app/static/images")
+ 
+
+print UPLOAD_FOLDER
 db_string="postgres://postgres:011741@localhost:5432/cincinnatus"
 engine = create_engine(db_string)
 DBSession=sessionmaker(bind=engine)
 session=DBSession()
 app=Flask(__name__)
 
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-
+   
 @RegisterRouting.route("/", methods=['GET','POST'])
 def register():
     return "hello"
@@ -26,16 +32,37 @@ def register():
 @RegisterRouting.route("/register/", methods=['GET','POST'])
 def registerStudent():
     form=RegisterForm()
-
+    print APP_ROOT
+    print UPLOAD_FOLDER
     if form.validate_on_submit():
-        # filename = secure_filename(request.form['image_path'])
-        # print os.path.realpath(filename)
-        # file.save(os.path.join('/static/Pictures', filename))
+
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        
+        file = request.files['file']
+        
+        # if user does not select file, browser also submit a empty part without filename
+        if not os.path.isdir(UPLOAD_FOLDER):
+            os.mkdir(UPLOAD_FOLDER)
+
+        if file.filename == '':
+            flash('No selected file')
+            print "No selected file"
+            return redirect(request.url)
+
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(UPLOAD_FOLDER, filename))
+            
+        
+
         print form.errors
         print "its happening 2"
         newStudent=Student(name=request.form['name'],
         last_name=request.form['last_name'],
         email=request.form['email'],
+        image_path=filename,
         gender=request.form['gender'],
         inscription_date=request.form['inscription_date'],
         ending_date=request.form['ending_date'],
@@ -48,7 +75,7 @@ def registerStudent():
         marital_status=request.form['marital_status'],
         nationality=request.form['nationality'],
         address=request.form['address'])
-            # os.path.realpath(filename)
+    
 
         session.add(newStudent)
         session.flush()

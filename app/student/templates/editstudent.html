@@ -23,11 +23,11 @@
 
       <div class="form">
         <h1>{{item.name}}</h1>
-        <form class="form" action="{{url_for('StudentRouting.editStudent', student_id=student_id)}}" method="post">
+        <form class="form" action="{{url_for('StudentRouting.editStudent', student_id=student_id)}}" method="post" enctype="multipart/form-data">
           {{ form.csrf_token }}
           {{ render_field(form.name) }}
           {{ render_field(form.last_name) }}
-          <!-- <input type="file" name="myImage" accept="image/*" /> -->
+          <input type="file" name="file" accept="image/*"/>
           <br>
           {{ render_field(form.email) }}
           {{ render_field(form.gender) }}
