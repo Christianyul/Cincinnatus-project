@@ -8,7 +8,7 @@ from flask_wtf import Form
 class StudentForm(Form):
     name = StringField('Nombres:', validators=[InputRequired(), Length(min=3,max=50)])
     last_name = StringField('Apellidos:', validators=[InputRequired(), Length(min=3,max=50)])
-    email = StringField('Email:', validators=[InputRequired()])
+    email = EmailField('Email:', validators=[InputRequired()])
     gender = RadioField('Genero:', choices=[('Masculino','Masculino'),('Femenino','Femenino')], validators=[InputRequired()])
     inscription_date = DateField('Fecha de Ingreso:', format='%Y-%m-%d', validators=[InputRequired()])
     ending_date = DateField('Fecha de Egreso:', format='%Y-%m-%d', validators=[Optional()])
