@@ -37,10 +37,23 @@ def newMedical(student_id):
             policy_num = 0
 
 
+        # si no hay nada en alergies se agrega "Ninguna" por default
+        if len(request.form['alergies']) > 0:
+            aler = request.form['alergies']
+        else:
+            aler = "Ninguna"      
+
+
+        if len(request.form['special_condition']) > 0:
+            special = request.form['special_condition']
+        else:
+            special = "Ninguna"       
+        
+
         newItem=MedicalData(
-        alergies=request.form['alergies'],
+        alergies=aler,
         intensity=request.form['intensity'],
-        special_condition=request.form['special_condition'],
+        special_condition=special,
         blood_type=request.form['blood_type'],
         ars=request.form['ars'],
         afiliation_type=request.form['afiliation_type'],

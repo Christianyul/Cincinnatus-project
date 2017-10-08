@@ -6,7 +6,12 @@
     <title>Registro de Estudiantes</title>
   </head>
   <body>
+
+    <header>
+
+    </header>
     <section class="row">
+
       <div class="form">
         <h1>Registro de estudiates</h1>
         <form class="form" action="{{url_for('RegisterRouting.registerStudent')}}" method="post" enctype="multipart/form-data">
@@ -17,11 +22,18 @@
           {{ render_field(form.last_name) }}
           <input type="file" name="file" accept="image/*" />
           <br>
+          {% with messages = get_flashed_messages() %}
+          {% if messages %}
+          <ul>
+            {% for message in messages %}
+            <li style="color:red;"> {{ message }} </li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        {% endwith %}
           {{ render_field(form.email) }}
           {{ render_field(form.gender) }}
           {{ render_field(form.inscription_date) }}
-          {{ render_field(form.retirement_date) }}
-          {{ render_field(form.ending_date) }}
 
           {{ render_field(form.birthdate) }}
           <select class="" name="">
