@@ -14,8 +14,8 @@ class StudentForm(Form):
     ending_date = DateField('Fecha de Egreso:', format='%Y-%m-%d', validators=[Optional()])
     retirement_date = DateField('Fecha de Retiro:', format='%Y-%m-%d', validators=[Optional()])
     birthdate = DateField('Fecha de nacimiento:', format='%Y-%m-%d', validators=[InputRequired()] )
-    phone_mobile = StringField('Telefono Celular:', validators=[InputRequired()])
-    phone_home = StringField('Telefono Hogar:', validators=[InputRequired()])
+    phone_mobile = IntegerField('Telefono Celular:', validators=[InputRequired()])
+    phone_home = IntegerField('Telefono Hogar:', validators=[InputRequired()])
     id_document = StringField('Documento De Identidad:', validators=[InputRequired()])
     status = RadioField('Estado Actual:', choices=[('Activo','Activo'),('Retirado','Retirado'),('Terminado','Terminado')],default='Activo', validators=[InputRequired()])
     #select para los cursos

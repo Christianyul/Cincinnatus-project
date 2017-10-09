@@ -8,8 +8,8 @@ class EmergencyContact(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(50), nullable=False)
     last_name = Column(String(50), nullable=False)
-    phone_mobile = Column(String(12), nullable=False)
-    phone_home = Column(String(12))
+    phone_mobile = Column(Integer, nullable=False)
+    phone_home = Column(Integer)
     relationship = Column(String(20), nullable=False)
     student = Column(Integer, ForeignKey('students.id'))
 

@@ -16,11 +16,11 @@
         <h1>Registro de Contactos de Emergencia</h1>
         <form class="form" action="{{url_for('EmergencyRouting.newEmergency', student_id= student.id)}}" method="post">
           {{ form.csrf_token }}
-          {{ render_field(form.name) }}
-          {{ render_field(form.last_name) }}
-          {{ render_field(form.phone_mobile) }}
-          {{ render_field(form.phone_home) }}
-          {{ render_field(form.relationship) }}
+          {{ render_field(form.name) }} <br>
+          {{ render_field(form.last_name) }} <br>
+          {{ render_field(form.phone_mobile) }} <br>
+          {{ render_field(form.phone_home) }} <br>
+          {{ render_field(form.relationship) }} <br>
 
           <div><input type="submit" value="Enviar"></div>
         </form>

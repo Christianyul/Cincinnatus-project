@@ -40,11 +40,9 @@ try:
     session.add(em)
     session.commit()
 
-
+    print "database setup done"
 
 except Exception as e:
     print e
     pass
 
-
-print "database setup done"

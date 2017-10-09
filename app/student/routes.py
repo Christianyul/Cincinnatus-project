@@ -24,7 +24,6 @@ def allowed_file(filename):
 @StudentRouting.route("/student/")
 def showStudent():
     item=session.query(Student).all()
-    
     return render_template("student.html", item=item)
 
 

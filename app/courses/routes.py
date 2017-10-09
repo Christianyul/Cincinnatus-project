@@ -15,15 +15,19 @@ DBSession=sessionmaker(bind=engine)
 session=DBSession()
 app=Flask(__name__)
 
-# def CollectingData():
-#     Data = {}
-#     coursedata = session.query(Course).all()
-#     for courses in coursedata:
-#         Data["id"] = courses.id
-#         Data["name"] = courses.name
-#         Data["lesson"] = courses.lesson
-#         Data["link"] = courses.link
-#     return Data
+def CollectingData():
+    ArrayCourses = []
+    Courses = {}
+    Data = {"Allcoursesdata": ArrayCourses}
+    coursedata = session.query(Course).all()
+    for courses in coursedata:
+        Courses["id"] = str(courses.id)
+        Courses["name"] = str(courses.name)
+        Courses["lesson"] = str(courses.lesson)
+        Courses["link"] = str(courses.link)
+        ArrayCourses.append(Courses)
+        Courses = {}
+    return Data
 
 @CourseRouting.route("/course/")
 def showCourse():
