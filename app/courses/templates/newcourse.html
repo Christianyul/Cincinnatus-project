@@ -24,9 +24,9 @@
         <h1>Registro de los cursos</h1>
         <form class="form" action="{{url_for('CourseRouting.newCourse')}}" method="post">
           {{ form.csrf_token }}
-          {{ render_field(form.name) }}
-          {{ render_field(form.lesson) }}
-          {{ render_field(form.link) }}
+          {{ render_field(form.name) }} <br>
+          {{ render_field(form.lesson) }} <br>
+          {{ render_field(form.link) }} <br>
           <div><input type="submit" value="Enviar"></div>
         </form>
       </div>

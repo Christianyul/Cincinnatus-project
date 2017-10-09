@@ -25,10 +25,10 @@
         <h1>{{item.name}}</h1>
         <form class="coursesform" action="{{url_for('CourseRouting.editCourse', course_id=course_id)}}" method="post">
           {{ form.csrf_token }}
-          {{ render_field(form.name) }}
-          {{ render_field(form.lesson) }}
-          {{ render_field(form.link) }}
-          <div><input type="submit" value="Enviar"></div>
+          {{ render_field(form.name) }} <br>
+          {{ render_field(form.lesson) }} <br>
+          {{ render_field(form.link) }} <br>
+          <div><input type="submit" value="Enviar"></div><br>
           <div> <a href="{{url_for('CourseRouting.deleteCourse', course_id=course_id)}}">Eliminar</a> </div>
         </form>
       </div>

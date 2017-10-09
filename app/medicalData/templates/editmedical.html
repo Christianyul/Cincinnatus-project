@@ -25,16 +25,16 @@
         <h1>{{item.student_id}}</h1>
         <form class="form" action="{{url_for('MedicalRouting.editMedical', medical_id=medical_id, student_id=student.id)}}" method="post">
           {{ form.csrf_token }}
-          {{ render_field(form.alergies) }}
-          {{ render_field(form.intensity ) }}
-          {{ render_field(form.special_condition) }}
-          {{ render_field(form.blood_type) }}
-          {{ render_field(form.ars) }}
-          {{ render_field(form.afiliation_type) }}
-          {{ render_field(form.policy_number) }}
+          {{ render_field(form.alergies) }} <br>
+          {{ render_field(form.intensity ) }} <br>
+          {{ render_field(form.special_condition) }} <br>
+          {{ render_field(form.blood_type) }} <br>
+          {{ render_field(form.ars) }} <br>
+          {{ render_field(form.afiliation_type) }} <br>
+          {{ render_field(form.policy_number) }} <br>
 
 
-          <div><input type="submit" value="Enviar"></div>
+          <div><input type="submit" value="Enviar"></div><br>
           <div> <a href="{{url_for('MedicalRouting.deleteMedical', medical_id=medical_id, student_id=student.id)}}">Eliminar</a> </div>
         </form>
       </div>

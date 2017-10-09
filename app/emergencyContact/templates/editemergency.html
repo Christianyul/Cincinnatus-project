@@ -26,14 +26,14 @@
         <h1>{{item.name}}</h1>
         <form class="form" action="{{url_for('EmergencyRouting.editEmergency', emergency_id=emergency_id, student_id=student.id)}}" method="post">
           {{ form.csrf_token }}
-          {{ render_field(form.name) }}
-          {{ render_field(form.last_name) }}
-          {{ render_field(form.phone_mobile) }}
-          {{ render_field(form.phone_home) }}
-          {{ render_field(form.relationship) }}
+          {{ render_field(form.name) }} <br>
+          {{ render_field(form.last_name) }} <br>
+          {{ render_field(form.phone_mobile) }} <br>
+          {{ render_field(form.phone_home) }} <br>
+          {{ render_field(form.relationship) }} <br>
 
 
-          <div><input type="submit" value="Enviar"></div>
+          <div><input type="submit" value="Enviar"></div>  <br>
           <div> <a href="{{url_for('EmergencyRouting.deleteEmergency', emergency_id=emergency_id, student_id=student.id)}}">Eliminar</a> </div>
         </form>
       </div>
