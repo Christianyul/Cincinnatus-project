@@ -3,25 +3,42 @@
   <head>
     <meta charset="utf-8">
     <title>CincinnatusInstitute Application</title>
-    <link rel="stylesheet" href="./Css/HomeStyle.css">
+    <link rel="stylesheet" href="../static/css/app.css">
+    <link rel="stylesheet" href="../static/css/homeStyle.css">
   </head>
   <body>
-      <div class="row">
-        <div class="col-3 LogoImagen"><img src="./Images/Cincinnatus-test.png" alt="Logo"></div>
-        <div class="col-9"><nav class="menu-vertical">
-          <a href="#">Home</a> |
-          <a href="#">Studient Profile</a> |
-          <a href="#">Log Out</a>
-        </nav></div>
-      </div>
-      <div class="col-12">
-        <h1>Hello Studiant Name</h1>
-      </div>
-      <div class="row">
-        <div class="col-12 img-ranking"><img src="http://via.placeholder.com/1220x340" alt="Ranking"></div>
-      </div>
-      <div class="row">
-        <div class="col-12 img-calendar"><img src="http://via.placeholder.com/1220x340" alt="Calendar of the studiant"></div>
-      </div>
+      <div class="container">
+        <header class="small-12">
+            <div class="medium-2 img-responsive hide-for-small-only">
+                <img src="../static/img/logo.png" alt="Logo">
+            </div>
+            <div class="small-12 medium-10 darker just-space-between">
+                <nav class="small-9">
+                    <ul class="menu">
+                      <li><a href="#">Home</a></li>
+                      <li><a href="#">Profile</a></li>
+                      <li><a href="#">Admin</a></li>
+                    </ul>
+                </nav>
+                <button class="button small-2">Log Out</button>
+            </div>
+        </header>
+        
+        <div class="row">
+            <div class="small-12 course">
+                <div class="small-12 medium-4 large-3 course-info">
+                    <h2 class="course-title">Intro to computer sciences</h2>
+                    <span>Lessons</span>
+                    <div class="course-lessons">
+                      99
+                    </div>
+                </div>
+                 <div class="small-12 medium-8 large-9 students-container">
+                      <div class="small-3 large-2 student-img">
+                          <img src="http://fullerlivingconstruction.com/redesign/wp-content/uploads/2015/03/team-member-2.jpg" alt="Student">
+                      </div>
+                </div>
+            </div>
+        </div>
   </body>
 </html>
