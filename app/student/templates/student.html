@@ -1,5 +1,17 @@
 <html>
-
+<head>
+  <style>
+    *{
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -ms-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+    th{
+      border: 1px solid red;
+    }
+  </style>
+</head>
 <body>
 
   <header>
@@ -9,51 +21,51 @@
   <div>
     <h1>Estudiantes</h1>
     <h2>Registrar Nuevo Estudiante</h2>
-    <a href='{{url_for('StudentRouting.newStudent')}}'> Add new student </a>
-  </div>
-
-
-  {% for r in item %}
+    <a href='{{url_for('StudentRouting.newStudent')}}'> Add new student </a> 
+  </div><br>
 
   <section>
-
-
-  <div>
-    
-    <img src="{{ url_for('static', filename ='images/%s' % (item[item.index(r)].image_path)) }}" )alt="Profile Pic" height="200" width="250">
-    <h3>Nombres:</h3><p> {{item[item.index(r)].name}} </p>
-    <h3>Apellidos:</h3><p> {{item[item.index(r)].last_name}} </p>
-    <h3>Genero:</h3><p> {{item[item.index(r)].gender}} </p>
-    <h3>Email:</h3><p> {{item[item.index(r)].email}} </p>
-    <h3>Fecha de Ingreso:</h3><p> {{item[item.index(r)].inscription_date}} </p>
-    <h3>Fecha de Egreso:</h3><p> {{item[item.index(r)].ending_date}} </p>
-    <h3>Fecha de Retiro:</h3><p> {{item[item.index(r)].retirement_date}} </p>
-    <h3>Fecha de nacimiento:</h3><p> {{item[item.index(r)].birthdate}} </p>
-    <h3>Teléfono Celular:</h3><p> {{item[item.index(r)].phone_mobile}} </p>
-    <h3>Teléfono Hogar:</h3> <p> {{item[item.index(r)].phone_home}} </p>
-    <h3>Documento de Identidad:</h3><p> {{item[item.index(r)].id_document}} </p>
-    <h3>Curso Actual:</h3> <p> {{item[item.index(r)].actual_course}} </p>
-    <h3>Leccion Actual:</h3><p> {{item[item.index(r)].actual_lesson}} </p>
-    <h3>Estado:</h3><p> {{item[item.index(r)].status}} </p>
-    <h3>Estado Civil:</h3><p> {{item[item.index(r)].marital_status}} </p>
-    <h3>Nacionalidad:</h3><p> {{item[item.index(r)].nationality}} </p>
-    <h3>Direccion:</h3>  <p> {{item[item.index(r)].address}} </p>
-
-
-    <br>
-    <a href='{{url_for('StudentRouting.editStudent',student_id = item[item.index(r)].id)}}'>Edit/Delete </a>
-    <br>
-    <a href="{{url_for('EmergencyRouting.showEmergency',student_id=item[item.index(r)].id)}}">Add/Edit Emergency Contact</a>
-      <a href="{{url_for('MedicalRouting.showMedical',student_id=item[item.index(r)].id)}}">Add/Edit Medical Data </a>
-
-    <br>
-  </div>
-
-  {% endfor %}
-  </section>
-  <footer>
-    <!-- footer aqui -->
-  </footer>
+   
+    <div>
+      <table width="100%", border="1", cellpadding="5">
+        <tr>
+          <th>Image of the Student</th>
+          <th>Student Name</th>
+          <th>Student Last Name</th>
+          <th>Student Address</th>
+          <th>Student Gender</th>
+          <th>Student Email</th>
+          <th>Student Birthdate</th>
+          <th>Student Home Phone</th>
+          <th>Student Cellphone</th>
+          <th>Document of Identity</th>
+          <th>Actual Course</th>
+          <th>Actual Lesson</th>
+          <th>State in the Institute</th>
+          <th>Marital State</th>
+          <th>Nationality</th>
+        </tr>
+        {% for r in item %}
+        <tr>
+          <td><img src="{{ url_for('static', filename ='images/%s' % (item[item.index(r)].image_path)) }}" alt="Profile Picture" height="100" width="150"></td>
+          <td>{{item[item.index(r)].name}}</td>
+          <td>{{item[item.index(r)].last_name}}</td>
+          <td>{{item[item.index(r)].address}}</td>
+          <td>{{item[item.index(r)].gender}}</td>
+          <td>{{item[item.index(r)].email}}</td>
+          <td>{{item[item.index(r)].birthdate}}</td>
+          <td>{{item[item.index(r)].phone_home}}</td>
+          <td>{{item[item.index(r)].phone_mobile}}</td>
+          <td>{{item[item.index(r)].id_document}}</td>
+          <td>{{item[item.index(r)].actual_course}}</td>
+          <td>{{item[item.index(r)].actual_lesson}}</td>
+          <td>{{item[item.index(r)].status}}</td>
+          <td>{{item[item.index(r)].marital_status}} </td>
+          <td>{{item[item.index(r)].nationality}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
 </body>
 
 </html>
