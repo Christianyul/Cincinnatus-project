@@ -23,38 +23,30 @@ app=Flask(__name__)
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-   
 @RegisterRouting.route("/", methods=['GET','POST'])
 def register():
     return "hello"
 
-
 @RegisterRouting.route("/register/", methods=['GET','POST'])
 def registerStudent():
     form=RegisterForm()
+    courses=session.query(Course).all()
     print APP_ROOT
     print UPLOAD_FOLDER
     if form.validate_on_submit():
 
-        if 'file' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
-        
-        file = request.files['file']
-        
+        if 'file' not in request.files or request.files['file'].filename == '':
+            filename = "default.jpg"
+        else:
+            file = request.files['file']
         # if user does not select file, browser also submit a empty part without filename
-        if not os.path.isdir(UPLOAD_FOLDER):
-            os.mkdir(UPLOAD_FOLDER)
-
-        if file.filename == '':
-            flash('No selected file')
-            print "No selected file"
-            return redirect(request.url)
-
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(UPLOAD_FOLDER, filename))
-            
+        # if not os.path.isdir(UPLOAD_FOLDER):
+        #     os.mkdir(UPLOAD_FOLDER)
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(UPLOAD_FOLDER, filename))
+            else:
+                filename = "default.jpg"
         
 
         print form.errors
@@ -68,6 +60,7 @@ def registerStudent():
         birthdate=request.form['birthdate'],
         phone_mobile=request.form['phone_mobile'],
         phone_home=request.form['phone_home'],
+        actual_course=request.form['actual_course'],
         id_document=request.form['id_document'],
         status=request.form['status'],
         marital_status=request.form['marital_status'],
@@ -121,4 +114,4 @@ def registerStudent():
         session.add(newEmergency)
 
         session.commit()
-    return render_template("register.html", form=form)
+    return render_template("register.html", form=form, courses=courses)
