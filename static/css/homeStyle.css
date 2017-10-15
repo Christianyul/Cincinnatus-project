@@ -1,9 +1,16 @@
 header {
 	margin-bottom: 20px;
 }
+
+.student-img{
+	display: inline-block;
+	height: auto;
+	width: auto;
+}
+
 .student-img > img {
 	height: 125px;
-	width: 100%;
+	width: 125px;
 }
 
 .course {

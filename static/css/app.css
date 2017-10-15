@@ -76,6 +76,11 @@
     height: auto;
 }
 
+.img-logo img {
+    max-width: 133px;
+    max-height: 74px;
+}
+
 .darker {
     background-color: #222;
 }
