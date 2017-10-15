@@ -18,9 +18,9 @@
       <h1>Registro de estudiates</h1>
       <form class="form" action="{{url_for('StudentRouting.newStudent')}}" method="post" enctype="multipart/form-data">
         {{ form.csrf_token }}
-        {{ render_field(form.name) }}
-        {{ render_field(form.last_name) }}
-        <input type="file" name="file" accept="image/*" />
+        {{ render_field(form.name) }} <br>
+        {{ render_field(form.last_name) }} <br>
+        <div><input type="file" name="file" accept="image/*" /></div>
         <br> 
         {% with messages = get_flashed_messages() %}
         {% if messages %}
@@ -32,28 +32,27 @@
         {% endif %}
       {% endwith %}
 
-        {{ render_field(form.email) }}
-        {{ render_field(form.gender) }}
-        {{ render_field(form.birthdate) }}
-        {{ render_field(form.inscription_date) }}
-        {{ render_field(form.retirement_date) }}
-        {{ render_field(form.ending_date) }}
+        {{ render_field(form.email) }} <br>
+        {{ render_field(form.gender) }} <br>
+        {{ render_field(form.birthdate) }} <br>
+        {{ render_field(form.inscription_date) }} <br>
+        {{ render_field(form.retirement_date) }} <br>
+        {{ render_field(form.ending_date) }} <br>
 
 
 
 
-        <br>
+        <div>
         <select class="" name="">
             <option value="">Lecciones Aqui</option>
-          </select>
-        <br>
-        {{ render_field(form.phone_mobile) }}
-        {{ render_field(form.phone_home) }}
-        {{ render_field(form.id_document) }}
-        {{ render_field(form.status) }}
-        {{ render_field(form.marital_status) }}
-        {{ render_field(form.nationality) }}
-        {{ render_field(form.address)}}
+        </select></div><br>
+        {{ render_field(form.phone_mobile) }} <br>
+        {{ render_field(form.phone_home) }} <br>
+        {{ render_field(form.id_document) }} <br>
+        {{ render_field(form.status) }} <br>
+        {{ render_field(form.marital_status) }} <br>
+        {{ render_field(form.nationality) }} <br>
+        {{ render_field(form.address)}} <br>
         <div><input type="submit" value="Enviar"></div>
       </form>
 
