@@ -16,7 +16,7 @@ class Student(Base):
     status = Column(String(20), nullable=False)
     ending_date = Column(Date)
     retirement_date = Column(Date)
-    actual_course = Column(Integer, ForeignKey('courses.id'))
+    actual_course = Column(String(50))
     actual_lesson = Column(Integer)
     marital_status = Column(String(20))
     nationality = Column(String(20), nullable=False)

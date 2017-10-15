@@ -16,11 +16,7 @@ class RegisterForm(Form):
     phone_home = IntegerField('Telefono Hogar:', validators=[InputRequired()])
     id_document = StringField('Documento De Identidad:', validators=[InputRequired()])
     status = RadioField('Estado Actual:', choices=[('Activo','Activo'),('Retirado','Retirado'),('Terminado','Terminado')],default='Activo', validators=[InputRequired()])
-    #select para los cursos
-    #select para lecciones
-    #input de arhivo para imagenes
     marital_status = RadioField('Estado Civil:', choices=[('Soltero','Soltero'),('Casado','Casado')],default='Soltero', validators=[InputRequired()])
-    nationality = StringField('Nacionalidad:', validators=[InputRequired()])
     address= StringField('Direccion:', validators=[InputRequired(), Length(min=3,max=200)])
 
 #-------------MEDICAL DATA---------------#
@@ -33,7 +29,6 @@ class RegisterForm(Form):
     ars = StringField('ARS:', validators=[Optional()])
     afiliation_type = StringField('Tipo de Afiliacion:',validators=[Optional()])
     policy_number = IntegerField('Numero de Poliza:',validators=[Optional()] )
-
 
 
 #------------EMERGENCY CONTACT---------------#

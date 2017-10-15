@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, jsonify
 from . import StudentRouting
 from database_setup import *
 from studentForm import StudentForm
@@ -6,8 +6,7 @@ from flask import Blueprint
 import os
 from werkzeug.utils import secure_filename
 
-
-db_string="postgres://postgres:linkinpark09@localhost:5001/cincinnatus"
+db_string="postgres://postgres:011741@localhost:5432/cincinnatus"
 engine = create_engine(db_string)
 DBSession=sessionmaker(bind=engine)
 session=DBSession()
@@ -39,55 +38,51 @@ def Student_API(Student):
     Data['actual_lesson'] = str(Student.marital_status)
     Data['nationality'] = str(Student.nationality)
     Data['address'] = str(Student.address)
-    return Data 
+    return jsonify(Data) 
 
-def Student_Data():
-    Array_Data = []
-    Api_Students = {"All the data": Array_Data}
-    students = session.query(Student).all()
-    for student in students:
-        Array_Data.append(Student_API(student))
-    return Api_Students
+# def Student_Data():
+#     Array_Data = []
+#     Api_Students = {"All the data": Array_Data}
+#     students = session.query(Student).all()
+#     for student in students:
+#         Array_Data.append(Student_API(student))
+#     return Api_Students
 
 @StudentRouting.route("/student/")
 def showStudent():
     item=session.query(Student).all()
-    print Student_Data()
     return render_template("student.html", item=item)
-
 
 @StudentRouting.route("/student/register/", methods=['GET','POST'])
 def newStudent():
     form = StudentForm()
+    courses=session.query(Course).all()
     if form.validate_on_submit():
-        print APP_ROOT
-        print UPLOAD_FOLDER
-    
+        
         re_date=request.form['retirement_date']
         end_date=request.form['ending_date']
 
-        if 'file' not in request.files:
-            flash('No image selected')
-            print "No image selected"
-            return redirect(request.url)
+        if len(re_date) <= 0:
+            re_date = "0001-01-01"
 
-        file = request.files['file']
+        if len(end_date) <=0:
+            end_date = "0001-01-01"
+
+        if 'file' not in request.files or request.files['file'].filename == '':
+            filename = "default.jpg"
+        else:
+            file = request.files['file']
         # if user does not select file, browser also submit a empty part without filename
-        if not os.path.isdir(UPLOAD_FOLDER):
-            os.mkdir(UPLOAD_FOLDER)
+        # if not os.path.isdir(UPLOAD_FOLDER):
+        #     os.mkdir(UPLOAD_FOLDER)
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(UPLOAD_FOLDER, filename))
+            else:
+                filename = "default.jpg"
 
-        if file.filename == '':
-            flash('No image selected')
-            print "No image selected"
-            return redirect(request.url)
+        print filename
 
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(UPLOAD_FOLDER, filename))
-            print filename
-
-
-        
         print form.errors
         print "its happening 2"
         newItem=Student(name=request.form['name'],
@@ -101,30 +96,27 @@ def newStudent():
         birthdate=request.form['birthdate'],
         phone_mobile=request.form['phone_mobile'],
         phone_home=request.form['phone_home'],
+        actual_course=request.form['actual_course'],
         id_document=request.form['id_document'],
         status=request.form['status'],
         marital_status=request.form['marital_status'],
         nationality=request.form['nationality'],
         address=request.form['address'])
-        # os.path.realpath(filename)
-
 
         session.add(newItem)
         session.commit()
         #flash("New Item Added")
         return redirect(url_for('StudentRouting.showStudent'))
 
-
     print "its happening 1"
 
-    return render_template("studentsignup.html", form=form)
-
-
+    return render_template("studentsignup.html", form=form, courses=courses)
 
 
 @StudentRouting.route("/student/<int:student_id>/edit/", methods=['GET','POST'])
 def editStudent(student_id):
     form = StudentForm()
+    courses=session.query(Course).all()
        
     editedItem = session.query(Student).filter_by(id=student_id).one()
     if form.validate_on_submit():
@@ -135,43 +127,49 @@ def editStudent(student_id):
         re_date=request.form['retirement_date']
         end_date=request.form['ending_date']
 
-        file = request.files['file']
+        if len(re_date) <= 0:
+            re_date = "0001-01-01"
+
+        if len(end_date) <=0:
+            end_date = "0001-01-01"
+
+        if 'file' not in request.files or request.files['file'].filename == '':
+            filename= False
+            pass
+        else:
+            file = request.files['file']
         # if user does not select file, browser also submit a empty part without filename
-        if not os.path.isdir(UPLOAD_FOLDER):
-            os.mkdir(UPLOAD_FOLDER)
-
-        if file.filename == '':
-            flash('No selected file')
-            print "No selected file"
-            return redirect(request.url)
-
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(UPLOAD_FOLDER, filename))
+        # if not os.path.isdir(UPLOAD_FOLDER):
+        #     os.mkdir(UPLOAD_FOLDER)
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(UPLOAD_FOLDER, filename))
+            else:
+                filename = "default.jpg"
 
         editedItem.name = request.form['name']
         editedItem.last_name=request.form['last_name']
         editedItem.email=request.form['email']
-        editedItem.image_path=filename
+        if filename:
+            editedItem.image_path=filename
         editedItem.gender=request.form['gender']
         editedItem.inscription_date=request.form['inscription_date']
-        editedItem.ending_date=request.form['ending_date']
-        editedItem.retirement_date=request.form['retirement_date']
+        editedItem.ending_date=end_date
+        editedItem.retirement_date=re_date
         editedItem.birthdate=request.form['birthdate']
         editedItem.phone_mobile=request.form['phone_mobile']
         editedItem.phone_home=request.form['phone_home']
+        editedItem.actual_course=request.form['actual_course']
         editedItem.id_document=request.form['id_document']
         editedItem.status=request.form['status']
         editedItem.marital_status=request.form['marital_status']
         editedItem.nationality=request.form['nationality']
         editedItem.address=request.form['address']
-
-
         session.add(editedItem)
         session.commit()
         #flash("New Item Added")
         return redirect(url_for('StudentRouting.showStudent'))
-    return render_template("editstudent.html",form=form, student_id=student_id, item=editedItem)
+    return render_template("editstudent.html",form=form, student_id=student_id, item=editedItem, courses=courses)
 
 
 

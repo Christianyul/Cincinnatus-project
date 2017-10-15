@@ -1,15 +1,7 @@
 <html>
 <head>
   <style>
-    *{
-      -webkit-box-sizing: border-box;
-      -moz-box-sizing: border-box;
-      -ms-box-sizing: border-box;
-      box-sizing: border-box;
-    }
-    th{
-      border: 1px solid red;
-    }
+  
   </style>
 </head>
 <body>
@@ -27,7 +19,7 @@
   <section>
    
     <div>
-      <table width="100%", border="1", cellpadding="5">
+      <table width="100%", border="0", cellpadding="5">
         <tr>
           <th>Image of the Student</th>
           <th>Student Name</th>
@@ -40,7 +32,6 @@
           <th>Student Cellphone</th>
           <th>Document of Identity</th>
           <th>Actual Course</th>
-          <th>Actual Lesson</th>
           <th>State in the Institute</th>
           <th>Marital State</th>
           <th>Nationality</th>
@@ -58,7 +49,7 @@
           <td>{{item[item.index(r)].phone_mobile}}</td>
           <td>{{item[item.index(r)].id_document}}</td>
           <td>{{item[item.index(r)].actual_course}}</td>
-          <td>{{item[item.index(r)].actual_lesson}}</td>
+          
           <td>{{item[item.index(r)].status}}</td>
           <td>{{item[item.index(r)].marital_status}} </td>
           <td>{{item[item.index(r)].nationality}}</td>
@@ -71,6 +62,7 @@
         {% endfor %}
       </table>
     </div>
+    </section>
 </body>
 
 </html>
