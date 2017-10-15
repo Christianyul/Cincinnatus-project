@@ -14,11 +14,9 @@ from database import *
 #create database
 #////----cambiar password-------///
 #if database is created we control the exception by simply passing
-
-connect = connect(user = 'postgres', host='localhost', port= '5001', password='linkinpark09', dbname= 'cincinnatus')
-if connect:
-    pass
-else:
+try:
+    connect = connect(user = 'postgres', host='localhost', port= '5001', password='linkinpark09', dbname= 'cincinnatus')
+except:
     try:
         con = connect(user='postgres', host = 'localhost', port='5001', password='linkinpark09')
         con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
@@ -37,9 +35,6 @@ else:
         #///----cambiar password------///
         db_string="postgres://postgres:linkinpark09@localhost:5001/cincinnatus"
         engine = create_engine(db_string)
-
-
-
         #this will add the classes that we will create as tables in our database
         Base.metadata.create_all(engine)
 

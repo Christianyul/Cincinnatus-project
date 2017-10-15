@@ -63,6 +63,11 @@
           <td>{{item[item.index(r)].marital_status}} </td>
           <td>{{item[item.index(r)].nationality}}</td>
         </tr>
+        <tr>
+          <td><a href='{{url_for('StudentRouting.editStudent',student_id = item[item.index(r)].id)}}'>Edit/Delete </a></td>
+          <td><a href="{{url_for('EmergencyRouting.showEmergency',student_id=item[item.index(r)].id)}}">Add/Edit Emergency Contact</a></td>
+          <td><a href="{{url_for('MedicalRouting.showMedical',student_id=item[item.index(r)].id)}}">Add/Edit Medical Data </a></td>
+        </tr>
         {% endfor %}
       </table>
     </div>
