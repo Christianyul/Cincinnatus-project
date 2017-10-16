@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, jsonify
 from . import EmergencyRouting
 from database_setup import *
 from emergencyForm import EmergencyForm
@@ -10,18 +10,33 @@ GET, POST = methods
 
 nl = "\n"
 
-db_string="postgres://postgres:011741@localhost:5432/cincinnatus"
+db_string="postgres://postgres:linkinpark09@localhost:5001/cincinnatus"
 engine = create_engine(db_string)
 DBSession=sessionmaker(bind=engine)
 session=DBSession()
 app=Flask(__name__)
 
+@EmergencyRouting.route("/<int:student_id>/emergency/emergencyapi")
+def EmergencyApi(student_id):
+    Info = []
+    student = session.query(Student).filter_by(id=student_id)
+    emergency = session.query(EmergencyContact).filter_by(id =student_id).all()
+    for data in emergency:
+        Data = {}
+        Data["id"] = data.id
+        Data["Student_ID"] = data.student
+        Data["Name_Emergency_Contact"] = data.name
+        Data["Emergency_Phone_Mobile"] = data.phone_mobile
+        Data["Emergency_Phone_Home"] = data.phone_home
+        Data["Relationship_with_the_contact"] = data.relationship
+        Info.append(Data)
+    EmergencyData = {"All_Data": Info}
+    return jsonify(EmergencyData)
 
 @EmergencyRouting.route("/<int:student_id>/emergency/")
 def showEmergency(student_id):
     student=session.query(Student).filter_by(id=student_id).one()
     item=session.query(EmergencyContact).filter_by(student=student_id).all()
-    print item
     return render_template("emergency.html", item=item, student = student )
 
 
