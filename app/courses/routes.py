@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, jsonify
 from . import CourseRouting
 from database_setup import *
 from . import coursesForm
@@ -15,6 +15,8 @@ DBSession=sessionmaker(bind=engine)
 session=DBSession()
 app=Flask(__name__)
 
+
+@CourseRouting.route('/course/courseapi')
 def CollectingData():
     ArrayCourses = []
     Courses = {}
@@ -27,7 +29,7 @@ def CollectingData():
         Courses["link"] = str(courses.link)
         ArrayCourses.append(Courses)
         Courses = {}
-    return Data
+    return jsonify(Data)
 
 @CourseRouting.route("/course/")
 def showCourse():

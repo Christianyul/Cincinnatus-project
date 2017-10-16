@@ -9,17 +9,30 @@ GET, POST = methods
 
 nl = "\n"
 
-db_string="postgres://postgres:011741@localhost:5432/cincinnatus"
+db_string="postgres://postgres:linkinpark09@localhost:5001/cincinnatus"
 engine = create_engine(db_string)
 DBSession=sessionmaker(bind=engine)
 session=DBSession()
 app=Flask(__name__)
 
+@UserRouting.route("/user/usersapi")
+def UserApi():
+    users = session.query(User).all()
+    Info = []
+    Data_Api = {"All_Data": Info}
+    for user in users:
+        Data = {}
+        Data["UserName"] = user.user_name
+        Data["Email"] = user.email
+        Data["User_Type"] = user.user_type
+        Data["Name"] = user.name
+        Info.append(Data)
+    return jsonify(Data_Api)
+    
 
 @UserRouting.route("/user/")
 def showUser():
     item=session.query(User).all()
-    print item
     return render_template("user.html", item=item)
 
 

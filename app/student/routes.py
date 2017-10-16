@@ -6,7 +6,7 @@ from flask import Blueprint
 import os
 from werkzeug.utils import secure_filename
 
-db_string="postgres://postgres:011741@localhost:5432/cincinnatus"
+db_string="postgres://postgres:linkinpark09@localhost:5001/cincinnatus"
 engine = create_engine(db_string)
 DBSession=sessionmaker(bind=engine)
 session=DBSession()
@@ -38,15 +38,16 @@ def Student_API(Student):
     Data['actual_lesson'] = str(Student.marital_status)
     Data['nationality'] = str(Student.nationality)
     Data['address'] = str(Student.address)
-    return jsonify(Data) 
+    return Data
 
-# def Student_Data():
-#     Array_Data = []
-#     Api_Students = {"All the data": Array_Data}
-#     students = session.query(Student).all()
-#     for student in students:
-#         Array_Data.append(Student_API(student))
-#     return Api_Students
+@StudentRouting.route("/student/studentsapi")
+def Student_Data():
+    Array_Data = []
+    Api_Students = {"All the data": Array_Data}
+    students = session.query(Student).all()
+    for student in students:
+        Array_Data.append(Student_API(student))
+    return jsonify(Api_Students)
 
 @StudentRouting.route("/student/")
 def showStudent():

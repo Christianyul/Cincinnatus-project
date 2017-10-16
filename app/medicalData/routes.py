@@ -2,7 +2,7 @@ from flask import Flask, render_template, url_for
 from . import MedicalRouting
 from database_setup import *
 from medicalForm import MedicalForm
-from flask import Blueprint
+from flask import Blueprint, jsonify
 import os
 
 methods = ['GET', 'POST']
@@ -10,12 +10,32 @@ GET, POST = methods
 
 nl = "\n"
 
-db_string="postgres://postgres:011741@localhost:5432/cincinnatus"
+db_string="postgres://postgres:linkinpark09@localhost:5001/cincinnatus"
 engine = create_engine(db_string)
 DBSession=sessionmaker(bind=engine)
 session=DBSession()
 app=Flask(__name__)
 
+
+@MedicalRouting.route("/<int:student_id>/medical/medicalapi")
+def MedicalApi(student_id):
+    Info = []
+    student = session.query(Student).filter_by(id=student_id)
+    medical = session.query(MedicalData).filter_by(id =student_id).all()
+    for data in medical:
+        Data = {}
+        Data["id"] = data.id
+        Data["Student_Id"] = data.student
+        Data["alergies_of_the_student"] = data.alergies
+        Data["Intensity_of_the_alergies"] = data.intensity
+        Data["Special_Condition"] = data.special_condition
+        Data["Blood_Type"] = data.blood_type
+        Data["Ars"] = data.ars
+        Data["Afliation_type"] = data.afiliation_type
+        Data["policy_number"] = data.policy_number
+        Info.append(Data)
+    MedicalDataApi = {"All_Data": Info}
+    return jsonify(MedicalDataApi)
 
 @MedicalRouting.route("/<int:student_id>/medical/")
 def showMedical(student_id):
