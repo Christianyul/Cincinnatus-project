@@ -6,7 +6,7 @@ from flask import Blueprint
 import os
 from werkzeug.utils import secure_filename
 
-db_string="postgres://postgres:linkinpark09@localhost:5001/cincinnatus"
+db_string="postgres://postgres:011741@localhost:5432/cincinnatus"
 engine = create_engine(db_string)
 DBSession=sessionmaker(bind=engine)
 session=DBSession()
@@ -19,40 +19,42 @@ UPLOAD_FOLDER = os.path.join(APP_ROOT,"app\static\images")
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-def Student_API(Student):
+def Student_API():
+    StudentItem=session.query(Student).all()
     Data = {}
-    Data['id'] = str(Student.id)
-    Data['name'] = str(Student.name)
-    Data['last_name'] = str(Student.last_name)
-    Data['email'] = str(Student.email)
-    Data['image_path'] = str(Student.image_path)
-    Data['gender'] = str(Student.gender)
-    Data['incription_date'] = str(Student.inscription_date)
-    Data['birthdate'] = str(Student.birthdate)
-    Data['phone_mobile'] = str(Student.phone_mobile)
-    Data['id_document'] = str(Student.id_document)
-    Data['status'] = str(Student.status)
-    Data['ending_date'] = str(Student.ending_date)
-    Data['retirement_date'] = str(Student.retirement_date)
-    Data['actual_course'] = str(Student.actual_course)
-    Data['actual_lesson'] = str(Student.marital_status)
-    Data['nationality'] = str(Student.nationality)
-    Data['address'] = str(Student.address)
-    return Data
+    for data in StudentItem:  
+        Data['id'] = str(data.id)
+        Data['name'] = str(data.name)
+        Data['last_name'] = str(data.last_name)
+        Data['email'] = str(data.email)
+        Data['image_path'] = str(data.image_path)
+        Data['gender'] = str(data.gender)
+        Data['incription_date'] = str(data.inscription_date)
+        Data['birthdate'] = str(data.birthdate)
+        Data['phone_mobile'] = str(data.phone_mobile)
+        Data['id_document'] = str(data.id_document)
+        Data['status'] = str(data.status)
+        Data['ending_date'] = str(data.ending_date)
+        Data['retirement_date'] = str(data.retirement_date)
+        Data['actual_course'] = str(data.actual_course)
+        Data['actual_lesson'] = str(data.marital_status)
+        Data['nationality'] = str(data.nationality)
+        Data['address'] = str(data.address)
+    return jsonify(Data) 
 
-@StudentRouting.route("/student/studentsapi")
-def Student_Data():
-    Array_Data = []
-    Api_Students = {"All the data": Array_Data}
-    students = session.query(Student).all()
-    for student in students:
-        Array_Data.append(Student_API(student))
-    return jsonify(Api_Students)
 
-@StudentRouting.route("/student/")
+@StudentRouting.route("/student/",  methods=['GET','POST'])
 def showStudent():
+    print Student_API()
     item=session.query(Student).all()
-    return render_template("student.html", item=item)
+    if request.method == 'POST':
+        searchText= request.form["search"]
+        student=session.query(Student).filter(Student.id_document.like(searchText+"%")).all()
+        print student
+        return render_template("student.html", item=student)
+    else:   
+        print item
+        return render_template("student.html", item=item)
 
 @StudentRouting.route("/student/register/", methods=['GET','POST'])
 def newStudent():
@@ -139,7 +141,6 @@ def editStudent(student_id):
             pass
         else:
             file = request.files['file']
-        # if user does not select file, browser also submit a empty part without filename
         # if not os.path.isdir(UPLOAD_FOLDER):
         #     os.mkdir(UPLOAD_FOLDER)
             if file and allowed_file(file.filename):

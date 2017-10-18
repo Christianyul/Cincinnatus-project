@@ -14,7 +14,15 @@
     <h1>Estudiantes</h1>
     <h2>Registrar Nuevo Estudiante</h2>
     <a href='{{url_for('StudentRouting.newStudent')}}'> Add new student </a> 
-  </div><br>
+  </div>
+
+  <div>
+    <form action="{{url_for('StudentRouting.showStudent')}}" method="POST">
+      <input name ="search" type = "text">
+      <input type = "submit">
+    </form>
+  </div>
+
 
   <section>
    

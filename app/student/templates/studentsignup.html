@@ -45,6 +45,7 @@
           <label for="actual_course">Actual Course:</label>
           <br>
           <select class="" name="actual_course">
+            <option value="">-------</option>
             {% for r in courses  %}
               <option value="{{ courses[courses.index(r)].id }}"> {{ courses[courses.index(r)].name }} </option>
             {% endfor %}
@@ -57,7 +58,8 @@
         {{ render_field(form.id_document) }} 
         {{ render_field(form.status) }} 
         {{ render_field(form.marital_status) }} 
-<div>
+
+        <div>
         <label for="nationality">Nationality:</label> 
         <br>
         <select name="nationality">
