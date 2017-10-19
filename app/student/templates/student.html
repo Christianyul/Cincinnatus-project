@@ -14,10 +14,11 @@
     <h1>Estudiantes</h1>
     <h2>Registrar Nuevo Estudiante</h2>
     <a href='{{url_for('StudentRouting.newStudent')}}'> Add new student </a> 
-  </div>
+  </div><br>
 
   <div>
     <form action="{{url_for('StudentRouting.showStudent')}}" method="POST">
+      <label><b>Search the Student by his ID Number:</b></label>
       <input name ="search" type = "text">
       <input type = "submit">
     </form>
@@ -27,7 +28,7 @@
   <section>
    
     <div>
-      <table width="100%", border="0", cellpadding="5">
+      <table width="100%", border="1", cellpadding="0.5">
         <tr>
           <th>Image of the Student</th>
           <th>Student Name</th>
