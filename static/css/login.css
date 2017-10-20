@@ -1,0 +1,27 @@
+body {
+  background: #FF403E;
+  background: -webkit-linear-gradient(right, #CF3432, #FF403E);
+  background: -moz-linear-gradient(right, #CF3432, #FF403E);
+  background: linear-gradient(to left, #CF3432, #FF403E);
+  padding-bottom: 3%;     
+}
+
+h1 {
+    text-align: center;
+}
+
+input[type=text]:focus,
+input[type=password]:focus {
+    border: none;
+    padding: 15px;
+    border-bottom: 1px solid #EC6778;
+    border-radius: 0;
+}
+
+input[type=submit] {
+    background-color: #FF4C23;
+}
+
+input[type=submit]:hover {
+    background-color: #FF633F;
+}
