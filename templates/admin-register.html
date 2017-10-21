@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Admin Registration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../static/css/app.css">
+    <link rel="stylesheet" href="../static/css/register-form.css">
+  </head>
+  <body>
+      <div class="container">
+        <header class="small-12">
+            <div class="small-12 darker just-space-between">
+                <div class="medium-2 large-1 img-logo hide-for-small-only">
+                    <img src="../static/img/logo.png" alt="Logo">
+                </div>
+                <nav class="small-9 large-10">
+                    <ul class="menu">
+                      <li><a href="#">Home</a></li>
+                      <li><a href="#">Profile</a></li>
+                      <li><a href="#">Admin</a></li>
+                    </ul>
+                </nav>
+                <button class="button small-2">Log Out</button>
+            </div>
+        </header>
+        <div class="row form-container">
+              <h1>Admin register</h1> 
+              <form action="" method="post">
+                  <label>Name</label>
+                  <input type="text" name="name">
+                  <label>Last name</label>
+                  <input type="text" name="last_name">
+                  <label>Nickname</label>
+                  <input type="text" name="user_name">
+                  <label>Password</label>
+                  <input type="password" name="pass">
+                  <label>Verify password</label>
+                  <input type="password" name="verify">
+                  <label>Email</label>
+                  <input type="email" name="email">
+                  <h3>Authorization Level</h3>
+                  <div class="auth-level">
+                      <label>Owner Admin</label>
+                      <input type="radio" name="admin_type" value="owner"><br>
+                      <label>Normal Admin</label> 
+                      <input type="radio" name="admin_type" value="admin">
+                  </div>
+                  <input type="submit" name="send" value="Accept">
+            </form>
+        </div>
+  </body>
+</html>

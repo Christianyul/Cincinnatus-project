@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Medical data</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../static/css/app.css">
+    <link rel="stylesheet" href="../static/css/register-form.css">
+  </head>
+  <body>
+      <div class="container">
+        <header class="small-12">
+            <div class="small-12 darker just-space-between">
+                <div class="medium-2 large-1 img-logo hide-for-small-only">
+                    <img src="../static/img/logo.png" alt="Logo">
+                </div>
+                <nav class="small-9 large-10">
+                    <ul class="menu">
+                      <li><a href="#">Home</a></li>
+                      <li><a href="#">Profile</a></li>
+                      <li><a href="#">Admin</a></li>
+                    </ul>
+                </nav>
+                <button class="button small-2">Log Out</button>
+            </div>
+        </header>
+        <div class="row form-container">
+              <h1>Medical data</h1>
+              <form action="" method="post">
+                  <h3>Just fill up if you have any allergies</h3>
+                  <label>To what do you have allergy?</label>
+                  <input type="text" name="allergy">
+                  <label>Possible reactions</label>
+                  <input type="text" name="reactions">
+                  <label>Intensity</label>
+                  <select name="intensity">
+                      <option value="mild">Mild</option>
+                      <option value="moderate">Moderate</option>
+                      <option value="serious">Serious</option>
+                  </select>
+                  <hr>
+                  <label>Special medical condition</label>
+                  <input type="text" name="special_condition">
+                  <label>Medicines</label>
+                  <input type="text" name="medicines">
+                  <label>Blood type</label>
+                  <select name="blood_type">
+                      <option value="O+">O+</option>
+                      <option value="O-">O-</option>
+                      <option value="A+">A+</option>
+                      <option value="A-">A-</option>
+                      <option value="B+">B+</option>
+                      <option value="B-">B-</option>
+                      <option value="AB+">AB+</option>
+                      <option value="AB-">AB-</option>
+                      <option value="unknown">unknown</option>
+                  </select>
+                  <label>Are you affiliated with an ARS?</label>
+                  <select name="affiliated">
+                      <option value="yes">Yes</option>
+                      <option value="no">No</option>
+                  </select>
+                  <hr>
+                  <h3>Only fill in if you are affiliated with an ARS</h3>
+                  <label>Name of the ARS</label>
+                 <input type="text" name="name_ars">
+                 <label>Type of affiliation</label>
+                  <select name="type_affiliation">
+                      <option value="Dependent">Dependent</option>
+                      <option value="titular">titular</option>
+                  </select>
+                  <label>Policy number</label>
+                  <input type="text" name="policy_number">
+                  <input type="submit" name="send" value="Accept">
+            </form>
+        </div>
+  </body>
+</html>
