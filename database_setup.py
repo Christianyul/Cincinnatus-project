@@ -1,10 +1,8 @@
-from dependencies import *
 from database import *
+from dependencies import *
 
 #create database
 #////----cambiar password-------///
-#if database is created we control the exception by simply passing
-
 try:
     connect = connect(user = 'postgres', host='localhost', port= '5432', password='011741', dbname= 'cincinnatus')
 except Exception as e:

@@ -1,7 +1,5 @@
-from dependencies import *
-#instance or declarative class
-#this will let sqlalchemy know that our classes are special classses
-#that correspond to tables in our database
+from sqlalchemy import Column, Date, Integer, ForeignKey, String, Table
+from dependencies import Base
 
 class Course(Base):
     __tablename__="courses"
@@ -9,12 +7,3 @@ class Course(Base):
     name = Column(String(50), nullable=False)
     lesson = Column(Integer)
     link =Column(String(150))
-
-    @property
-    #returns an object data in easily serializeable format
-    def serialize(self):
-        return {
-        'id': self.id,
-        'name': self.name,
-        'lesson': self.lesson,
-        }

@@ -4,6 +4,7 @@
   <head>
     <meta charset="utf-8">
     <title>Registro de Estudiantes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register-form.css') }}">
   </head>
   <body>
 
@@ -40,6 +41,7 @@
             <label for="actual_course">Actual Course:</label>
             <br>
             <select class="" name="actual_course">
+              <option value="">------</option>
               {% for r in courses  %}
                 <option value="{{ courses[courses.index(r)].id }}"> {{ courses[courses.index(r)].name }} </option>
               {% endfor %}

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, redirect
 from . import RegisterRouting
 from database_setup import *
 from registerForm import RegisterForm
@@ -67,16 +67,13 @@ def registerStudent():
         nationality=request.form['nationality'],
         address=request.form['address'])
     
-
         session.add(newStudent)
         session.flush()
-
 
         if len(request.form['policy_number'])> 0:
             policy_num = request.form['policy_number']
         else:
             policy_num = 0
-
 
         # si no hay nada en alergies se agrega "Ninguna" por default
         if len(request.form['alergies']) > 0:
@@ -84,13 +81,10 @@ def registerStudent():
         else:
             aler = "Ninguna"  
 
-
-
         if len(request.form['special_condition']) > 0:
             special = request.form['special_condition']
         else:
             special = "Ninguna"       
-
 
         newMedical=MedicalData(
         alergies=aler,
@@ -112,6 +106,5 @@ def registerStudent():
         student=newStudent.id)
 
         session.add(newEmergency)
-
         session.commit()
     return render_template("register.html", form=form, courses=courses)

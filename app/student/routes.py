@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request, jsonify
+from flask import Flask, render_template, url_for, request, jsonify, redirect
 from . import StudentRouting
 from database_setup import *
 from studentForm import StudentForm

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, jsonify
+from flask import Flask, render_template, url_for, jsonify, request, redirect
 from . import CourseRouting
 from database_setup import *
 from . import coursesForm
