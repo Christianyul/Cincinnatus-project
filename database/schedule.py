@@ -1,7 +1,5 @@
-from dependencies import *
-#instance or declarative class
-#this will let sqlalchemy know that our classes are special classses
-#that correspond to tables in our database
+from sqlalchemy import Column, Date, Integer, ForeignKey, String, Table
+from dependencies import Base
 
 
 class Schedule(Base):
@@ -10,13 +8,4 @@ class Schedule(Base):
     day = Column(String(200))
     daytime = Column(String(20))
     student = Column(Integer, ForeignKey('students.id'))
-
-    @property
-    #returns an object data in easily serializeable format
-    def serialize(self):
-        return {
-        'id': self.id,
-        'day': self.day,
-        'daytime':self.daytime,
-        'student':self.student,
-        }
+    

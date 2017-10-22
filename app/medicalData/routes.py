@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request, redirect
 from . import MedicalRouting
 from database_setup import *
 from medicalForm import MedicalForm

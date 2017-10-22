@@ -9,4 +9,4 @@ class UserForm(Form):
     user_name = StringField('Usuario:', validators=[InputRequired(), Length(min=3,max=30)])
     password= PasswordField('Password:', validators=[InputRequired(), Length(min=3,max=30)])
     email = EmailField('Email:', validators=[InputRequired()])
-    user_type=RadioField('Tipo de Usuario', choices=[('Admin','Admin'),('Student','Student'),('Owner','Owner')], validators=[InputRequired()])
+    user_type=RadioField('Tipo de Usuario', choices=[('Admin','Admin'),('Student','Student')], validators=[InputRequired()])

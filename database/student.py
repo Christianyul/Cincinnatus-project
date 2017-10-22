@@ -1,4 +1,5 @@
-from dependencies import *
+from sqlalchemy import Column, Date, Integer, ForeignKey, String, Table
+from dependencies import Base
 
 class Student(Base):
     __tablename__="students"
@@ -21,30 +22,3 @@ class Student(Base):
     marital_status = Column(String(20))
     nationality = Column(String(20), nullable=False)
     address = Column(String(200), nullable=False)
-
-
-
-
-    @property
-    #returns an object data in easily serializeable format
-    def serialize(self):
-        return {
-        'id': self.id,
-        'name': self.name,
-        'last_name':self.last_name,
-        'gender': self.gender,
-        'inscription_date': self.inscription_date,
-        'birthdate': self.birthdate,
-        'phone_mobile': self.phone_mobile,
-        'phone_home': self.phone_home,
-        'id_document': self.id_document,
-        'status': self.status,
-        'ending_date': self.ending_date,
-        'retirement_date': self.retirement_date,
-        'actual_course': self.actual_course,
-        'actual_lesson': self.actual_lesson,
-        'marital_status': self.marital_status,
-        'nationality': self.nationality,
-        'address': self.address,
-        'email': self.email,
-        }
