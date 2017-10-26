@@ -10,7 +10,7 @@ GET, POST = methods
 
 nl = "\n"
 
-db_string="postgres://postgres:011741@localhost:5432/cincinnatus"
+db_string="postgres://postgres:linkinpark09@localhost:5001/cincinnatus"
 engine = create_engine(db_string)
 DBSession=sessionmaker(bind=engine)
 session=DBSession()

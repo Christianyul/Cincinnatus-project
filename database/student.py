@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Date, Integer, ForeignKey, String, Table
+from sqlalchemy import Column, Date, Integer, ForeignKey, String, Table, BigInteger
 from dependencies import Base
 
 class Student(Base):
@@ -11,8 +11,8 @@ class Student(Base):
     gender=Column(String(20), nullable=False)
     inscription_date = Column(Date,nullable=False)
     birthdate = Column(Date, nullable=False )
-    phone_mobile = Column(Integer, nullable=False)
-    phone_home = Column(Integer)
+    phone_mobile = Column(BigInteger, nullable=False)
+    phone_home = Column(BigInteger)
     id_document = Column(String(12))
     status = Column(String(20), nullable=False)
     ending_date = Column(Date)

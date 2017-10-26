@@ -10,11 +10,21 @@ GET, POST = methods
 
 nl = "\n"
 
-db_string="postgres://postgres:011741@localhost:5432/cincinnatus"
+db_string="postgres://postgres:linkinpark09@localhost:5001/cincinnatus"
 engine = create_engine(db_string)
 DBSession=sessionmaker(bind=engine)
 session=DBSession()
 app=Flask(__name__)
+
+def phone_number_filtration(PhoneNumber):
+    if PhoneNumber.isdigit():
+        return int(PhoneNumber)
+    else:
+        newformat = PhoneNumber.replace("-", "", 2)
+        if newformat.isdigit():
+            return int(newformat)
+        else:
+            return 
 
 @EmergencyRouting.route("/<int:student_id>/emergency/emergencyapi")
 def EmergencyApi(student_id):
@@ -45,12 +55,12 @@ def newEmergency(student_id):
     form = EmergencyForm()
     student=session.query(Student).filter_by(id=student_id).one()
     if form.validate_on_submit():
-        newItem=EmergencyContact(name=request.form['name'],
-        last_name=request.form['last_name'],
-        phone_mobile=request.form['phone_mobile'],
-        phone_home=request.form['phone_home'],
-        relationship=request.form['relationship'],
-        student=student.id)
+        newItem = EmergencyContact(name = request.form['name'],
+        last_name = request.form['last_name'],
+        phone_mobile = phone_number_filtration(request.form['phone_mobile']),
+        phone_home = phone_number_filtration(request.form['phone_home']),
+        relationship = request.form['relationship'],
+        student = student.id)
 
         session.add(newItem)
         session.commit()
