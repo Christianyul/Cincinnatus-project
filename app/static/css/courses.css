@@ -1,0 +1,29 @@
+table {
+    border-collapse: collapse;
+    margin: 20px 5%;
+    max-width: 90%;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border: 1px solid #8080806b;
+}
+
+th {
+    background-color: #3ca040e3;
+    color: white;
+    text-align: center;
+}
+
+tr > td:first-child {
+    min-width: 250px;
+}
+
+button.add {
+    background-color: #0684ffb0;
+    border: none;
+    color: white;
+    margin-left: 5%;
+    padding: 10px;
+}

@@ -3,33 +3,25 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Contactos de Emergencia</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto de Emergencia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register-form.css') }}">
   </head>
   <body>
-    <header>
-      <!-- header aqui -->
-    </header>
-    <section class="row">
-
-      <div class="form">
-        <h1>Registro de Contactos de Emergencia</h1>
-        <form class="form" action="{{url_for('EmergencyRouting.newEmergency', student_id= student.id)}}" method="post">
-          {{ form.csrf_token }}
-          {{ render_field(form.name) }} <br>
-          {{ render_field(form.last_name) }} <br>
-          {{ render_field(form.phone_mobile) }} <br>
-          {{ render_field(form.phone_home) }} <br>
-          {{ render_field(form.relationship) }} <br>
-
-          <div><input type="submit" value="Enviar"></div>
-        </form>
-
-
+      <div class="container">
+          <div class="row form-container">
+              <h1>Registro de Contactos de Emergencia</h1>
+              <form action="{{url_for('EmergencyRouting.newEmergency', student_id= student.id)}}" method="post">
+                  {{ form.csrf_token }}
+                  {{ render_field(form.name) }} <br>
+                  {{ render_field(form.last_name) }} <br>
+                  {{ render_field(form.phone_mobile) }} <br>
+                  {{ render_field(form.phone_home) }} <br>
+                  {{ render_field(form.relationship) }} <br>
+                  <input type="submit" value="Enviar">
+              </form>
+          </div>
       </div>
-    </section>
-    <foooter>
-      <!-- footer aqui -->
-    </footer>
   </body>
 </html>
