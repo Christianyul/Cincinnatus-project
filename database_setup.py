@@ -4,11 +4,11 @@ from dependencies import *
 #create database
 #////----cambiar password-------///
 try:
-    connect = connect(user = 'postgres', host='localhost', port= '5001', password='linkinpark09', dbname= 'cincinnatus')
+    connect = connect(user = 'postgres', host='localhost', port= '5432', password='011741', dbname= 'cincinnatus')
 except Exception as e:
     print "Creating Database..."
     try:
-        con = connect(user='postgres', host = 'localhost', port='5001', password='linkinpark09')
+        con = connect(user='postgres', host = 'localhost', port='5432', password='011741')
         con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
         cur= con.cursor()
         cur.execute('CREATE DATABASE' + " cincinnatus")
@@ -23,7 +23,7 @@ except Exception as e:
         em= EmergencyContact()
 
         #///----cambiar password------///
-        db_string="postgres://postgres:linkinpark09@localhost:5001/cincinnatus"
+        db_string="postgres://postgres:011741@localhost:5432/cincinnatus"
         engine = create_engine(db_string)
 
         #this will add the classes that we will create as tables in our database

@@ -12,12 +12,23 @@
       <div class="container">
           <div class="row form-container">
               <h1>Registro de usuario</h1>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                  <ul>
+                      {% for message in messages %}
+                          <li style="color:red;"> {{ message }} </li>
+                      {% endfor %}
+                  </ul>
+              {% endif %}
+            {% endwith %}
               <form action="{{url_for('UserRouting.signUp')}}" method="post">
                   {{ form.csrf_token }}
-                  {{ render_field(form.name) }}
                   {{ render_field(form.user_name) }}
                   {{ render_field(form.email) }}
                   {{ render_field(form.password) }}
+                  <label for="valid">Confirmar Password:</label>
+                  <input name="valid" type="password">
+                  {{ render_field(form.name) }}
                   {{ render_field(form.user_type) }}
                   <input type="submit" value="Enviar">
               </form>
