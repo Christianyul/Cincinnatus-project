@@ -45,7 +45,9 @@
                         </select>
                         <br>
                         {{ render_field(form.phone_mobile) }} 
-                        {{ render_field(form.phone_home) }} 
+                        {{Error_Phone}}
+                        {{ render_field(form.phone_home) }}
+                        {{Error_Phone}} 
                         {{ render_field(form.id_document) }} 
                         {{ render_field(form.status) }} 
                         {{ render_field(form.marital_status) }} 
