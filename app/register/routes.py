@@ -7,14 +7,15 @@ import os
 from werkzeug.utils import secure_filename
 
 
+
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 APP_ROOT= os.path.abspath(os.path.dirname(__name__))
 UPLOAD_FOLDER = os.path.join(APP_ROOT,"app/static/images")
- 
+
 
 print UPLOAD_FOLDER
-db_string="postgres://postgres:linkinpark09@localhost:5001/cincinnatus"
+db_string="postgres://postgres:011741@localhost:5432/cincinnatus"
 engine = create_engine(db_string)
 DBSession=sessionmaker(bind=engine)
 session=DBSession()
@@ -23,9 +24,11 @@ app=Flask(__name__)
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+
 @RegisterRouting.route("/", methods=['GET','POST'])
 def register():
     return "hello"
+
 
 @RegisterRouting.route("/register/", methods=['GET','POST'])
 def registerStudent():

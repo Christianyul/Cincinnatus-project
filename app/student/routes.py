@@ -6,7 +6,7 @@ from flask import Blueprint
 import os
 from werkzeug.utils import secure_filename
 
-db_string="postgres://postgres:linkinpark09@localhost:5001/cincinnatus"
+db_string="postgres://postgres:011741@localhost:5432/cincinnatus"
 engine = create_engine(db_string)
 DBSession=sessionmaker(bind=engine)
 session=DBSession()
@@ -29,7 +29,6 @@ def phone_number_filtration(PhoneNumber):
         else:
             return 
     
-
 def Student_API(data):
     Data = {}  
     Data['id'] = str(data.id)
@@ -76,14 +75,10 @@ def showStudent():
 def newStudent():
     form = StudentForm()
     courses=session.query(Course).all()
-    print phone_number_filtration(request.form['phone_mobile'])
+    print APP_ROOT
+    print UPLOAD_FOLDER
     if form.validate_on_submit():
-        re_date=request.form['retirement_date']
-        end_date=request.form['ending_date']
-        if len(re_date) <= 0:
-            re_date = "0001-01-01"
-        if len(end_date) <=0:
-            end_date = "0001-01-01"
+
         if 'file' not in request.files or request.files['file'].filename == '':
             filename = "default.jpg"
         else:
@@ -96,27 +91,24 @@ def newStudent():
                 file.save(os.path.join(UPLOAD_FOLDER, filename))
             else:
                 filename = "default.jpg"
-        # print filename
-        # print form.errors
-        # print "its happening 2"
-        newItem=Student(name=request.form['name'],
-        last_name = request.form['last_name'],
-        email = request.form['email'],
-        gender = request.form['gender'],
-        image_path = filename,
-        inscription_date = request.form['inscription_date'],
-        ending_date = end_date,
-        retirement_date = re_date,
-        birthdate = request.form['birthdate'],
-        phone_mobile = phone_number_filtration(request.form['phone_mobile']),
-        phone_home = phone_number_filtration(request.form['phone_home']),
-        actual_course = request.form['actual_course'],
-        id_document = request.form['id_document'],
-        status = request.form['status'],
-        marital_status = request.form['marital_status'],
-        nationality = request.form['nationality'],
-        address = request.form['address'])
-        session.add(newItem)
+        
+        newStudent=Student(name=request.form['name'],
+        last_name=request.form['last_name'],
+        email=request.form['email'],
+        image_path=filename,
+        gender=request.form['gender'],
+        inscription_date=request.form['inscription_date'],
+        birthdate=request.form['birthdate'],
+        phone_mobile=request.form['phone_mobile'],
+        phone_home=request.form['phone_home'],
+        actual_course=request.form['actual_course'],
+        id_document=request.form['id_document'],
+        status=request.form['status'],
+        marital_status=request.form['marital_status'],
+        nationality=request.form['nationality'],
+        address=request.form['address'])
+    
+        session.add(newStudent)
         session.commit()
         #flash("New Item Added")
         return redirect(url_for('StudentRouting.showStudent'))
@@ -150,11 +142,14 @@ def editStudent(student_id):
                 file.save(os.path.join(UPLOAD_FOLDER, filename))
             else:
                 filename = "default.jpg"
+
         editedItem.name = request.form['name']
         editedItem.last_name = request.form['last_name']
         editedItem.email = request.form['email']
+
         if filename:
             editedItem.image_path = filename
+
         editedItem.gender = request.form['gender']
         editedItem.inscription_date = request.form['inscription_date']
         editedItem.ending_date = end_date
@@ -173,7 +168,6 @@ def editStudent(student_id):
         #flash("New Item Added")
         return redirect(url_for('StudentRouting.showStudent'))
     return render_template("editstudent.html",form=form, student_id=student_id, item=editedItem, courses=courses)
-
 
 
 @StudentRouting.route("/student/<int:student_id>/delete/", methods=['GET','POST'])
