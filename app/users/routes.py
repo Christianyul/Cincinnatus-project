@@ -4,15 +4,21 @@ from database_setup import *
 from userForm import UserForm
 from flask import Blueprint
 import hashlib
-
-methods = ['GET', 'POST']
-GET, POST = methods
+from flask_login import login_required
+from app import login_manager
 
 db_string="postgres://postgres:011741@localhost:5432/cincinnatus"
 engine = create_engine(db_string)
 DBSession=sessionmaker(bind=engine)
 session=DBSession()
 app=Flask(__name__)
+
+@login_manager.user_loader
+def user_loader(id):
+    # do whatever you need to to load the user object
+    # a database query, for example
+    user= session.query(User).filter_by(id=id).one()
+    return user
 
 @UserRouting.route("/user/usersapi")
 def UserApi():
@@ -29,6 +35,7 @@ def UserApi():
     return jsonify(Data_Api)
     
 @UserRouting.route("/user/")
+@login_required
 def showUser():
     item=session.query(User).all()
     return render_template("user.html", item=item)
@@ -64,6 +71,7 @@ def signUp():
 
 
 @UserRouting.route("/user/<int:user_id>/edit/", methods=['GET','POST'])
+@login_required
 def editUser(user_id):
     form = UserForm()
     editedItem = session.query(User).filter_by(id=user_id).one()
@@ -82,6 +90,7 @@ def editUser(user_id):
 
 
 @UserRouting.route("/user/<int:user_id>/delete/", methods=['GET','POST'])
+@login_required
 def deleteUser(user_id):
     if request.method == 'POST':
         deletedItem = session.query(User).filter_by(id=user_id).one()

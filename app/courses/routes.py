@@ -3,11 +3,8 @@ from . import CourseRouting
 from database_setup import *
 from . import coursesForm
 from flask import Blueprint
-
-methods = ['GET', 'POST']
-GET, POST = methods
-
-nl = "\n"
+from flask_login import login_required
+from app import login_manager
 
 db_string="postgres://postgres:011741@localhost:5432/cincinnatus"
 engine = create_engine(db_string)
@@ -15,6 +12,12 @@ DBSession=sessionmaker(bind=engine)
 session=DBSession()
 app=Flask(__name__)
 
+@login_manager.user_loader
+def user_loader(id):
+    # do whatever you need to to load the user object
+    # a database query, for example
+    user= session.query(User).filter_by(id=id).one()
+    return user
 
 @CourseRouting.route('/course/courseapi')
 def CollectingData():
@@ -32,13 +35,14 @@ def CollectingData():
     return jsonify(Data)
 
 @CourseRouting.route("/course/")
+@login_required
 def showCourse():
     course=session.query(Course).all()
     print course
     return render_template("course.html", course=course)
 
-
 @CourseRouting.route("/course/newCourse/", methods=['GET','POST'])
+@login_required
 def newCourse():
     form = coursesForm.CourseForm()
     if form.validate_on_submit():
@@ -49,8 +53,8 @@ def newCourse():
         return redirect(url_for('CourseRouting.showCourse'))
     return render_template("newcourse.html", form=form)
 
-
 @CourseRouting.route("/course/<int:course_id>/edit/", methods=['GET','POST'])
+@login_required
 def editCourse(course_id):
     form = coursesForm.CourseForm()
     editedItem = session.query(Course).filter_by(id=course_id).one()
@@ -64,8 +68,8 @@ def editCourse(course_id):
         return redirect(url_for('CourseRouting.showCourse'))
     return render_template("editcourse.html",form=form, course_id=course_id, item=editedItem)
 
-
 @CourseRouting.route("/course/<int:course_id>/delete/", methods=['GET','POST'])
+@login_required
 def deleteCourse(course_id):
     if request.method == 'POST':
         deletedItem = session.query(Course).filter_by(id=course_id).one()

@@ -4,11 +4,15 @@ from database_setup import *
 from emergencyForm import EmergencyForm
 from flask import Blueprint
 import os
+from flask_login import login_required
+from app import login_manager
 
-methods = ['GET', 'POST']
-GET, POST = methods
-
-nl = "\n"
+@login_manager.user_loader
+def user_loader(id):
+    # do whatever you need to to load the user object
+    # a database query, for example
+    user= session.query(User).filter_by(id=id).one()
+    return user
 
 db_string="postgres://postgres:011741@localhost:5432/cincinnatus"
 engine = create_engine(db_string)
@@ -44,6 +48,7 @@ def EmergencyApi(student_id):
     return jsonify(EmergencyData)
 
 @EmergencyRouting.route("/<int:student_id>/emergency/")
+@login_required
 def showEmergency(student_id):
     student=session.query(Student).filter_by(id=student_id).one()
     item=session.query(EmergencyContact).filter_by(student=student_id).all()
@@ -51,6 +56,7 @@ def showEmergency(student_id):
 
 
 @EmergencyRouting.route("/<int:student_id>/emergency/register/", methods=['GET','POST'])
+@login_required
 def newEmergency(student_id):
     form = EmergencyForm()
     student=session.query(Student).filter_by(id=student_id).one()
@@ -73,6 +79,7 @@ def newEmergency(student_id):
 
 
 @EmergencyRouting.route("/<int:student_id>/emergency/<int:emergency_id>/edit/", methods=['GET','POST'])
+@login_required
 def editEmergency(emergency_id,student_id):
     form = EmergencyForm()
     student=session.query(Student).filter_by(id=student_id).one()
@@ -92,6 +99,7 @@ def editEmergency(emergency_id,student_id):
 
 
 @EmergencyRouting.route("/<int:student_id>/emergency/<int:emergency_id>/delete/", methods=['GET','POST'])
+@login_required
 def deleteEmergency(emergency_id, student_id):
     student=session.query(Student).filter_by(id=student_id).one()
     if request.method == 'POST':

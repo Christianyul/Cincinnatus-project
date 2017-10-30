@@ -5,6 +5,8 @@ from studentForm import StudentForm
 from flask import Blueprint
 import os
 from werkzeug.utils import secure_filename
+from flask_login import login_required
+from app import login_manager
 
 db_string="postgres://postgres:011741@localhost:5432/cincinnatus"
 engine = create_engine(db_string)
@@ -15,6 +17,13 @@ app=Flask(__name__)
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 APP_ROOT= os.path.abspath(os.path.dirname(__name__))
 UPLOAD_FOLDER = os.path.join(APP_ROOT,"app\static\images")
+
+@login_manager.user_loader
+def user_loader(id):
+    # do whatever you need to to load the user object
+    # a database query, for example
+    user= session.query(User).filter_by(id=id).one()
+    return user
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -62,6 +71,7 @@ def Make_StudentApi():
 
 
 @StudentRouting.route("/student/",  methods=['GET','POST'])
+@login_required
 def showStudent():
     Students = session.query(Student).all()
     if request.method == 'POST':
@@ -72,6 +82,7 @@ def showStudent():
         return render_template("student.html", item = Students)
 
 @StudentRouting.route("/student/register/", methods=['GET','POST'])
+@login_required
 def newStudent():
     form = StudentForm()
     courses=session.query(Course).all()
@@ -129,6 +140,7 @@ def newStudent():
 
 
 @StudentRouting.route("/student/<int:student_id>/edit/", methods=['GET','POST'])
+@login_required
 def editStudent(student_id):
     form = StudentForm()
     courses = session.query(Course).all()
@@ -183,6 +195,7 @@ def editStudent(student_id):
 
 
 @StudentRouting.route("/student/<int:student_id>/delete/", methods=['GET','POST'])
+@login_required
 def deleteStudent(student_id):
     if request.method == 'POST':
         deletedItem = session.query(Student).filter_by(id=student_id).one()
