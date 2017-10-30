@@ -109,7 +109,7 @@ def newStudent():
             else:
                 filename = "default.jpg"
         if phonehome is None or phonemobile is None:
-            return render_template("studentsignup.html", Error_Phone="One of the phone inputs not is a phone number", form=form, courses=courses)
+            return render_template("studentsignup.html", Error_Phone="One of the phone numbers is Invalid", form=form, courses=courses)
         # print filename
         # print form.errors
         # print "its happening 2"
