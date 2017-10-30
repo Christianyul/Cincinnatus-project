@@ -4,11 +4,8 @@ from database_setup import *
 from medicalForm import MedicalForm
 from flask import Blueprint, jsonify
 import os
-
-methods = ['GET', 'POST']
-GET, POST = methods
-
-nl = "\n"
+from flask_login import login_required
+from app import login_manager
 
 db_string="postgres://postgres:011741@localhost:5432/cincinnatus"
 engine = create_engine(db_string)
@@ -16,6 +13,12 @@ DBSession=sessionmaker(bind=engine)
 session=DBSession()
 app=Flask(__name__)
 
+@login_manager.user_loader
+def user_loader(id):
+    # do whatever you need to to load the user object
+    # a database query, for example
+    user= session.query(User).filter_by(id=id).one()
+    return user
 
 @MedicalRouting.route("/<int:student_id>/medical/medicalapi")
 def MedicalApi(student_id):
@@ -38,6 +41,7 @@ def MedicalApi(student_id):
     return jsonify(MedicalDataApi)
 
 @MedicalRouting.route("/<int:student_id>/medical/")
+@login_required
 def showMedical(student_id):
     student=session.query(Student).filter_by(id=student_id).one()
     item=session.query(MedicalData).filter_by(student=student_id).all()
@@ -46,6 +50,7 @@ def showMedical(student_id):
 
 
 @MedicalRouting.route("/<int:student_id>/medical/register/", methods=['GET','POST'])
+@login_required
 def newMedical(student_id):
     form = MedicalForm()
     student=session.query(Student).filter_by(id=student_id).one()
@@ -91,6 +96,7 @@ def newMedical(student_id):
 
 
 @MedicalRouting.route("/<int:student_id>/medical/<int:medical_id>/edit/", methods=['GET','POST'])
+@login_required
 def editMedical(medical_id,student_id):
     form = MedicalForm()
     student=session.query(Student).filter_by(id=student_id).one()
@@ -120,6 +126,7 @@ def editMedical(medical_id,student_id):
 
 
 @MedicalRouting.route("/<int:student_id>/medical/<int:medical_id>/delete/", methods=['GET','POST'])
+@login_required
 def deleteMedical(medical_id, student_id):
     student=session.query(Student).filter_by(id=student_id).one()
     if request.method == 'POST':

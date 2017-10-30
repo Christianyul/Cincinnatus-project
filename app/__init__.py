@@ -1,9 +1,15 @@
 from flask import Flask
 from config import config
+from flask_login import LoginManager
+login_manager = LoginManager()
 
 def create_app(config_name):
 	app = Flask(__name__)
 	app.config.from_object(config[config_name])
+	login_manager.init_app(app)
+	login_manager.login_view = "RegisterRouting.login"
+	login_manager.login_message =""
+
 
 	# Configuracion de los BluePrints
 	from .courses import CourseRouting as CourseRouting
