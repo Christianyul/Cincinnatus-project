@@ -40,7 +40,9 @@
                           {% endfor %}
                       </select>
                       {{ render_field(form.phone_mobile) }} 
-                      {{ render_field(form.phone_home) }} 
+                      {{errormsg}}
+                      {{ render_field(form.phone_home) }}
+                      {{errormsg}} 
                       {{ render_field(form.id_document) }} 
                       {{ render_field(form.status) }} 
                       {{ render_field(form.marital_status) }} 
@@ -63,7 +65,9 @@
                       {{ render_field(form.emname) }} 
                       {{ render_field(form.emlast_name) }} 
                       {{ render_field(form.emphone_mobile) }} 
-                      {{ render_field(form.emphone_home) }} 
+                      {{errormsg}}
+                      {{ render_field(form.emphone_home) }}
+                      {{errormsg}} 
                       {{ render_field(form.relationship) }} 
                       <input type="submit" value="Enviar">
                   </form>

@@ -12,8 +12,8 @@ class RegisterForm(Form):
     inscription_date = DateField('Fecha de Ingreso:', format='%Y-%m-%d', validators=[InputRequired()])
 
     birthdate = DateField('Fecha de nacimiento:', format='%Y-%m-%d', validators=[InputRequired()] )
-    phone_mobile = IntegerField('Telefono Celular:', validators=[InputRequired()])
-    phone_home = IntegerField('Telefono Hogar:', validators=[InputRequired()])
+    phone_mobile = StringField('Telefono Celular:', validators=[InputRequired(), Length(min=9, max=12)])
+    phone_home = StringField('Telefono Hogar:', validators=[InputRequired(), Length(min=9, max=12)])
     id_document = StringField('Documento De Identidad:', validators=[InputRequired()])
     status = RadioField('Estado Actual:', choices=[('Activo','Activo'),('Retirado','Retirado'),('Terminado','Terminado')],default='Activo', validators=[InputRequired()])
     marital_status = RadioField('Estado Civil:', choices=[('Soltero','Soltero'),('Casado','Casado')],default='Soltero', validators=[InputRequired()])
@@ -34,6 +34,6 @@ class RegisterForm(Form):
 #------------EMERGENCY CONTACT---------------#
     emname = StringField('Nombres:', validators=[InputRequired(), Length(min=3,max=50)])
     emlast_name = StringField('Apellidos:', validators=[InputRequired(), Length(min=3,max=50)])
-    emphone_mobile = IntegerField('Telefono Celular:', validators=[InputRequired()])
-    emphone_home = IntegerField('Telefono Hogar:', validators=[InputRequired()])
+    emphone_mobile = StringField('Telefono Celular:', validators=[InputRequired(), Length(min=9, max=12)])
+    emphone_home = StringField('Telefono Hogar:', validators=[InputRequired(), Length(min=9, max=12)])
     relationship = StringField('Relacion con el estudiante:', validators=[InputRequired()])
