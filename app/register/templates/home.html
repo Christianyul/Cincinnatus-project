@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>CincinnatusInstitute Application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/homeStyle.css') }}">
+  </head>
+  <body>
+      <div class="container">
+        <header class="small-12">
+            <div class="small-12 darker just-space-between">
+                <div class="img-logo hide-for-small-only">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+                </div>
+                <nav class="small-9">
+                    <ul class="menu">
+                      <li><a href="/student/">Students</a></li>
+                      <li><a href="/register/">Register</a></li>
+                      <li><a href="#">Admin</a></li>
+                    </ul>
+                </nav>
+                <button class="button small-2">Log Out</button>
+            </div>
+        </header>
+        
+        <div class="row">
+            {% for r in courses %}
+                <div class="small-12 course">
+                    <div class="small-12 large-3 course-info">
+                        <h2 class="course-title">{{courses[courses.index(r)].name}}</h2>
+                        <span>Lessons</span>
+                        <div class="course-lessons">
+                          {{courses[courses.index(r)].lesson}}
+                        </div>
+                    </div>
+                     <div class="small-12 large-9 students-container">
+                          <figure class="student-img">
+                              <img src="http://fullerlivingconstruction.com/redesign/wp-content/uploads/2015/03/team-member-2.jpg" alt="Student">
+                          </figure>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+  </body>
+</html>
