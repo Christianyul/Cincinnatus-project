@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Date, Integer, ForeignKey, String, Table, BigInteger
-from dependencies import Base
+from dependencies import Base, relationship
 
 class Student(Base):
     __tablename__="students"
@@ -22,3 +22,5 @@ class Student(Base):
     marital_status = Column(String(20))
     nationality = Column(String(20), nullable=False)
     address = Column(String(200), nullable=False)
+    medical = relationship('MedicalData', cascade="all, delete-orphan")
+    emergency = relationship('EmergencyContact', cascade="all, delete-orphan")
