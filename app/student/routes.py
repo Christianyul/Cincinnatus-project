@@ -92,7 +92,6 @@ def showStudent():
 def newStudent():
     form = StudentForm()
     courses=session.query(Course).all()
-    # print phone_number_filtration(request.form['phone_mobile'])
     if form.validate_on_submit():
         
         re_date=request.form['retirement_date']
