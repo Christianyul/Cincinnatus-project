@@ -10,12 +10,12 @@ from flask_login import login_user
 from flask_login import login_required
 from app import login_manager
 
-ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+ALLOWED_EXTENSIONS = set(['svg' 'png', 'jpg', 'jpeg', 'gif'])
 
 APP_ROOT= os.path.abspath(os.path.dirname(__name__))
 UPLOAD_FOLDER = os.path.join(APP_ROOT,"app/static/images")
 
-db_string="postgres://postgres:linkinpark09@localhost:5001/cincinnatus"
+db_string="postgres://postgres:011741@localhost:5432/cincinnatus"
 engine = create_engine(db_string)
 DBSession=sessionmaker(bind=engine)
 dbsession=DBSession()
@@ -37,7 +37,6 @@ def phone_number_filtration(PhoneNumber):
         else:
             return 
     
-
 @login_manager.user_loader
 def user_loader(id):
     # do whatever you need to to load the user object
@@ -45,8 +44,10 @@ def user_loader(id):
     user= dbsession.query(User).filter_by(id=id).one()
     return user
 
-def allowed_file(filename): 
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+def allowed_file(filename):
+    if filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS:
+        return True
+    return False
 
 @RegisterRouting.route("/", methods=['GET','POST'])
 def register():
@@ -57,26 +58,28 @@ def register():
 def login():
     form=LoginForm()
     h = hashlib.md5() 
-    if form.validate_on_submit():
-       
+    if form.validate_on_submit():   
         h.update(request.form['password'])
         user = dbsession.query(User).filter_by(user_name= request.form['user']).one()
         if user is not None and user.password == h.hexdigest():
             user.authenticated = True
-
             login_user(user)         
             return redirect(url_for('RegisterRouting.register'))
     return render_template('login.html', form=form)
+
 
 @RegisterRouting.route("/register/", methods=['GET','POST'])
 def registerStudent():
     form=RegisterForm()        
     courses=dbsession.query(Course).all()
-    if form.validate_on_submit():
+
+    if form.validate_on_submit():    
         phonemobile = phone_number_filtration(request.form['phone_mobile'])
         phonehome = phone_number_filtration(request.form['phone_home'])
         emergencyhome = phone_number_filtration(request.form['emphone_home'])
         emergencymobile = phone_number_filtration(request.form['emphone_mobile'])
+
+#-------------------------------IMAGE VALIDATION----------------------------------#
         if 'file' not in request.files or request.files['file'].filename == '':
             filename = "default.jpg"
         else:
@@ -89,6 +92,8 @@ def registerStudent():
                 file.save(os.path.join(UPLOAD_FOLDER, filename))
             else:
                 filename = "default.jpg"
+
+#-------------------------------PHONE VALIDATION-------------------------------------#
         if phonemobile is None or phonehome is None or emergencyhome is None or emergencymobile is None:
             return render_template("register.html", courses=courses, form=form, errormsg="One of the phone numbers is Invalid")
         # print form.errors
@@ -110,10 +115,12 @@ def registerStudent():
         address=request.form['address'])
         dbsession.add(newStudent)
         dbsession.flush()
+
         if len(request.form['policy_number'])> 0:
             policy_num = request.form['policy_number']
         else:
             policy_num = 0
+
         # si no hay nada en alergies se agrega "Ninguna" por default
         if len(request.form['alergies']) > 0:
             aler = request.form['alergies']
