@@ -14,7 +14,7 @@ DBSession=sessionmaker(bind=engine)
 session=DBSession()
 app=Flask(__name__)
 
-ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+ALLOWED_EXTENSIONS = set(['svg', 'png', 'jpg', 'jpeg', 'gif'])
 APP_ROOT= os.path.abspath(os.path.dirname(__name__))
 UPLOAD_FOLDER = os.path.join(APP_ROOT,"app\static\images")
 
@@ -26,7 +26,9 @@ def user_loader(id):
     return user
 
 def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+    if filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS:
+        return True
+    return False
 
 def phone_number_filtration(PhoneNumber):
     if PhoneNumber.isdigit():
@@ -65,8 +67,10 @@ def Make_StudentApi():
     Students = session.query(Student).all()
     ArrayStudents = []
     AllData = {"All_Data": ArrayStudents}
+
     for student in Students:
         ArrayStudents.append(Student_API(student))
+
     return jsonify(AllData)
 
 
@@ -75,9 +79,11 @@ def Make_StudentApi():
 def showStudent():
     Students = session.query(Student).all()
     if request.method == 'POST':
+        
         searchText = request.form["search"]
         student = session.query(Student).filter(Student.id_document.like(searchText+"%")).all()
         return render_template("student.html", item = student)
+
     else:   
         return render_template("student.html", item = Students)
 
@@ -88,31 +94,37 @@ def newStudent():
     courses=session.query(Course).all()
     # print phone_number_filtration(request.form['phone_mobile'])
     if form.validate_on_submit():
+        
         re_date=request.form['retirement_date']
         phonemobile = phone_number_filtration(request.form['phone_mobile'])
         phonehome = phone_number_filtration(request.form['phone_home'])
         end_date=request.form['ending_date']
+
         if len(re_date) <= 0:
             re_date = "0001-01-01"
+
         if len(end_date) <=0:
             end_date = "0001-01-01"
+
+#----------------------IMAGE VALIDATION-------------------#
         if 'file' not in request.files or request.files['file'].filename == '':
             filename = "default.jpg"
+
         else:
             file = request.files['file']
         # if user does not select file, browser also submit a empty part without filename
         # if not os.path.isdir(UPLOAD_FOLDER):
         #     os.mkdir(UPLOAD_FOLDER)
+            print allowed_file(file.filename)
             if file and allowed_file(file.filename):
                 filename = secure_filename(file.filename)
                 file.save(os.path.join(UPLOAD_FOLDER, filename))
             else:
                 filename = "default.jpg"
+#-----------------------PHONE VALIDATION--------------------------#
         if phonehome is None or phonemobile is None:
             return render_template("studentsignup.html", Error_Phone="One of the phone numbers is Invalid", form=form, courses=courses)
-        # print filename
-        # print form.errors
-        # print "its happening 2"
+ 
 
         newItem=Student(name=request.form['name'],
         last_name = request.form['last_name'],
