@@ -6,7 +6,7 @@ from loginForm import LoginForm
 from flask import Blueprint
 import os, hashlib
 from werkzeug.utils import secure_filename
-from flask_login import login_user
+from flask_login import login_user, logout_user
 from flask_login import login_required
 from app import login_manager
 
@@ -66,6 +66,11 @@ def login():
             login_user(user)         
             return redirect(url_for('RegisterRouting.register'))
     return render_template('login.html', form=form)
+
+@RegisterRouting.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('RegisterRouting.login'))
 
 
 @RegisterRouting.route("/register/", methods=['GET','POST'])
