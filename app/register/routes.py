@@ -51,8 +51,9 @@ def allowed_file(filename):
 
 @RegisterRouting.route("/", methods=['GET','POST'])
 def register():
-    print hashlib
-    return "hello"
+    students = dbsession.query(Student).all()
+    courses = dbsession.query(Course).all()    
+    return render_template("home.html", courses = courses, students = students)
 
 @RegisterRouting.route("/login", methods=['GET','POST'])
 def login():

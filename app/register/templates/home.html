@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/homeStyle.css') }}">
+{% endblock %}
+{% block content %}
+    <div class="row">
+        {% for r in courses %}
+            <div class="small-12 course">
+                <div class="small-12 large-3 course-info">
+                    <h2 class="course-title">{{courses[courses.index(r)].name}}</h2>
+                    <span>Lessons</span>
+                    <div class="course-lessons">
+                      <p>{{courses[courses.index(r)].lesson}}</p>
+                    </div>
+                </div>
+                 <div class="small-12 large-9 students-container">
+                      {% for s in students %}
+                          {% if students[students.index(s)].actual_course| int == courses[courses.index(r)].id| int %}
+                            <figure class="student-img">
+                                <img src="{{ url_for('static', filename ='images/%s' % (students[students.index(s)].image_path)) }}" alt="{{students[students.index(s)].name}}" title="{{students[students.index(s)].name}}">
+                            </figure>
+                          {% endif %}
+                      {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

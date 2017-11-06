@@ -78,14 +78,25 @@ def Make_StudentApi():
 @login_required
 def showStudent():
     Students = session.query(Student).all()
+    courses = session.query(Course).all()
     if request.method == 'POST':
         
         searchText = request.form["search"]
         student = session.query(Student).filter(Student.id_document.like(searchText+"%")).all()
-        return render_template("student.html", item = student)
+        return render_template("student.html", item = student, course=courses)
 
     else:   
-        return render_template("student.html", item = Students)
+        return render_template("student.html", item = Students, course=courses)
+
+@StudentRouting.route("/student/<int:student_id>/info/", methods=['GET','POST'])
+@login_required
+def infoStudent(student_id):
+    student = session.query(Student).filter_by(id=student_id).one()
+    medical_data=session.query(MedicalData).filter_by(student=student_id).all()
+    contacts=session.query(EmergencyContact).filter_by(student=student_id).all()
+    course=session.query(Course).filter_by(id=student.actual_course).one()
+    return render_template("infostudent.html", student_id=student_id, student=student, medical=medical_data, contacts=contacts, course=course)
+
 
 @StudentRouting.route("/student/register/", methods=['GET','POST'])
 @login_required

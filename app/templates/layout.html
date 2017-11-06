@@ -2,28 +2,23 @@
 <html lang="en">
 
 <head>
+    {% block head %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/register-form.css') }}">
     <title>Cincinnatus</title>
+    {% endblock %}
 </head>
 
 <body>
-    <header>
-        <p>header here</p>
-        <button type="button" onclick="window.location.href='{{ url_for('RegisterRouting.login') }}';">Log in</button>
-        <button type="button" onclick="window.location.href='{{ url_for('RegisterRouting.logout') }}';">Log out</button>
-    </header>
-    <!-- AQUI VA AL WEA -->
-         {% block content %}
-         {% endblock %}   
+    <div class="container">
+        {% include 'menu.html' %}
+        {% block content %}
 
-    <footer>
-        <p>Footer here</p>
-    </footer>
-
+        {% endblock %} 
+    </div> 
 </body>
 
 </html>

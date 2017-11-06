@@ -1,51 +1,46 @@
-{% from "_formhelpers.html" import render_field %}
-{% extends "layout.html" %}
-
+{% extends "form-struct.html" %}
+{% block title %}Edit student{% endblock %}
 {% block content %}
-      <div class="container">
-            <div class="row form-container">
-                <h1>{{item.name}}</h1>
-                <div class="form-options">
-                  <a href="{{url_for('StudentRouting.deleteStudent', student_id=student_id)}}">
-                      <button class="delete"> 
-                          Eliminar
-                      </button>
-                  </a> 
-                </div>
-                <form class="form" action="{{url_for('StudentRouting.editStudent', student_id=student_id)}}" method="post" enctype="multipart/form-data">
-                    {{ form.csrf_token }}
-                    {{ render_field(form.name) }}
-                    {{ render_field(form.last_name) }}
-                    <input type="file" name="file" accept="image/*"/>
-                    <br>
-                    {{ render_field(form.email) }}
-                    {{ render_field(form.gender) }}
-                    {{ render_field(form.birthdate) }}
-                    {{ render_field(form.inscription_date) }}
-                    {{ render_field(form.ending_date) }}
-                    {{ render_field(form.retirement_date) }}
-                    <label for="actual_course">Curso actual:</label>
-                    <select class="" name="actual_course">
-                      <option value="">-------</option>
-                        {% for r in courses  %}
-                          <option value="{{ courses[courses.index(r)].id }}">{{ courses[courses.index(r)].name }}</option>
-                        {% endfor %}
-                    </select>
-                    <br>     
-                    {{ render_field(form.phone_mobile) }}
-                    {{ render_field(form.phone_home) }}
-                    {{ render_field(form.id_document) }}
-                    {{ render_field(form.status) }}
-                    {{ render_field(form.marital_status) }}
-                    <label for="nationality">Nationality:</label> 
-                    <br>
-                    <select name="nationality">
-                          {% include 'countries.html' %}
-                    </select>
-                    <br>
-                    {{ render_field(form.address) }}
-                    <input type="submit" value="Enviar">
-                </form>
-              </div>
-          </div>
-   {% endblock %}
+    <h1>{{item.name}}</h1>
+    <div class="form-options">
+        <a href="{{url_for('StudentRouting.deleteStudent', student_id=student_id)}}">
+            <button class="delete"> 
+                Delete
+            </button>
+        </a> 
+    </div>
+    <form class="form" action="{{url_for('StudentRouting.editStudent', student_id=student_id)}}" method="post" enctype="multipart/form-data">
+        {{ form.csrf_token }}
+        {{ render_field(form.name) }}
+        {{ render_field(form.last_name) }}
+        <input type="file" name="file" accept="image/*"/>
+        <br>
+        {{ render_field(form.email) }}
+        {{ render_field(form.gender) }}
+        {{ render_field(form.birthdate) }}
+        {{ render_field(form.inscription_date) }}
+        {{ render_field(form.ending_date) }}
+        {{ render_field(form.retirement_date) }}
+        <label for="actual_course">Actual course</label>
+        <select class="" name="actual_course">
+            <option value="">-------</option>
+            {% for r in courses  %}
+                <option value="{{ courses[courses.index(r)].id }}">{{ courses[courses.index(r)].name }}</option>
+            {% endfor %}
+        </select>
+        <br>     
+        {{ render_field(form.phone_mobile) }}
+        {{ render_field(form.phone_home) }}
+        {{ render_field(form.id_document) }}
+        {{ render_field(form.status) }}
+        {{ render_field(form.marital_status) }}
+        <label for="nationality">Nationality:</label> 
+        <br>
+        <select name="nationality">
+                {% include 'countries.html' %}
+        </select>
+        <br>
+        {{ render_field(form.address) }}
+        <input type="submit" value="Save">
+    </form>
+{% endblock %}

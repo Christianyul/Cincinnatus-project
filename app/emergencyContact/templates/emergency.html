@@ -1,42 +1,41 @@
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Emergency Contact</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-  <header>
-    <!-- header aqui -->
-  </header>
-
-  <div>
-  <h1>Contactos de emergencia</h1>
-  <h2>Registrar Nuevo Contacto</h2>
-  <a href='{{url_for('EmergencyRouting.newEmergency', student_id= student.id)}}'> Add new Emergency Contact </a>
-  </div>
-  {% for r in item %}
-
-<section>
-  <div>
-
-    <h3>Nombres:</h3> <p> {{item[item.index(r)].name}} </p>
-    <h3>Apellidos:</h3><p> {{item[item.index(r)].last_name}} </p>
-    <h3>Telefono Celular:</h3><p> {{item[item.index(r)].phone_mobile}} </p>
-    <h3>Telofono Hogar:</h3><p> {{item[item.index(r)].phone_home}} </p>
-    <h3>Relacion con estudiante:</h3><p> {{item[item.index(r)].relationship}} </p>
-
-
-    <br>
-    <a href='{{url_for('EmergencyRouting.editEmergency', emergency_id = item[item.index(r)].id, student_id= student.id )}}'>Edit/Delete </a>
-    <br>
-    <br>
-  </div>
-
-  {% endfor %}
-</section>
-  <foooter>
-    <!-- footer aqui -->
-  </footer>
-</body>
-
-</html>
+{% extends "layout.html" %}
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/courses.css') }}">
+{% endblock %}
+{% block content %}
+    <div class="container flow-column">
+        <h1>Emergency contacts</h1>
+        <a href='{{url_for('EmergencyRouting.newEmergency', student_id= student.id)}}'>
+            <button class="add">
+                Add contact
+            </button> 
+        </a>
+        <div class="row">
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Lastname</th> 
+                <th>Cell phone</th>
+                <th>Phone</th>
+                <th>Relationship</th>
+                <th></th>
+            </tr>
+            {% for r in item %}
+                <tr>
+                    <td>{{item[item.index(r)].name}}</td>
+                    <td>{{item[item.index(r)].last_name}}</td>
+                    <td>{{item[item.index(r)].phone_mobile}}</td>
+                    <td>{{item[item.index(r)].phone_home}}</td> 
+                    <td>{{item[item.index(r)].relationship}}</td>
+                    <td>
+                        <a href='{{url_for('EmergencyRouting.editEmergency',emergency_id = item[item.index(r)].id, student_id= student.id)}}'>
+                            <button>Edit</button> 
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        </div>
+    </div>
+{% endblock %}

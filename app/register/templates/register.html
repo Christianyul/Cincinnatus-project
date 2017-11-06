@@ -1,82 +1,65 @@
-{% from "_formhelpers.html" import render_field %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Registro de estudiantes</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/register-form.css') }}">
-  </head>
-  <body>
-      <div class="container">
-            <div class="row form-container">
-                  <h1>Registro de estudiante</h1>
-                  <form action="{{url_for('RegisterRouting.registerStudent')}}" method="post" enctype="multipart/form-data">
-                      {{ form.csrf_token }}
-                      <h3>Datos Generales</h3>
-                      {{ render_field(form.name) }} 
-                      {{ render_field(form.last_name) }}
-                      <br>
-                      <input type="file" name="file" accept="image/*" />
-                      <br>
-                      {% with messages = get_flashed_messages() %}
-                          {% if messages %}
-                              <ul>
-                                  {% for message in messages %}
-                                      <li style="color:red;"> {{ message }} </li>
-                                  {% endfor %}
-                              </ul>
-                          {% endif %}
-                      {% endwith %}
-                      {{ render_field(form.email) }} 
-                      {{ render_field(form.gender) }} 
-                      {{ render_field(form.inscription_date) }} 
-                      {{ render_field(form.birthdate) }} 
-                      <label for="actual_course">Curso actual</label>
-                      <select name="actual_course">
-                          <option value="">--------</option>
-                          {% for r in courses  %}
-                              <option value="{{ courses[courses.index(r)].id }}"> {{ courses[courses.index(r)].name }} </option>
-                          {% endfor %}
-                      </select>
-                      {{ render_field(form.phone_mobile) }} 
-                      {{errormsg}}
-                      {{ render_field(form.phone_home) }}
-                      {{errormsg}} 
-                      {{ render_field(form.id_document) }} 
-                      {{ render_field(form.status) }} 
-                      {{ render_field(form.marital_status) }} 
-                      <label for="nationality">Nationality:</label> 
-                      <select name="nationality">
-                          {% include 'countries.html' %}
-                      </select>
-                      {{ render_field(form.address) }}
-                      <hr>
-                      <h3>Datos Medicos</h3>
-                      {{ render_field(form.alergies) }} 
-                      {{ render_field(form.intensity ) }} 
-                      {{ render_field(form.special_condition) }} 
-                      {{ render_field(form.blood_type) }} 
-                      {{ render_field(form.ars) }} 
-                      {{ render_field(form.afiliation_type) }} 
-                      {{ render_field(form.policy_number) }}
-                      <hr> 
-                      <h3>Contacto de emergencia</h3>
-                      {{ render_field(form.emname) }} 
-                      {{ render_field(form.emlast_name) }} 
-                      {{ render_field(form.emphone_mobile) }} 
-                      {{errormsg}}
-                      {{ render_field(form.emphone_home) }}
-                      {{errormsg}} 
-                      {{ render_field(form.relationship) }} 
-                      <input type="submit" value="Enviar">
-                  </form>
-              </div>
-          </div>
-    <footer>
-      <!-- footer aqui -->
-    </footer>
-    <!-- <script src="{{ url_for('static', filename='js/js.js') }}"></script> -->
-  </body>
-</html>
+{% extends "form-struct.html" %}
+{% block title %}Student register{% endblock %}
+{% block content %}
+    <h1>Student register</h1>
+    <form action="{{url_for('RegisterRouting.registerStudent')}}" method="post" enctype="multipart/form-data">
+        {{ form.csrf_token }}
+        <h3>General data</h3>
+        {{ render_field(form.name) }} 
+        {{ render_field(form.last_name) }}
+        <br>
+        <input type="file" name="file" accept="image/*" />
+        <br>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li style="color:red;"> {{ message }} </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        {{ render_field(form.email) }} 
+        {{ render_field(form.gender) }} 
+        {{ render_field(form.inscription_date) }} 
+        {{ render_field(form.birthdate) }} 
+        <label for="actual_course">Actual course</label>
+        <select name="actual_course">
+            <option value="">--------</option>
+            {% for r in courses  %}
+                <option value="{{ courses[courses.index(r)].id }}"> {{ courses[courses.index(r)].name }} </option>
+            {% endfor %}
+        </select>
+        {{ render_field(form.phone_mobile) }} 
+        {{errormsg}}
+        {{ render_field(form.phone_home) }}
+        {{errormsg}} 
+        {{ render_field(form.id_document) }} 
+        {{ render_field(form.status) }} 
+        {{ render_field(form.marital_status) }} 
+        <label for="nationality">Nationality:</label> 
+        <select name="nationality">
+            {% include 'countries.html' %}
+        </select>
+        {{ render_field(form.address) }}
+        <hr>
+        <h3>Medical data</h3>
+        {{ render_field(form.alergies) }} 
+        {{ render_field(form.intensity ) }} 
+        {{ render_field(form.special_condition) }} 
+        {{ render_field(form.blood_type) }} 
+        {{ render_field(form.ars) }} 
+        {{ render_field(form.afiliation_type) }} 
+        {{ render_field(form.policy_number) }}
+        <hr> 
+        <h3>Emergency contacts</h3>
+        {{ render_field(form.emname) }} 
+        {{ render_field(form.emlast_name) }} 
+        {{ render_field(form.emphone_mobile) }} 
+        {{errormsg}}
+        {{ render_field(form.emphone_home) }}
+        {{errormsg}} 
+        {{ render_field(form.relationship) }} 
+        <input type="submit" value="Enviar">
+    </form>
+{% endblock %}

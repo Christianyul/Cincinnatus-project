@@ -1,0 +1,22 @@
+<header class="small-12">
+    <div class="small-12 darker just-space-between">
+        <a href="/" class="img-logo hide-for-small-only">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+        </a>
+        <nav class="small-9">
+            <ul class="menu">
+                {% if current_user.is_authenticated %}
+                    <li><a href="/student/">Students</a></li>
+                    <li><a href="/course/">Courses</a></li>
+                    <li><a href="/user/">Users</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% if current_user.is_authenticated %}
+            <button class="button small-2" onclick="window.location.href='{{ url_for('RegisterRouting.logout') }}';">Log Out</button>
+            {% else %}
+            <button class="button small-2" onclick="window.location.href='{{ url_for('RegisterRouting.login') }}';">Log in</button>
+        {% endif %}
+        
+    </div>
+</header>

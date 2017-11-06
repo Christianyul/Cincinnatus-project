@@ -1,25 +1,12 @@
-{% from "_formhelpers.html" import render_field %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Cursos</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/register-form.css') }}">
-  </head>
-  <body>
-      <div class="container">
-          <div class="row form-container">
-              <h1>Agregar curso</h1>
-              <form action="{{url_for('CourseRouting.newCourse')}}" method="post">
-                  {{ form.csrf_token }}
-                  {{ render_field(form.name) }} <br>
-                  {{ render_field(form.lesson) }} <br>
-                  {{ render_field(form.link) }} <br>
-                  <input type="submit" value="Enviar">
-              </form>
-          </div>
-      </div>
-  </body>
-</html>
+{% extends "form-struct.html" %}
+{% block title %}Courses{% endblock %}
+{% block content %}
+    <h1>Add course</h1>
+    <form action="{{url_for('CourseRouting.newCourse')}}" method="post">
+        {{ form.csrf_token }}
+        {{ render_field(form.name) }} <br>
+        {{ render_field(form.lesson) }} <br>
+        {{ render_field(form.link) }} <br>
+        <input type="submit" value="Save">
+    </form>
+{% endblock %}

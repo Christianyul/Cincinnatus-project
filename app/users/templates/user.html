@@ -1,39 +1,39 @@
-<html>
-
-<body>
-  <header>
-    <!-- header aqui -->
-  </header>
-
-<section>
-  <div>
-  <h1>Users</h1>
-  <h2>Add nuevo Usuario</h2>
-  <a href='{{url_for('UserRouting.signUp')}}'> Add new user </a>
-  </div>
-  {% for r in item %}
-
-  <div>
-
-    <h3>Nombre:</h3><p> {{item[item.index(r)].name}} </p>
-
-    <h3>Nombre de Usuario:</h3><p> {{item[item.index(r)].user_name}} </p>
-    <h3>Email:</h3><p> {{item[item.index(r)].email}} </p>
-    <h3>Tipo de Usuario:</h3><p> {{item[item.index(r)].user_type}} </p>
-
-    <br>
-    <a href='{{url_for('UserRouting.editUser',user_id = item[item.index(r)].id)}}'>Edit/Delete </a>
-    <br>
-    <br>
-  </div>
-
-  {% endfor %}
-
-  </section>
-
-  <footer>
-    <!-- footer aqui -->
-  </footer>
-</body>
-
-</html>
+{% extends "layout.html" %}
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/courses.css') }}">
+{% endblock %}
+{% block content %}
+    <div class="container flow-column">
+        <h1>Users</h1>
+        <a href='{{url_for('UserRouting.signUp')}}'> 
+            <button class="add">
+                Add user
+            </button> 
+        </a>
+        <div class="row">
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Nickname</th> 
+                <th>Email</th>
+                <th>User type</th>
+                <th></th>
+            </tr>
+            {% for r in item %}
+                <tr>
+                    <td>{{item[item.index(r)].name}}</td>
+                    <td>{{item[item.index(r)].user_name}}</td>
+                    <td>{{item[item.index(r)].email}}</td>
+                    <td>{{item[item.index(r)].user_type}}</td> 
+                    <td>
+                        <a href='{{url_for('UserRouting.editUser',user_id = item[item.index(r)].id)}}'>
+                            <button>Edit</button> 
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        </div>
+    </div>
+{% endblock %}
