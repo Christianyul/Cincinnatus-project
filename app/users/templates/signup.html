@@ -1,38 +1,25 @@
-{% from "_formhelpers.html" import render_field %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Registro de usuario</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/register-form.css') }}">
-  </head>
-  <body>
-      <div class="container">
-          <div class="row form-container">
-              <h1>Registro de usuario</h1>
-            {% with messages = get_flashed_messages() %}
-              {% if messages %}
-                  <ul>
-                      {% for message in messages %}
-                          <li style="color:red;"> {{ message }} </li>
-                      {% endfor %}
-                  </ul>
-              {% endif %}
-            {% endwith %}
-              <form action="{{url_for('UserRouting.signUp')}}" method="post">
-                  {{ form.csrf_token }}
-                  {{ render_field(form.user_name) }}
-                  {{ render_field(form.email) }}
-                  {{ render_field(form.password) }}
-                  <label for="valid">Confirmar Password:</label>
-                  <input name="valid" type="password">
-                  {{ render_field(form.name) }}
-                  {{ render_field(form.user_type) }}
-                  <input type="submit" value="Enviar">
-              </form>
-          </div>
-      </div>
-  </body>
-</html>
+{% extends "form-struct.html" %}
+{% block title %}User register{% endblock %}
+{% block content %}
+    <h1>User register</h1>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li style="color:red;"> {{ message }} </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <form action="{{url_for('UserRouting.signUp')}}" method="post">
+        {{ form.csrf_token }}
+        {{ render_field(form.user_name) }}
+        {{ render_field(form.email) }}
+        {{ render_field(form.password) }}
+        <label for="valid">Confirm password:</label>
+        <input name="valid" type="password">
+        {{ render_field(form.name) }}
+        {{ render_field(form.user_type) }}
+        <input type="submit" value="Save">
+    </form>
+{% endblock %}

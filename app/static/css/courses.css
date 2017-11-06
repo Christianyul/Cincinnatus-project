@@ -20,10 +20,12 @@ tr > td:first-child {
     min-width: 250px;
 }
 
-button.add {
-    background-color: #0684ffb0;
-    border: none;
-    color: white;
-    margin-left: 5%;
-    padding: 10px;
+.container > a {
+    text-decoration: none;
+}
+
+form.flow-row > input {
+    display: inline;
+    max-width: 50%;
+    margin-left: 10px;
 }

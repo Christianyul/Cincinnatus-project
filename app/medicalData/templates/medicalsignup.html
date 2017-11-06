@@ -1,29 +1,16 @@
-{% from "_formhelpers.html" import render_field %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Datos Medicos</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/register-form.css') }}">
-  </head>
-  <body>
-      <div class="container">
-          <div class="row form-container">
-                <h1>Registro de Datos Medicos</h1>
-                <form action="{{url_for('MedicalRouting.newMedical', student_id= student.id)}}" method="post">
-                    {{ form.csrf_token }}
-                    {{ render_field(form.alergies) }}
-                    {{ render_field(form.intensity ) }} 
-                    {{ render_field(form.special_condition) }} 
-                    {{ render_field(form.blood_type) }} 
-                    {{ render_field(form.ars) }} 
-                    {{ render_field(form.afiliation_type) }} 
-                    {{ render_field(form.policy_number) }} 
-                    <input type="submit" value="Enviar">
-                </form>
-          </div>
-      </div>
-  </body>
-</html>
+{% extends "form-struct.html" %}
+{% block title %}Medical data{% endblock %}
+{% block content %}
+    <h1>Medical data</h1>
+    <form action="{{url_for('MedicalRouting.newMedical', student_id= student.id)}}" method="post">
+        {{ form.csrf_token }}
+        {{ render_field(form.alergies) }}
+        {{ render_field(form.intensity ) }} 
+        {{ render_field(form.special_condition) }} 
+        {{ render_field(form.blood_type) }} 
+        {{ render_field(form.ars) }} 
+        {{ render_field(form.afiliation_type) }} 
+        {{ render_field(form.policy_number) }} 
+        <input type="submit" value="Save">
+    </form>
+{% endblock %}

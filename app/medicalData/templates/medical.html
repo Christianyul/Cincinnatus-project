@@ -1,38 +1,43 @@
+<!DOCTYPE html>
 <html>
-
-<body>
-  <header>
-    <!-- header aqui -->
-  </header>
-<section>
-  <h1></h1>
-  <h2>Registrar Datos Medicos</h2>
-  <a href='{{url_for('MedicalRouting.newMedical', student_id= student.id)}}'> Add Medical Data </a>
-  {% for r in item %}
-
-  <div>
-
-    <h3>Alergias:</h3><p> {{item[item.index(r)].alergies}} </p>
-    <h3>Intensidad:</h3><p> {{item[item.index(r)].intensity}} </p>
-    <h3>Condincion Especial:</h3><p> {{item[item.index(r)].special_condition}} </p>
-    <h3>Tipo de Sangre:</h3><p> {{item[item.index(r)].blood_type}} </p>
-    <h3>ARS:</h3><p> {{item[item.index(r)].ars}} </p>
-    <h3>Tipo de Afiliación:</h3><p> {{item[item.index(r)].afiliation_type}} </p>
-    <h3>Numero de Poliza:</h3><p> {{item[item.index(r)].policy_number}} </p>
-
-
-    <br>
-    <a href='{{url_for('MedicalRouting.editMedical', medical_id = item[item.index(r)].id, student_id= student.id )}}'>Edit/Delete </a>
-    <br>
-    <br>
-  </div>
-
-  {% endfor %}
-
-  </section>
-  <footer>
-    <!-- footer aqui -->
-  </footer>
+  <head>
+    <meta charset="utf-8">
+    <title>Medical data</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register-form.css') }}">
+  </head>
+  <body>
+    <div class="container">
+        <div class="row form-container">
+            <h1>Medical data</h1>
+            {% if item|length == 0 %}
+                <a class="add" href='{{url_for('MedicalRouting.newMedical', student_id= student.id)}}'> 
+                    <button>Add Medical Data </button>
+                </a>
+            {% endif %}
+            {% for r in item %}
+                <form>
+                    <label>Alergias</label>
+                    <input type="text" value="{{item[item.index(r)].alergies}}" readonly> 
+                    <label>Intensidad</label>
+                    <input type="text" value="{{item[item.index(r)].intensity}}" readonly> 
+                    <label>Condincion Especial</label>
+                    <input type="text" value="{{item[item.index(r)].special_condition}}" readonly> 
+                    <label>Tipo de Sangre</label>
+                    <input type="text" value="{{item[item.index(r)].blood_type}}" readonly> 
+                    <label>ARS</label>
+                    <input type="text" value="{{item[item.index(r)].ars}}" readonly>
+                    <label>Tipo de Afiliación</label>
+                    <input type="text" value="{{item[item.index(r)].afiliation_type}}" readonly> 
+                    <label>Numero de Poliza</label>
+                    <input type="text" value="{{item[item.index(r)].policy_number}}" readonly>
+                    <br>
+                    <a class="submit" href='{{url_for('MedicalRouting.editMedical', medical_id = item[item.index(r)].id, student_id= student.id )}}'> Edit </a>
+                    <br>
+                </form>
+            {% endfor %}
+        </div>
+    </div>
 </body>
-
 </html>

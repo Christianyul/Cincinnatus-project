@@ -1,8 +1,5 @@
 body {
-  background: #479CE3;
-  background: -webkit-linear-gradient(right, #3D85C2, #479CE3);
-  background: -moz-linear-gradient(right, #3D85C2, #479CE3);
-  background: linear-gradient(to left, #3D85C2, #479CE3);
+  background-color: #eff3f6;
   padding-bottom: 3%;
 }
 
@@ -46,6 +43,14 @@ header {
     color: white;
     font-size: 25pt;
     padding: 30px;
+    width: 33px;
+}
+
+.course-lessons p {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    width: 100%;
 }
 
 .course-info > span {
@@ -61,7 +66,7 @@ header {
 
 .course-info {
     align-items: center;
-    background-color: #205D76;
+    background-color: #17649A;
     flex-direction: column;
     justify-content: center;
     padding-bottom: 20px;

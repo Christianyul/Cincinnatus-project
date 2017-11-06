@@ -1,0 +1,23 @@
+{% from "_formhelpers.html" import render_field %}
+<!DOCTYPE html>
+<html>
+  <head>
+    {% block head %}
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register-form.css') }}">
+    {% endblock %}
+  </head>
+  <body>
+      <div class="container">
+            {% include 'menu.html' %}
+            <div class="row form-container">
+                {% block content %}
+                {% endblock %}
+            </div>
+      </div>
+  </body>
+</html>

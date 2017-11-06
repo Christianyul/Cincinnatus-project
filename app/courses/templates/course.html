@@ -1,32 +1,25 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Cursos</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/courses.css') }}">
-  </head>
-<body>
-<header>
-  <!-- header aqui -->
-</header>
-    <h1>Cursos</h1>
-    <a href='{{url_for('CourseRouting.newCourse')}}'> 
-        <button class="add">
-           Agregar curso
-        </button> 
-    </a>
-    <div class="container">
+{% extends "layout.html" %}
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/courses.css') }}">
+{% endblock %}
+{% block content %}
+    <div class="container flow-column">
+        <h1>Courses</h1>
+        <a href='{{url_for('CourseRouting.newCourse')}}'> 
+            <button class="add">
+                Add course
+            </button> 
+        </a>
         <div class="row">
-           <table>
-              <tr>
-                  <th>Nombre</th>
-                  <th>Lecciones</th> 
-                  <th>Link</th>
-                  <th>Accion</th>
-              </tr>
-              {% for r in course %}
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Lessons</th> 
+                <th>Link</th>
+                <th></th>
+            </tr>
+            {% for r in course %}
                 <tr>
                     <td>{{course[course.index(r)].name}}</td>
                     <td>{{course[course.index(r)].lesson}}</td> 
@@ -37,14 +30,12 @@
                     </td>
                     <td>
                         <a href='{{url_for('CourseRouting.editCourse',course_id = course[course.index(r)].id)}}'>
-                            <button>Editar</button> 
+                            <button>Edit</button> 
                         </a>
                     </td>
                 </tr>
-              {% endfor %}
-          </table>
+            {% endfor %}
+        </table>
         </div>
     </div>
-</body>
-
-</html>
+{% endblock %}
