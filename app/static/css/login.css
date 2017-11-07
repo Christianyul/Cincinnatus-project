@@ -1,13 +1,13 @@
 body {
   background: #FF403E;
-  background: -webkit-linear-gradient(right, #CF3432, #FF403E);
-  background: -moz-linear-gradient(right, #CF3432, #FF403E);
-  background: linear-gradient(to left, #CF3432, #FF403E);
+  background: -webkit-linear-gradient(right, #eff3f6, #eff3f6);
+  background: -moz-linear-gradient(right, #eff3f6, #eff3f6);
+  background: linear-gradient(to left, #eff3f6, #eff3f6);
   padding-bottom: 3%;     
 }
 
 h1 {
-    color: white;
+    color: #1d1d1d;
     text-align: center;
 }
 
@@ -20,9 +20,10 @@ input[type=password]:focus {
 }
 
 input[type=submit] {
-    background-color: #FF4C23;
+    background-color: #0080ff;
 }
 
 input[type=submit]:hover {
-    background-color: #FF633F;
+    background-color: #2894ff;
+    cursor: pointer;
 }

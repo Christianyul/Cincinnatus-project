@@ -6,11 +6,11 @@
 {% block content %}
     <div class="container flow-column">
         <h1>Users</h1>
-        <a href='{{url_for('UserRouting.signUp')}}'> 
-            <button class="add">
+      
+            <button class="add" onclick="window.location.href='{{ url_for('UserRouting.signUp') }}';">
                 Add user
             </button> 
-        </a>
+      
         <div class="row">
         <table>
             <tr>

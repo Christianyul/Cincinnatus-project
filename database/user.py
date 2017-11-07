@@ -6,7 +6,7 @@ class User(Base, UserMixin):
    id= Column(Integer,primary_key=True)
    name = Column(String(50), nullable=False)
    user_name = Column(String(50))
-   password = Column(String(500), nullable=False)
+   password = Column(String(300), nullable=False)
    email= Column(String(50), nullable=False)
    user_type= Column(String(50), nullable=False)
    student = Column(Integer, ForeignKey('students.id'))
