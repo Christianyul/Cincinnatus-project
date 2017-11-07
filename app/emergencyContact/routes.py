@@ -39,6 +39,7 @@ def EmergencyApi(student_id):
         Data = {}
         Data["id"] = data.id
         Data["Student_ID"] = data.student
+        Data['last_name'] = data.last_name
         Data["Name_Emergency_Contact"] = data.name
         Data["Emergency_Phone_Mobile"] = data.phone_mobile
         Data["Emergency_Phone_Home"] = data.phone_home
@@ -48,7 +49,7 @@ def EmergencyApi(student_id):
     return jsonify(EmergencyData)
 
 @EmergencyRouting.route("/<int:student_id>/emergency/")
-@login_required
+#@login_required
 def showEmergency(student_id):
     student=session.query(Student).filter_by(id=student_id).one()
     item=session.query(EmergencyContact).filter_by(student=student_id).all()
@@ -56,7 +57,7 @@ def showEmergency(student_id):
 
 
 @EmergencyRouting.route("/<int:student_id>/emergency/register/", methods=['GET','POST'])
-@login_required
+#@login_required
 def newEmergency(student_id):
     form = EmergencyForm()
     student=session.query(Student).filter_by(id=student_id).one()
@@ -79,7 +80,7 @@ def newEmergency(student_id):
 
 
 @EmergencyRouting.route("/<int:student_id>/emergency/<int:emergency_id>/edit/", methods=['GET','POST'])
-@login_required
+# @login_required
 def editEmergency(emergency_id,student_id):
     form = EmergencyForm()
     student=session.query(Student).filter_by(id=student_id).one()

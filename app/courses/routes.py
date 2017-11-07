@@ -35,14 +35,14 @@ def CollectingData():
     return jsonify(Data)
 
 @CourseRouting.route("/course/")
-@login_required
+# @login_required
 def showCourse():
     course=session.query(Course).all()
     print course
     return render_template("course.html", course=course)
 
 @CourseRouting.route("/course/newCourse/", methods=['GET','POST'])
-@login_required
+# @login_required
 def newCourse():
     form = coursesForm.CourseForm()
     if form.validate_on_submit():
@@ -54,7 +54,7 @@ def newCourse():
     return render_template("newcourse.html", form=form)
 
 @CourseRouting.route("/course/<int:course_id>/edit/", methods=['GET','POST'])
-@login_required
+# @login_required
 def editCourse(course_id):
     form = coursesForm.CourseForm()
     editedItem = session.query(Course).filter_by(id=course_id).one()

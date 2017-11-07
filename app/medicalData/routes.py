@@ -41,7 +41,7 @@ def MedicalApi(student_id):
     return jsonify(MedicalDataApi)
 
 @MedicalRouting.route("/<int:student_id>/medical/")
-@login_required
+# @login_required
 def showMedical(student_id):
     student=session.query(Student).filter_by(id=student_id).one()
     item=session.query(MedicalData).filter_by(student=student_id).all()
@@ -50,7 +50,7 @@ def showMedical(student_id):
 
 
 @MedicalRouting.route("/<int:student_id>/medical/register/", methods=['GET','POST'])
-@login_required
+# @login_required
 def newMedical(student_id):
     form = MedicalForm()
     student=session.query(Student).filter_by(id=student_id).one()
@@ -96,7 +96,7 @@ def newMedical(student_id):
 
 
 @MedicalRouting.route("/<int:student_id>/medical/<int:medical_id>/edit/", methods=['GET','POST'])
-@login_required
+# @login_required
 def editMedical(medical_id,student_id):
     form = MedicalForm()
     student=session.query(Student).filter_by(id=student_id).one()
