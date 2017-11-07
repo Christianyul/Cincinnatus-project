@@ -39,6 +39,7 @@ def EmergencyApi(student_id):
         Data = {}
         Data["id"] = data.id
         Data["Student_ID"] = data.student
+        Data['last_name'] = data.last_name
         Data["Name_Emergency_Contact"] = data.name
         Data["Emergency_Phone_Mobile"] = data.phone_mobile
         Data["Emergency_Phone_Home"] = data.phone_home
