@@ -1,7 +1,9 @@
 table {
     border-collapse: collapse;
-    margin: 20px 5%;
+    margin: 20px 0px;
     max-width: 90%;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 th, td {
@@ -27,5 +29,5 @@ tr > td:first-child {
 form.flow-row > input {
     display: inline;
     max-width: 50%;
-    margin-left: 10px;
+    
 }

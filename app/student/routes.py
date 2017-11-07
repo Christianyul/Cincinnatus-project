@@ -24,6 +24,7 @@ def user_loader(id):
     # a database query, for example
     user= session.query(User).filter_by(id=id).one()
     return user
+   
 
 def allowed_file(filename):
     if filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS:
@@ -75,7 +76,6 @@ def Make_StudentApi():
 
 
 @StudentRouting.route("/student/",  methods=['GET','POST'])
-@login_required
 def showStudent():
     Students = session.query(Student).all()
     courses = session.query(Course).all()
@@ -105,6 +105,7 @@ def newStudent():
     courses=session.query(Course).all()
     if form.validate_on_submit():
         
+        idcourse=session.query(Course).filter_by(id=request.form['actual_course']).one().id
         re_date=request.form['retirement_date']
         phonemobile = phone_number_filtration(request.form['phone_mobile'])
         phonehome = phone_number_filtration(request.form['phone_home'])
@@ -147,7 +148,7 @@ def newStudent():
         birthdate = request.form['birthdate'],
         phone_mobile = phone_number_filtration(request.form['phone_mobile']),
         phone_home = phone_number_filtration(request.form['phone_home']),
-        actual_course = request.form['actual_course'],
+        actual_course = idcourse,
         id_document = request.form['id_document'],
         status = request.form['status'],
         marital_status = request.form['marital_status'],

@@ -80,6 +80,7 @@ def registerStudent():
     courses=dbsession.query(Course).all()
 
     if form.validate_on_submit():    
+        idcourse=dbsession.query(Course).filter_by(id=request.form['actual_course']).one().id
         phonemobile = phone_number_filtration(request.form['phone_mobile'])
         phonehome = phone_number_filtration(request.form['phone_home'])
         emergencyhome = phone_number_filtration(request.form['emphone_home'])
@@ -113,7 +114,7 @@ def registerStudent():
         birthdate=request.form['birthdate'],
         phone_mobile=request.form['phone_mobile'],
         phone_home=request.form['phone_home'],
-        actual_course=request.form['actual_course'],
+        actual_course=idcourse,
         id_document=request.form['id_document'],
         status=request.form['status'],
         marital_status=request.form['marital_status'],
