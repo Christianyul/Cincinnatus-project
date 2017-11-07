@@ -76,10 +76,6 @@ def Make_StudentApi():
 
 
 @StudentRouting.route("/student/",  methods=['GET','POST'])
-<<<<<<< HEAD
-=======
-# @login_required
->>>>>>> Doing some Javascript to Manage the edit part of the page
 def showStudent():
     Students = session.query(Student).all()
     courses = session.query(Course).all()
@@ -103,7 +99,7 @@ def infoStudent(student_id):
 
 
 @StudentRouting.route("/student/register/", methods=['GET','POST'])
-#@login_required
+@login_required
 def newStudent():
     form = StudentForm()
     courses=session.query(Course).all()
@@ -167,7 +163,7 @@ def newStudent():
 
 
 @StudentRouting.route("/student/<int:student_id>/edit/", methods=['GET','POST'])
-# @login_required
+@login_required
 def editStudent(student_id):
     form = StudentForm()
     courses = session.query(Course).all()

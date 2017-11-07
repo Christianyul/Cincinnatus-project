@@ -49,7 +49,7 @@ def EmergencyApi(student_id):
     return jsonify(EmergencyData)
 
 @EmergencyRouting.route("/<int:student_id>/emergency/")
-#@login_required
+@login_required
 def showEmergency(student_id):
     student=session.query(Student).filter_by(id=student_id).one()
     item=session.query(EmergencyContact).filter_by(student=student_id).all()
@@ -57,7 +57,7 @@ def showEmergency(student_id):
 
 
 @EmergencyRouting.route("/<int:student_id>/emergency/register/", methods=['GET','POST'])
-#@login_required
+@login_required
 def newEmergency(student_id):
     form = EmergencyForm()
     student=session.query(Student).filter_by(id=student_id).one()
@@ -80,7 +80,7 @@ def newEmergency(student_id):
 
 
 @EmergencyRouting.route("/<int:student_id>/emergency/<int:emergency_id>/edit/", methods=['GET','POST'])
-# @login_required
+@login_required
 def editEmergency(emergency_id,student_id):
     form = EmergencyForm()
     student=session.query(Student).filter_by(id=student_id).one()

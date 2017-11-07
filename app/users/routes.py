@@ -35,7 +35,7 @@ def UserApi():
     return jsonify(Data_Api)
     
 @UserRouting.route("/user/")
-# @login_required
+@login_required
 def showUser():
     item=session.query(User).all()
     return render_template("user.html", item=item)
@@ -71,7 +71,7 @@ def signUp():
 
 
 @UserRouting.route("/user/<int:user_id>/edit/", methods=['GET','POST'])
-# @login_required
+@login_required
 def editUser(user_id):
     form = UserForm()
     editedItem = session.query(User).filter_by(id=user_id).one()
