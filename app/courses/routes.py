@@ -6,7 +6,6 @@ from flask import Blueprint
 from flask_login import login_required
 from app import login_manager
 
-db_string="postgres://postgres:011741@localhost:5432/cincinnatus"
 engine = create_engine(db_string)
 DBSession=sessionmaker(bind=engine)
 session=DBSession()

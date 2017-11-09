@@ -15,7 +15,6 @@
             <button class="add" onclick="window.location.href='{{url_for('StudentRouting.newStudent') }}';">
                 Add student
             </button> 
-     
         <div class="row">
         <table>
             <tr>
@@ -34,9 +33,9 @@
                   <td style="width:100px !important"> <img src="{{ url_for('static', filename ='images/%s' % (item[item.index(r)].image_path)) }}" width="100px" height="100px" alt="Profile Picture"></td>
                   <td>{{item[item.index(r)].name}} {{item[item.index(r)].last_name}}</td>
                   <td>{{item[item.index(r)].email}}</td>
-                  <td>{{item[item.index(r)].phone_home}}</td>
-                  <td>{{item[item.index(r)].phone_mobile}}</td>
                   <td>{{item[item.index(r)].id_document}}</td>
+                  <td>{{item[item.index(r)].phone_home}}</td>
+                  <td>{{item[item.index(r)].phone_mobile}}</td>       
                   <td>{{course[item[item.index(r)].actual_course|int -1].name}}</td>
                   <td>{{item[item.index(r)].status}}</td>
                   <td>

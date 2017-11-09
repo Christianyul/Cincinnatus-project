@@ -8,7 +8,6 @@ from werkzeug.utils import secure_filename
 from flask_login import login_required
 from app import login_manager
 
-db_string="postgres://postgres:011741@localhost:5432/cincinnatus"
 engine = create_engine(db_string)
 DBSession=sessionmaker(bind=engine)
 session=DBSession()
@@ -25,7 +24,6 @@ def user_loader(id):
     user= session.query(User).filter_by(id=id).one()
     return user
    
-
 def allowed_file(filename):
     if filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS:
         return True

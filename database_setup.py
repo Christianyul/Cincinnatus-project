@@ -21,16 +21,11 @@ except Exception as e:
         me= MedicalData()
         sc= Schedule()
         em= EmergencyContact()
-
         #///----cambiar password------///
-        db_string="postgres://postgres:011741@localhost:5432/cincinnatus"
         engine = create_engine(db_string)
-
         #this will add the classes that we will create as tables in our database
         Base.metadata.create_all(engine)
 
-        # DBSession=sessionmaker(bind=engine)
-        # session=DBSession()
         print "Database Setup Done"
     except Exception as e:
          print e 

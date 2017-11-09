@@ -10,3 +10,4 @@ from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 #this will let sqlalchemy know that our classes are special classses
 #that correspond to tables in our database
 Base = declarative_base()
+db_string="postgres://postgres:011741@localhost:5432/cincinnatus"

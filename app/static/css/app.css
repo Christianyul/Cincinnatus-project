@@ -35,6 +35,10 @@ button {
     font-weight: 600;
 }
 
+.errors li{
+    color: red;
+}
+
 .container,
 .container>* {
     display: flex;

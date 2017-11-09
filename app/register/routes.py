@@ -1,13 +1,11 @@
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, url_for, request, redirect, Blueprint
 from . import RegisterRouting
 from database_setup import *
 from registerForm import RegisterForm
 from loginForm import LoginForm
-from flask import Blueprint
 import os, hashlib
 from werkzeug.utils import secure_filename
-from flask_login import login_user, logout_user
-from flask_login import login_required
+from flask_login import login_user, logout_user,  login_required
 from app import login_manager
 
 ALLOWED_EXTENSIONS = set(['svg' 'png', 'jpg', 'jpeg', 'gif'])
@@ -15,17 +13,10 @@ ALLOWED_EXTENSIONS = set(['svg' 'png', 'jpg', 'jpeg', 'gif'])
 APP_ROOT= os.path.abspath(os.path.dirname(__name__))
 UPLOAD_FOLDER = os.path.join(APP_ROOT,"app/static/images")
 
-db_string="postgres://postgres:011741@localhost:5432/cincinnatus"
 engine = create_engine(db_string)
 DBSession=sessionmaker(bind=engine)
 dbsession=DBSession()
 app=Flask(__name__)
-
-# try:
-#     obj = str(obj).decode('utf8')
-# except UnicodeEncodeError:
-#     # already unicode
-#     pass
 
 def phone_number_filtration(PhoneNumber):
     if PhoneNumber.isdigit():
@@ -103,8 +94,7 @@ def registerStudent():
 #-------------------------------PHONE VALIDATION-------------------------------------#
         if phonemobile is None or phonehome is None or emergencyhome is None or emergencymobile is None:
             return render_template("register.html", courses=courses, form=form, errormsg="One of the phone numbers is Invalid")
-        # print form.errors
-        # print "its happening 2"
+
         newStudent=Student(name=request.form['name'],
         last_name=request.form['last_name'],
         email=request.form['email'],
@@ -159,4 +149,5 @@ def registerStudent():
 
         dbsession.add(newEmergency)
         dbsession.commit()
+        return redirect(url_for('StudentRouting.showStudent'))
     return render_template("register.html", form=form, courses=courses)

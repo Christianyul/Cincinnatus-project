@@ -23,7 +23,6 @@
         {{ render_field(form.retirement_date) }}
         <label for="actual_course">Actual course</label>
         <select class="" name="actual_course">
-            <option value="">-------</option>
             {% for r in courses  %}
                 <option value="{{ courses[courses.index(r)].id }}">{{ courses[courses.index(r)].name }}</option>
             {% endfor %}

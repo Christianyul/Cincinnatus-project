@@ -7,7 +7,6 @@ import os
 from flask_login import login_required
 from app import login_manager
 
-db_string="postgres://postgres:011741@localhost:5432/cincinnatus"
 engine = create_engine(db_string)
 DBSession=sessionmaker(bind=engine)
 session=DBSession()
@@ -48,7 +47,6 @@ def showMedical(student_id):
     print item
     return render_template("medical.html", item=item, student = student )
 
-
 @MedicalRouting.route("/<int:student_id>/medical/register/", methods=['GET','POST'])
 @login_required
 def newMedical(student_id):
@@ -61,20 +59,17 @@ def newMedical(student_id):
         else:
             policy_num = 0
 
-
         # si no hay nada en alergies se agrega "Ninguna" por default
         if len(request.form['alergies']) > 0:
             aler = request.form['alergies']
         else:
             aler = "Ninguna"      
 
-
         if len(request.form['special_condition']) > 0:
             special = request.form['special_condition']
         else:
             special = "Ninguna"       
         
-
         newItem=MedicalData(
         alergies=aler,
         intensity=request.form['intensity'],

@@ -14,7 +14,6 @@ def user_loader(id):
     user= session.query(User).filter_by(id=id).one()
     return user
 
-db_string="postgres://postgres:011741@localhost:5432/cincinnatus"
 engine = create_engine(db_string)
 DBSession=sessionmaker(bind=engine)
 session=DBSession()
