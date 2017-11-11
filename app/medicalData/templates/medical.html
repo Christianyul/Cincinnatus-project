@@ -18,19 +18,19 @@
             {% endif %}
             {% for r in item %}
                 <form>
-                    <label>Alergias</label>
+                    <label>Alergies</label>
                     <input type="text" value="{{item[item.index(r)].alergies}}" readonly> 
-                    <label>Intensidad</label>
+                    <label>Intensity</label>
                     <input type="text" value="{{item[item.index(r)].intensity}}" readonly> 
-                    <label>Condincion Especial</label>
+                    <label>Special Condition</label>
                     <input type="text" value="{{item[item.index(r)].special_condition}}" readonly> 
-                    <label>Tipo de Sangre</label>
+                    <label>Blood Type</label>
                     <input type="text" value="{{item[item.index(r)].blood_type}}" readonly> 
                     <label>ARS</label>
                     <input type="text" value="{{item[item.index(r)].ars}}" readonly>
-                    <label>Tipo de Afiliación</label>
+                    <label>Afiliation Type</label>
                     <input type="text" value="{{item[item.index(r)].afiliation_type}}" readonly> 
-                    <label>Numero de Poliza</label>
+                    <label>Policy Number</label>
                     <input type="text" value="{{item[item.index(r)].policy_number}}" readonly>
                     <br>
                     <a class="submit" href='{{url_for('MedicalRouting.editMedical', medical_id = item[item.index(r)].id, student_id= student.id )}}'> Edit </a>

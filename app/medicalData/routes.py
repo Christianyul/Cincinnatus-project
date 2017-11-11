@@ -82,8 +82,6 @@ def newMedical(student_id):
 
         session.add(newItem)
         session.commit()
-        #flash("New Item Added")
-        # return redirect(url_for('MedicalRouting.showMedical',student_id=student.id))
         return redirect(url_for('StudentRouting.showStudent'))
     return render_template("medicalsignup.html", form=form, student=student)
 
@@ -97,7 +95,6 @@ def editMedical(medical_id,student_id):
     student=session.query(Student).filter_by(id=student_id).one()
     editedItem = session.query(MedicalData).filter_by(id=medical_id).one()
     if form.validate_on_submit():
-
         # si no hay nada en policy_number se agrega 0 por default
         if len(request.form['policy_number'])> 0:
             policy_num=request.form['policy_number']
@@ -113,22 +110,19 @@ def editMedical(medical_id,student_id):
         editedItem.policy_number = policy_num
         session.add(editedItem)
         session.commit()
-        #flash("New Item Added")
-        # return redirect(url_for('MedicalRouting.showMedical',student_id=student.id))
+
         return redirect(url_for('StudentRouting.showStudent'))
     return render_template("editmedical.html",form=form, medical_id=medical_id, item=editedItem, student=student)
-
-
 
 @MedicalRouting.route("/<int:student_id>/medical/<int:medical_id>/delete/", methods=['GET','POST'])
 @login_required
 def deleteMedical(medical_id, student_id):
     student=session.query(Student).filter_by(id=student_id).one()
-    if request.method == 'POST':
+
+    if request.method == 'POST':  
         deletedItem = session.query(MedicalData).filter_by(id=medical_id).one()
         session.delete(deletedItem)
         session.commit()
-        # return redirect(url_for('MedicalRouting.showMedical',student_id=student.id))
         return redirect(url_for('StudentRouting.showStudent'))
 
     return render_template("deletemedical.html",medical_id=medical_id, student=student)

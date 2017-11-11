@@ -44,7 +44,14 @@
         <hr>
         <h3>Medical data</h3>
         {{ render_field(form.alergies) }} 
-        {{ render_field(form.intensity ) }} 
+        <label for="intensity">Intensity</label>
+        <select name="intensity">
+            <option value="None">None</option>
+            <option value="Mild">Mild</option>
+            <option value="Modest">Modest</option>
+            <option value="Strong">Strong</option>
+        </select>
+
         {{ render_field(form.special_condition) }} 
         {{ render_field(form.blood_type) }} 
         {{ render_field(form.ars) }} 

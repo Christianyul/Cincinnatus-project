@@ -6,9 +6,9 @@ from flask_wtf import Form
 
 
 class EmergencyForm(Form):
-    name = StringField('Nombres:', validators=[InputRequired(), Length(min=3,max=50)])
-    last_name = StringField('Apellidos:', validators=[InputRequired(), Length(min=3,max=50)])
-    phone_mobile = StringField('Telefono Celular:', validators=[InputRequired(), Length(min=9, max=12)])
-    phone_home = StringField('Telefono Hogar:', validators=[InputRequired(), Length(min=9, max=12)])
-    relationship = StringField('Relacion:', validators=[InputRequired()])
-    # student = IntegerField('ID estudiantes', validators=[InputRequired()])
+    name = StringField('Name:', validators=[InputRequired(), Length(min=3,max=50)])
+    last_name = StringField('Last Name:', validators=[InputRequired(), Length(min=3,max=50)])
+    phone_mobile = StringField('Mobile Phone:', validators=[InputRequired(), Length(min=9, max=12)])
+    phone_home = StringField('Home Phone:', validators=[InputRequired(), Length(min=9, max=12)])
+    relationship = StringField('Relationship:', validators=[InputRequired()])
+
