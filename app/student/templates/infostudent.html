@@ -52,19 +52,19 @@
             {% endif %}
             {% for r in medical %}
                 <form>
-                    <label>Alergias</label>
+                    <label>Alergies</label>
                     <input type="text" value="{{medical[medical.index(r)].alergies}}" readonly> 
-                    <label>Intensidad</label>
+                    <label>Intensity</label>
                     <input type="text" value="{{medical[medical.index(r)].intensity}}" readonly> 
-                    <label>Condincion Especial</label>
+                    <label>Special Condition</label>
                     <input type="text" value="{{medical[medical.index(r)].special_condition}}" readonly> 
-                    <label>Tipo de Sangre</label>
+                    <label>Blood Type</label>
                     <input type="text" value="{{medical[medical.index(r)].blood_type}}" readonly> 
                     <label>ARS</label>
                     <input type="text" value="{{medical[medical.index(r)].ars}}" readonly>
-                    <label>Tipo de Afiliación</label>
+                    <label>Afiliation Type</label>
                     <input type="text" value="{{medical[medical.index(r)].afiliation_type}}" readonly> 
-                    <label>Numero de Poliza</label>
+                    <label>Polciy Number</label>
                     <input type="text" value="{{medical[medical.index(r)].policy_number}}" readonly>
                     <br>
                     <a class="submit" href='{{url_for('MedicalRouting.editMedical', medical_id = medical[medical.index(r)].id, student_id= student.id )}}'> Edit </a>
@@ -78,7 +78,7 @@
                 <table>
                     <tr>
                         <th>Name</th>
-                        <th>Lastname</th> 
+                        <th>Last Name</th> 
                         <th>Cell phone</th>
                         <th>Phone</th>
                         <th>Relationship</th>

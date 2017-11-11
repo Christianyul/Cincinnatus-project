@@ -70,8 +70,7 @@ def newEmergency(student_id):
 
         session.add(newItem)
         session.commit()
-        #flash("New Item Added")
-        # return redirect(url_for('EmergencyRouting.showEmergency',student_id=student.id))
+
         return redirect(url_for('StudentRouting.showStudent'))
     return render_template("emergencysignup.html", form=form, student=student)
 
@@ -91,8 +90,7 @@ def editEmergency(emergency_id,student_id):
         editedItem.phone_home=request.form['phone_home']
         session.add(editedItem)
         session.commit()
-        #flash("New Item Added")
-        # return redirect(url_for('EmergencyRouting.showEmergency',student_id=student.id))
+
         return redirect(url_for('StudentRouting.showStudent'))
     return render_template("editemergency.html",form=form, emergency_id=emergency_id, item=editedItem, student=student)
 
@@ -106,7 +104,6 @@ def deleteEmergency(emergency_id, student_id):
         deletedItem = session.query(EmergencyContact).filter_by(id=emergency_id).one()
         session.delete(deletedItem)
         session.commit()
-        # return redirect(url_for('EmergencyRouting.showEmergency',student_id=student.id))
         return redirect(url_for('StudentRouting.showStudent'))
 
     return render_template("deleteemergency.html",emergency_id=emergency_id, student=student)
