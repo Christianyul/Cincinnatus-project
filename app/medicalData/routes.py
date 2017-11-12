@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, request, redirect
 from . import MedicalRouting
-from database_setup import *
+from database_setup import sessionmaker, db_string, create_engine
 from medicalForm import MedicalForm
 from flask import Blueprint, jsonify
 import os

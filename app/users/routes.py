@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, jsonify, request, redirect, flash
 from . import UserRouting
-from database_setup import *
+from database_setup import create_engine, db_string, sessionmaker
 from userForm import UserForm
 from flask import Blueprint
 import hashlib

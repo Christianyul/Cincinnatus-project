@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, request, redirect, Blueprint
 from . import RegisterRouting
-from database_setup import *
+from database_setup import sessionmaker, create_engine, db_string
 from registerForm import RegisterForm
 from loginForm import LoginForm
 import os, hashlib
