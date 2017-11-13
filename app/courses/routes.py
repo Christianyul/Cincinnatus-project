@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, jsonify, request, redirect
 from . import CourseRouting
-from database_setup import *
+from database_setup import db_string, create_engine, sessionmaker
 from . import coursesForm
 from flask import Blueprint
 from flask_login import login_required

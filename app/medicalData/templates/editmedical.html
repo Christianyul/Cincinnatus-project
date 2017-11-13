@@ -13,7 +13,7 @@
         {{ form.csrf_token }}
         {{ render_field(form.alergies) }}
         <label class="show-intensity" for="intensity">Intensity</label>
-        <select class="show-intensity"  name="intensity">
+        <select class="show-intensity"  name="intensity" id="intensity_status">
             <option value="None">None</option>
             <option value="Mild">Mild</option>
             <option value="Modest">Modest</option>
@@ -27,5 +27,5 @@
         <input type="submit" value="Save">
     </form>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="{{url_for('static', filename='js/edit-medical-data.js')}}"></script>
+    <script src="{{url_for('static', filename='js/edits-medical-data.js')}}"></script>
 {% endblock %}

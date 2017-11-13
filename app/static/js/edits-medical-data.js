@@ -3,7 +3,8 @@ pageurl_id = pageurl.split("/")[3];
 console.log(pageurl_id);
 var h1text = document.getElementsByTagName('h1')[0], inputalergies = document.getElementById('alergies'),
 inputspecial = document.getElementById('special_condition'), inputars = document.getElementById('ars'),
-inputpolicy = document.getElementById('policy_number'), inputafiliation = document.getElementById('afiliation_type');
+inputpolicy = document.getElementById('policy_number'), inputafiliation = document.getElementById('afiliation_type')
+inputintensity = document.getElementById('intensity_status');
 $.ajax({
     url: "http://localhost:5000/" + pageurl_id + "/medical/medicalapi",
     contentType: document.body
@@ -11,6 +12,7 @@ $.ajax({
     console.log(data);
     data.All_Data.forEach(function(element){
         if (element.id == pageurl_id) {
+            inputintensity.value = element.Intensity_of_the_alergies;
             inputalergies.value = element.alergies_of_the_student;
             inputspecial.value = element.Special_Condition;
             inputars.value = element.Ars;

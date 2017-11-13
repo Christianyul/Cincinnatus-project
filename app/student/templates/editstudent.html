@@ -22,7 +22,7 @@
         {{ render_field(form.ending_date) }}
         {{ render_field(form.retirement_date) }}
         <label for="actual_course">Actual course</label>
-        <select class="" name="actual_course">
+        <select class="" name="actual_course" id="actual_course">
             {% for r in courses  %}
                 <option value="{{ courses[courses.index(r)].id }}">{{ courses[courses.index(r)].name }}</option>
             {% endfor %}
@@ -35,7 +35,7 @@
         {{ render_field(form.marital_status) }}
         <label for="nationality">Nationality:</label> 
         <br>
-        <select name="nationality">
+        <select name="nationality" id="nationality">
                 {% include 'countries.html' %}
         </select>
         <br>
@@ -43,5 +43,5 @@
         <input type="submit" value="Save">
     </form>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="{{url_for('static', filename='js/edit-student.js')}}"></script>
+    <script src="{{url_for('static', filename='js/student-edit.js')}}"></script>
 {% endblock %}
