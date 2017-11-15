@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, request, jsonify, redirect
 from . import StudentRouting
-from database_setup import db_string, create_engine, sessionmaker
+from database_setup import db_string, create_engine, sessionmaker, Student, Course, User, MedicalData, EmergencyContact
 from studentForm import StudentForm
 from flask import Blueprint
 import os

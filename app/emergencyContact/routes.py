@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, jsonify, request, redirect
 from . import EmergencyRouting
-from database_setup import create_engine, db_string, sessionmaker
+from database_setup import create_engine, db_string, sessionmaker, Student, EmergencyContact, User
 from emergencyForm import EmergencyForm
 from flask import Blueprint
 import os
