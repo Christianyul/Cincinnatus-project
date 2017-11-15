@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, jsonify, request, redirect, flash
 from . import UserRouting
-from database_setup import create_engine, db_string, sessionmaker
+from database_setup import create_engine, db_string, sessionmaker, User
 from userForm import UserForm
 from flask import Blueprint
 import hashlib
@@ -44,7 +44,7 @@ def showUser():
 def signUp():
     form = UserForm()
     h = hashlib.md5() 
-    
+    print User
     if form.validate_on_submit():
         h.update(request.form['password'])
 

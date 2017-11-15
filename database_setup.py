@@ -1,14 +1,15 @@
 from database import *
 from dependencies import *
 
+
 #create database
 #////----cambiar password-------///
 try:
-    connect = connect(user = 'postgres', host='localhost', port='5432', password='011741', dbname= 'cincinnatus')
+    connect = connect(user = 'postgres', host='localhost', port='5001', password='linkinpark09', dbname= 'cincinnatus')
 except Exception as e:
     print "Creating Database..."
     try:
-        con = connect(user='postgres', host = 'localhost', port='5432', password='011741')
+        con = connect(user='postgres', host = 'localhost', port='5001', password='linkinpark09')
         con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
         cur= con.cursor()
         cur.execute('CREATE DATABASE' + " cincinnatus")
