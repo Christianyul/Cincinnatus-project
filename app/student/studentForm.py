@@ -16,7 +16,7 @@ class StudentForm(Form):
     birthdate = DateField('Birthdate:', format='%Y-%m-%d', validators=[InputRequired()] )
     phone_mobile = StringField('Mobile Phone:', validators=[InputRequired(), Length(min=9, max=12)])
     phone_home = StringField('Mobile Home:', validators=[InputRequired(), Length(min=9, max=12)])
-    id_document = StringField('ID Document:', validators=[InputRequired()])
+    id_document = StringField('ID Document:', validators=[InputRequired(), Length(min=12, max=12)])
     status = RadioField('Status:', choices=[('Active','Active'),('Retirement','Retirement'),('Finished','Finished')],default='Active', validators=[InputRequired()])
     marital_status = RadioField('Marital Status:', choices=[('Single','Single'),('Married','Married')],default='Single', validators=[InputRequired()])
     address = StringField('Address:', validators=[InputRequired(), Length(min=3,max=200)])
