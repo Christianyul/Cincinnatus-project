@@ -49,4 +49,4 @@ Everything about flask forms here: https://www.youtube.com/watch?v=eu0tg4vgFr4&l
 
 Uploading files with flask: http://flask.pocoo.org/docs/0.12/patterns/fileuploads/
 
-Remember that you can find about any library mentioned the requirements.txt file by just googling it
+Remember that you can find about any library mentioned in the requirements.txt file by just googling it
