@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request, redirect, Blueprint
+from flask import Flask, render_template, url_for, request, redirect, Blueprint, flash
 from . import RegisterRouting
 from database_setup import sessionmaker, create_engine, db_string, Student, Course, MedicalData, EmergencyContact, User
 from registerForm import RegisterForm
@@ -26,8 +26,8 @@ def phone_number_filtration(PhoneNumber):
         if newformat.isdigit():
             return int(newformat)
         else:
-            return 
-    
+            return
+
 @login_manager.user_loader
 def user_loader(id):
     # do whatever you need to to load the user object
@@ -43,20 +43,24 @@ def allowed_file(filename):
 @RegisterRouting.route("/", methods=['GET','POST'])
 def register():
     students = dbsession.query(Student).all()
-    courses = dbsession.query(Course).all()    
+    courses = dbsession.query(Course).all()
     return render_template("home.html", courses = courses, students = students)
 
 @RegisterRouting.route("/login", methods=['GET','POST'])
 def login():
     form=LoginForm()
-    h = hashlib.md5() 
-    if form.validate_on_submit():   
+    h = hashlib.md5()
+    if form.validate_on_submit():
         h.update(request.form['password'])
-        user = dbsession.query(User).filter_by(user_name= request.form['user']).one()
+        user = dbsession.query(User).filter_by(user_name = request.form['user']).first()
         if user is not None and user.password == h.hexdigest():
             user.authenticated = True
-            login_user(user)         
+            login_user(user)
             return redirect(url_for('RegisterRouting.register'))
+        else:
+            flash("Incorrect user or password")
+            return redirect(url_for('RegisterRouting.login'))
+
     return render_template('login.html', form=form)
 
 @RegisterRouting.route('/logout')
@@ -67,11 +71,11 @@ def logout():
 
 @RegisterRouting.route("/register/", methods=['GET','POST'])
 def registerStudent():
-    form=RegisterForm()        
+    form=RegisterForm()
     courses=dbsession.query(Course).all()
 
-    if form.validate_on_submit():    
-        idcourse=dbsession.query(Course).filter_by(id=request.form['actual_course']).one().id
+    if form.validate_on_submit():
+        idcourse=dbsession.query(Course).filter_by(id = request.form['actual_course']).one().id
         phonemobile = phone_number_filtration(request.form['phone_mobile'])
         phonehome = phone_number_filtration(request.form['phone_home'])
         emergencyhome = phone_number_filtration(request.form['emphone_home'])
@@ -122,12 +126,12 @@ def registerStudent():
         if len(request.form['alergies']) > 0:
             aler = request.form['alergies']
         else:
-            aler = "Ninguna"  
+            aler = "Ninguna"
 
         if len(request.form['special_condition']) > 0:
             special = request.form['special_condition']
         else:
-            special = "Ninguna"       
+            special = "Ninguna"
 
         newMedical=MedicalData(
         alergies=aler,
