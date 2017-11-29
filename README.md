@@ -17,25 +17,23 @@ Just go to the the file location and run pip install -r requirements.txt on your
 
 **4.1** Go to the app's directory you should see a file called run.py 
 
-**4.2** Go to the dependencies.py file and change the db_string variable with your current password, port and user for postgresql 
+**4.2** Go to the dependencies.py file and change the database variables with your current user, password, port and database name for postgresql 
 
-**4.3** Go to the database_setup.py file and change the connect() method's arguments with your current password, port and user postgresql 
-
-**4.4** In your terminal run "python run.py"
+**4.3** In your terminal run "python run.py"
 
 you should see something in your terminal telling you that the app is running and the text "Database Setup Done"
 
-**4.5** Check that your database is correctly setted (with all the tables on it) 
+**4.4** Check that your database is correctly setted (with all the tables on it) 
 
 IF FOR SOME REASON you dont see any tables in your database, delete the current database and check your database_setup.py file then try again
 
-**4.6** Access your localhost in the 5000 port by default (localhost:5000) 
+**4.5** Access your localhost in the 5000 port by default (localhost:5000) 
 
-**4.7** Create an user in /user/signup 
+**4.6** Create an user in /user/signup 
  
 DO NOT Create an user directly in the database since the login ask for the password hashed
  
- **4.8** Create at least 1 Course
+**4.7** Create at least 1 Course
 
 It could be from the route /courses or the database itself
 
